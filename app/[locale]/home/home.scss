@@ -1,0 +1,583 @@
+#home {
+  .home__hero {
+    // border: 2px solid red;
+    width: 100vw;
+    height: auto;
+    // max-height: 100vh;
+    position: relative;
+  }
+
+  .home__brand_collab {
+    // border: 2px solid red;
+    padding: 50px 0;
+  }
+
+
+  .home__tech_solutions{
+    // border: 2px solid red;
+    padding: 100px 50px;
+
+    .home__tech_solutions_container {
+      // border: 2px solid orange;
+      width: 80vw;
+      display: flex;
+      margin: 0 auto;
+      max-width: 1400px;
+      justify-content: space-between;
+      position: relative;
+
+      header {
+        // border: 2px solid blue;
+        width: 38vw;
+        padding-right: 25px;
+
+        h2 {
+          line-height: 125%;
+          margin-bottom: 25px;
+          position: relative;
+        }
+        p {
+          position: relative;
+        }
+      }
+      .home_tech_list {
+        // border: 2px solid red;
+        width: 38vw;
+        padding: 45px 25px;
+        position: relative;
+      }
+    }
+  }
+
+
+  .home__limitles_app {
+    // border: 2px solid red;
+    padding: 100px 25px 25px;
+
+    .home__limitles_app_container {
+      margin: 0 auto;
+      max-width: 1440px;
+
+      header {
+        h2 {
+          margin-bottom: 75px;
+          position: relative;
+          text-align: center;
+        }
+      }
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+        position: relative;
+
+        li {
+          // border: 1px solid red;
+          width: 33%;
+          list-style: none;
+          padding: 0 25px 70px;
+
+          img {
+            width: 100%;
+            height: auto;
+          }
+          h4 {
+            font-size: 18px;
+            padding: 0 0 35px;
+          }
+          p {
+            font-size: 14px;
+            line-height: 150%;
+            padding: 0 0;
+          }
+        }
+      }      
+    }
+  }
+
+
+  .home__tech_partner {
+    width: 100vw;
+    height: 65vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+
+    img {
+      width: unset;
+      height: unset;
+      filter: brightness(75%);
+      opacity: 0.9;
+      padding-top: 50px;
+      position: absolute;
+    }
+    
+    div {
+      width: 100vw;
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      top: 0;
+      bottom: 0;
+
+      h2 {
+        margin-bottom: 25px;
+        padding: 0 50px;
+      }
+
+      button, a, p {
+        width: 145px;
+        align-self: center;
+        padding: 15px 0;
+        text-decoration: none;
+      }    
+    }
+  }
+
+
+  .home__latest_news {
+    // border: 2px solid blue;
+    // background-color: #f5f5f5;
+    margin: 0 auto;
+    max-width: 1440px;
+    padding: 100px 25px;
+    position: relative;
+    
+    header {
+      padding-left: 10px;
+      position: relative;
+
+      h2 {
+        margin-bottom: 25px;
+        text-align: left;
+      }
+      p {
+        font-size: 13px;
+        margin-bottom: 10px;
+      }
+    }
+    ul {
+      // border: 2px solid blue;
+      // align-items: center;
+      display: flex;
+      justify-content: space-around;
+      margin: 0 auto;
+      position: relative;
+      // max-width: 75vw;
+
+      li {
+        // border: 1px solid red;
+        width: 100%;
+        height: 100%;
+        list-style: none;
+        padding: 0 10px;
+
+        a {
+          // border: 2px solid red;
+          width: 100%;
+          // height: 200px;
+          display: flex;
+          margin-bottom: 20px;
+
+          img {
+            width: 100%;
+            height: auto;
+            // object-fit: cover;
+          }
+        }
+        p {
+          font-size: 18px;
+          margin-bottom: 5px;
+        }
+        p:nth-of-type(2) {
+          color: gray;
+          font-size: 14px;
+        }
+      }
+    }
+    .home__latest_news_copy {
+      display: flex;
+      justify-content: space-around;
+      margin: 0 auto;
+      p {
+        width: 300px;
+      }
+    }
+  }
+
+
+  .home__featured_in {
+    // border: 2px solid red;
+    // background-color: #f5f5f5;
+    // background-color: gray;
+    position: relative;
+
+    .home__featured_container {
+      // border: 2px solid red;
+      margin: 0 auto;
+      max-width: 1440px;
+      padding: 75px;
+
+      h2 {
+        margin-bottom: 25px;
+        position: relative;
+        text-align: center;
+      }
+
+      .home__featured_companies {
+        // border: 2px solid blue;
+        align-items: center;
+        display: flex;
+        justify-content: space-around;
+        margin: 0 auto;
+        position: relative;
+        // max-width: 70vw;
+
+        a {
+          img {
+            width: 100%;
+            height: auto;
+            padding: 0 20px;
+          }
+        }
+      }    
+    }
+  }
+
+
+  
+  // -------------------- MEDIA QUERIES
+  @media (min-width: 1800px) {
+    .home__tech_partner img {
+      width: 100vw;
+    }
+  }
+  @media (max-width: 1400px) {
+    .home__brand_collab {
+      padding: 0px;
+    }
+  }
+  // @media (max-width: 1440px) {}
+  @media (max-width: 1280px) {
+    .home__tech_solutions{
+      .home__tech_solutions_container {
+        width: 100%;
+
+        header {
+          width: 48%;
+        }
+        .home_tech_list {
+          width: 48%;
+        }
+      }
+    }
+
+    .home__featured_in {
+      .home__featured_container {
+        padding: 75px 50px;
+      }
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .home__brand_collab {
+      .slick-slide img {
+        width: 200px;
+        height: 200px;
+      }
+    }
+    .home__limitles_app {
+      .home__limitles_app_container {
+        ul {
+          li {
+            padding: 0 10px 70px;
+          }
+        }      
+      }
+    }
+
+    .home__tech_partner {
+      height: 50vh;
+    }
+
+    .home__featured_in {
+      .home__featured_container {
+        padding: 75px 25px;
+
+        .home__featured_companies {
+          a {
+            img {
+              padding: 0 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+  // @media (max-width: 1024px) {
+  //   padding-top: 50px;
+  // }
+
+  // @media (max-width: 912px) {}
+  @media (max-width: 820px) {
+    .home__tech_solutions{
+      padding: 75px 25px;
+
+      .home__tech_solutions_container {
+        display: flex;
+        flex-direction: column;
+
+        header {
+          width: 100%;
+          margin-bottom: 25px;
+        }
+        .home_tech_list {
+          width: 100%;
+        }
+      }
+    }
+
+    .home__limitles_app {
+      padding: 75px 15px 25px;
+
+      .home__limitles_app_container {
+        ul {
+          li {
+            width: 50%;
+            padding: 0 10px 45px;
+          }
+        }      
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .home__hero {
+      height: 600px;
+
+      #rs__fade_slider {
+        height: 600px;
+
+        .slick-slider .slick-list {
+          height: 600px !important;
+        }
+
+        .home__hero_image {
+          // transform: scale(1.5) translate(-10%, 15%);
+          object-fit: cover;
+          position: relative !important;
+        }        
+      }
+    }
+
+    .home__brand_collab {
+      .rs__center_mode_slider {
+        .slick-list .slick-slide img{
+          width: 200px;
+          height: 200px;
+        }
+      }
+    }
+
+    // .home__tech_partner {
+    //   // height: 40vh;
+    //   // img {
+    //   //   width: unset;
+    //   //   height: unset;
+    //   // }
+    // }
+
+    .home__latest_news {
+      padding: 50px 20px;
+
+      ul {
+        flex-wrap: wrap;
+  
+        li {
+          width: 50%;
+          margin-bottom: 35px;
+        }
+      }
+    }
+
+    .home__featured_in {
+      .home__featured_container {
+        padding: 50px 25px;
+
+        .home__featured_companies {
+          flex-wrap: wrap;
+          justify-content: flex-start;
+
+          a {
+            width: 50%;
+            margin-bottom: 20px;
+
+            img {
+              padding: 0 45px;
+            }
+          }
+        }
+      }
+    }
+  }
+  @media (max-width: 750px) {
+    .home__hero #rs__fade_slider {
+      .home__hero_image {
+        // transform: scale(3) translate(15%, 15%);
+      }
+      .home__hero_image_copy {
+        width: 70%;
+      }
+    }
+  }
+  @media (max-width: 568px) {
+    .home__hero #rs__fade_slider {
+      .home__hero_image_copy {
+        left: 25px;
+      }
+    }
+    .home__brand_collab {
+      .rs__center_mode_slider {
+        .slick-list .slick-slide {
+          // width: 200px !important;
+
+          img {
+            width: unset;
+            height: 150px;
+          }
+        }
+
+      }
+    }
+  }
+  // @media (max-width: 540px) {}
+
+  @media (max-width: 430px) {
+    #rs__fade_slider .slick-slider .slick-prev,
+    #rs__fade_slider .slick-slider .slick-next {
+      width: 40px !important;
+      height: 40px !important;
+      margin: auto;
+      right: 0 !important;
+      bottom: 10px !important;
+      left: 0 !important;
+    }
+    #rs__fade_slider .slick-slider .slick-prev {
+      left: -45px !important;
+    }
+    #rs__fade_slider .slick-slider .slick-next {
+      right: -45px !important;
+    }
+    .home__featured_in {
+      .home__featured_container {
+        .home__featured_companies {
+          a {
+            width: 50%;
+
+            img {
+              padding: 0 20px;
+            }
+          }
+        }
+      }
+    }
+    .home__limitles_app {
+      .home__limitles_app_container {
+        ul {
+          li {
+            width: 100%;
+            padding: 0 10px 75px;
+          }
+        }      
+      }
+    }
+    .home__latest_news {
+      ul {
+        li {
+          width: 100%;
+          margin-bottom: 50px;
+        }
+      } 
+    }
+  }
+  // @media (max-width: 414px) {}
+  // @media (max-width: 390px) {}
+}
+
+
+// -------------------- LIGHT / DARK MODE
+html.light {
+  .home__brand_collab {
+    background-color: var(--off-white-f5f5f5);
+  }
+  .home__tech_solutions{
+    .home__tech_solutions_container {
+      .home_tech_list {
+        background-color: var(--off-white-f5f5f5);
+      }
+    }
+  }
+  .home__limitles_app {
+    background-color: var(--off-white-f5f5f5);
+    transition: background-color 0.3s, color 0.3s;
+  }
+  .home__tech_partner {
+    div {
+      h2 { color: var(--white-fff); }
+      button, a, p { 
+        background-color: var(--white-fff);
+        color: var(--black-000); 
+      }
+    }
+  }
+  .home__featured_in {
+    background-color: var(--off-white-f5f5f5);
+    transition: background-color 0.3s, color 0.3s;
+  }
+}
+html.dark {
+  .home__brand_collab {
+    background-color: var(--dark-gray-2B282C);
+  }
+  .home__tech_solutions{
+    .home__tech_solutions_container {
+      .home_tech_list {
+        background-color: var(--dark-gray-2B282C);
+      }
+    }
+  }
+  .home__limitles_app {
+    background-color: var(--dark-gray-2B282C);
+  }
+  .home__tech_partner {
+    div {
+      h2 { color: var(--white-fff); }
+      button, a, p { 
+        background-color: var(--black-000);
+        color: var(--white-fff); 
+      }
+    }
+  }
+  .home__featured_in {
+    background-color: var(--dark-gray-2B282C);
+    transition: background-color 0.3s, color 0.3s;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

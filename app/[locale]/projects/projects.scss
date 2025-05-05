@@ -1,0 +1,274 @@
+#projects_listing.it {
+  header {
+    margin: 0 auto;
+    max-width: unset;
+    padding: 20px 0px;
+    position: relative;
+
+    .it__project_header {
+      // border: 2px solid teal;
+      width: 100%;
+      height: 600px;
+      overflow: hidden;
+      position: relative;
+
+      .it__projects_hero {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        padding: 0;
+        position: relative;
+
+        h1 {
+          // border: 1px solid red;
+          width: 100%;
+          color: #fff;
+          font-size: 2rem;
+          align-self: center;
+          text-align: left;
+          margin: auto;
+          max-width: 800px;
+          padding: 0 50px;
+          position: absolute;
+          z-index: 1;
+          left: 0;
+          right: 0;
+        }
+        img {
+          // border: 1px solid red;
+          width: 100%;
+          height: auto;
+          object-fit: cover;
+          position: relative;
+          top: 0;
+          left: 0;
+        }
+      }
+    }
+  }
+  .masonry-layout {
+    columns: 300px;
+    padding: 75px 25px;
+    margin: 0 auto;
+    max-width: 1280px;
+    transition: 0.3s;
+
+    // img
+    .it__project {
+      width: 100%;
+      // height: auto;
+      display: inline-block;
+      margin-bottom: 35px;
+      transform-style: preserve-3d;
+      transition: 0.3s;
+
+      img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+      }
+      h2 {
+        margin-bottom: 20px;
+      }
+      p {
+        margin-bottom: 15px;
+
+        strong {
+          font-size: 0.9rem;
+        }
+      }
+      div:nth-of-type(3) {
+        margin-bottom: 25px;
+      }
+
+      .accordian__title {
+        border-top: 1px solid #ccc;
+        // margin-top: 10px;
+
+        button {
+          background-color: unset;
+          padding: 10px 0;
+
+          svg {
+            margin-top: 5px;
+          }
+        }
+        
+        p {
+          margin: 0;
+        }
+      }
+
+      .it__project_accordion {
+        border: 2px solid red;
+
+        .it__project_accordion_subheading {
+          border: 2px solid yellow;
+        }
+        .it__project_accordion_body {
+          border: 2px solid pink;
+        }
+        p {
+          margin-bottom: 20px;
+        }
+      }
+    }
+    .it__project:last-of-type {
+      p {
+        display: none;
+      }
+      .accordian__title {
+        display: none;
+      }
+    }
+  }
+}
+
+
+
+#projects_listing {
+  header {
+    // border: 2px solid red;
+    margin: 0 auto;
+    max-width: 1440px;
+    padding: 75px 50px 100px;
+    text-align: center;
+
+    h1 {
+      margin-bottom: 25px;
+    }
+    p {
+      font-size: 20px;
+      margin: 0 auto;
+      max-width: 80%;
+      line-height: 150%;
+    }
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    max-width: 1440px;
+    padding: 0 25px 75px;
+
+    li {
+      width: 33.333333%;
+      list-style: none;
+      margin-bottom: 25px;
+      padding: 0 15px;
+      position: relative;
+      text-align: center;
+      
+      a {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        position: relative;
+
+        &:hover {
+          p {
+            background-color: rgba(255, 255, 255, 0.8);
+            z-index: 2;
+          }
+        }
+
+        p {
+          width: 100%;
+          height: 100%;
+          color: black;
+          font-size: 1.8rem;
+          font-weight: 400;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 25px;
+          position: absolute;
+          transition: 0.3s;
+        }
+
+        img {
+          width: 100%;
+          height: auto;
+          z-index: 1;
+        }
+      }
+    }
+  }
+
+  
+  // -------------------- MEDIA QUERIES
+  // @media (max-width: 1440px) {}
+  // @media (max-width: 1280px) {}
+  @media (max-width: 1024px) {
+    header {
+      padding: 150px 25px 75px;
+    }
+  }
+  // @media (max-width: 912px) {}
+  // @media (max-width: 820px) {}
+  @media (max-width: 768px) {
+    header p {
+      max-width: 100%;
+      font-size: 18px;
+    }
+    ul li {
+      width: 50%;
+    }
+  }
+  @media (max-width: 568px) {
+    ul {
+      padding: 0 25px 50px;
+
+      li a p {
+        font-size: 1.5rem;
+      }
+    }
+  }
+  // @media (max-width: 540px) {}
+  @media (max-width: 430px) {
+    ul {
+      padding: 0 10px 25px;
+
+      li {
+        margin-bottom: 15px;
+        padding: 0 10px;
+      }
+    }
+  }
+  // @media (max-width: 414px) {}
+  // @media (max-width: 390px) {}
+}
+
+
+
+
+// -------------------- DARK / LIGHT MODE
+html.light {
+  #projects_listing.it {
+    .masonry-layout {
+      .it__project {
+        .accordian__title {
+          button {
+            p { color:black; }
+          }
+          svg { color:black; }
+        }
+      }
+    }
+  }
+}
+html.dark {
+  #projects_listing.it {
+    .masonry-layout {
+      .it__project {
+        .accordian__title {
+          button {
+            p { color:white; }
+          }
+          svg { color:white; }
+        }
+      }
+    }
+  }
+}

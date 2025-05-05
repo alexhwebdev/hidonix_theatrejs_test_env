@@ -1,0 +1,63 @@
+.themeSwitcher__container {
+  // border: 1px solid red;
+  border-radius: 45px;
+  display: flex;
+  margin-left: 5px;
+  padding: 5px;
+  position: fixed;
+  text-transform: uppercase;
+  transition: all 0.3s;
+  z-index: 10000;
+  right: 20px;
+  bottom: 20px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+
+
+// -------------------- DARK / LIGHT MODE
+html {
+  --white-fff: #ffffff;
+  --off-white-f5f5f5: #f5f5f5;
+
+  --black-000: #000000;
+  --dark-gray-2B282C: #2B282C;
+
+  --red-B21F29: #B21F29;
+}
+
+html.light {
+  --bg-color: #fff;
+  --text-color: #000;
+
+  body { 
+    background-color: var(--bg-color);
+    color: --text-color;
+
+    .themeSwitcher__container {
+      border: 2px solid #000;
+    }
+  }
+}
+html.dark {
+  --bg-color: #000;
+  --text-color: #fff;
+
+  body { 
+    background-color: var(--bg-color);
+    color: --text-color;
+
+    .themeSwitcher__container {
+      border: 2px solid #fff;
+    }
+  }
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}

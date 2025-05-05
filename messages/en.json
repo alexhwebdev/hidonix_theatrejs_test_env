@@ -1,0 +1,32 @@
+{
+  "HomePage": {
+    "title": "En title",
+    "about": "En - Go to the about page"
+  },
+  "LocaleSwitcher": {
+    "label": "Select Language",
+    "locale": "{locale, select, it {🇮🇹 Italiano} en {🇺🇸 English} other {Unknown}}"
+  },
+  "NavComponent": {
+    "home": "Home",
+    "products": "Products",
+    "projects": "Projects",
+    "about": "About Us",
+    "blog": "Blog",
+    "contact": "Contact",
+    "routes": {
+      "home": "/",
+      "products": "",
+      "projects": "/projects",
+      "about": "/about-us",
+      "blog": "/blog",
+      "contact": "/contact",
+      "mit": "/mit-museum-innovation-technology",
+      "ion": "/ion-indoor-outdoor-navigation",
+      "expox": "/expox"
+    }
+  },
+  "LocaleLayout": {
+    "title": "EN Home | Hidonix"
+  }
+}

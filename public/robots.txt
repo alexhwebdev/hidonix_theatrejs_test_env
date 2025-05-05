@@ -1,0 +1,13 @@
+# *
+User-agent: *
+Disallow: /private/
+
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://hidonix.vercel.app/en
+
+# Sitemaps
+Sitemap: https://hidonix.vercel.app/en/sitemap.xml

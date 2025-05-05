@@ -1,0 +1,111 @@
+#rs__fade_slider {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 55%;
+
+  .slick-slider {
+    position: static;
+    
+    .slick-list {
+      width: 100%;
+      // height: 100vh;
+      height: 100% !important;
+      // display: flex;
+      // position: relative;
+      top: 0;
+      position: absolute;
+
+      .slick-track {
+        height: 100%;
+
+        .slick-slide {
+          // border: 1px solid red;
+          height: 100vh;
+          height: 100%;
+          text-align: center;
+
+          > div {
+            height: 100%;
+
+            .slide {
+              height: 100%;
+              display: flex !important;
+              justify-content: center;
+              position: relative;
+  
+              .home__hero_image_copy {
+                // border: 1px solid red;
+                width: 500px;
+                height: fit-content;
+                margin: auto;
+                position: absolute;
+                text-align: left;
+                z-index: 1;
+                top: 0;
+                bottom: 0;
+                left: 50px;
+  
+                h1 {
+                  color: #000;
+                  line-height: 110%;
+                  margin-bottom: 25px;
+                  position: relative;
+                }
+                p {
+                  color: #000;
+                  font-weight: 400;
+                  line-height: 130%;
+                  margin-bottom: 25px;
+                  position: relative;
+                }
+                button {
+                  background-color: var(--dark-gray-2B282C);
+                  border: none;
+                  border-radius: unset;
+                  padding: 15px 25px;
+                  position: relative;
+
+                  a {
+                    color: white;
+                    text-decoration: none;
+                  }
+                }
+              }
+  
+              .home__hero_image {
+                height: auto !important;
+              }
+              // img {
+              //   height: auto !important;
+              // }
+            }
+          }
+        }
+      }
+    }
+    .slick-prev,
+    .slick-next {
+      // border: 1px solid red;
+      width: 50px !important;
+      height: 50px !important;
+      background-color: rgba(0, 0, 0, 0.7);
+      border: 1px solid silver;
+      border-radius: 45px;
+      padding: 10px;
+      position: absolute;
+      top: unset !important;
+      right: 0;
+      bottom: 25px !important;
+      left: unset !important;
+
+      &::before { display: none; }
+    }
+    .slick-prev {
+      right: 115px !important;
+    }      
+    .slick-next {
+      right: 50px !important;
+    }
+  }
+}

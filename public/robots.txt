@@ -7,7 +7,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://hidonix.vercel.app/en
+Host: https://hidonix-nextjs-v1.vercel.app/en
 
 # Sitemaps
-Sitemap: https://hidonix.vercel.app/en/sitemap.xml
+Sitemap: https://hidonix-nextjs-v1.vercel.app/en/sitemap.xml

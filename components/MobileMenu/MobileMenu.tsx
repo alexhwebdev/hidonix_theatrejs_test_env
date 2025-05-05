@@ -78,7 +78,7 @@ const Hamburger = (
   };
 
   const nextLocale = params.locale === "en" ? "it" : "en";
-  // const hostDomain = "https://hidonix.vercel.app/";
+  // const hostDomain = "https://hidonix-nextjs-v1.vercel.app/";
   const hostDomain = "http://localhost:3000/";
 
   const selectLanguage = () => {

@@ -1,5 +1,5 @@
 const config = {
-    siteUrl: 'https://hidonix.vercel.app/en',
+    siteUrl: 'https://hidonix-nextjs-v1.vercel.app/en',
     generateRobotsTxt: true,
     robotsTxtOptions: {
       policies: [

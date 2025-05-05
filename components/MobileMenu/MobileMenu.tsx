@@ -90,6 +90,7 @@ const Hamburger = (
     });
   }
 
+  
   // Mobile Menu close
   useEffect(() => {
     if (isToggled === false) {

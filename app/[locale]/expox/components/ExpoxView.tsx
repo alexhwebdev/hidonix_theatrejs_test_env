@@ -445,9 +445,9 @@ const ExpoxView = (
               </button>
               
               {/* Download a brochure */}
-              <div className={`button`}>
+              {/* <div className={`button`}>
                 {parse(expoxS1HeadingBodyButtonsGallery.button2)}
-              </div>               
+              </div> */}
             </div>
           </div>
 

@@ -139,7 +139,7 @@ const FadeSlider: React.FC<IFadeSliderProps> = (
               <h1>{item.heading}</h1>
               <p>{item.body}</p>
               <button>
-                <a href={`${locale}/mit-museum-innovation-technology`}>
+                <a href={`${locale}${item.link}`}>
                   {item.button}
                 </a>
               </button>

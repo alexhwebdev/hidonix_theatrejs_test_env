@@ -652,14 +652,14 @@ const ExpoxView = (
           
           <div className={`body_button__container`}>
             {/* Download a brochure */}
-            <div className={`body_button`}>
+            {/* <div className={`body_button`}>
               <p>{parse(expoxS7HeadingSubheadingButtonImage.body)}</p>
               <button className={`button`}>
                 <a href="https://docsend.com/view/9gyitzzzy4dz9kva">
                   {parse(expoxS7HeadingSubheadingButtonImage.button)}
                 </a>
               </button>
-            </div>
+            </div> */}
 
             {/* Request a demo */}
             <div className={`body_button`}>

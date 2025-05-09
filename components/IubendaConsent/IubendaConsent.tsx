@@ -1,12 +1,10 @@
 'use client';
 
 import Script from 'next/script';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 
 export default function IubendaConsent() {
-  useEffect(() => {
-    // You can perform additional JS setup here if needed
-  }, []);
+  // useEffect(() => {}, []);
 
   return (
     <>

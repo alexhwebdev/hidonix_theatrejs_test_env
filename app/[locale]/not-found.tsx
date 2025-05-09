@@ -54,6 +54,7 @@ export default function NotFound() {
         src={notFoundAssets[0]?.url}
         alt={notFoundAssets[0]?.alt}
         fill
+        quality={10}
         priority
       />
       <div className={`img_copy__wrapper`}>

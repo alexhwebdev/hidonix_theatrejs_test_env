@@ -31,12 +31,6 @@ import IubendaConsent from '@/components/IubendaConsent/IubendaConsent';
 // import Script from 'next/script';
 
 
-// // Dynamically import the MatomoTracker component (client-side only)
-// const MatomoTracker = dynamic(() => import('./home/components/MatomoTracker'), {
-//   ssr: false, // Disable server-side rendering for this component
-// });
-
-
 type TLayoutProps = {
   children: ReactNode;
   params: Promise<{locale: string}>;
@@ -122,21 +116,16 @@ export default async function LocaleLayout({
     } 
   });
 
-
-
-
   // Ensure that the incoming `locale` is valid
   const {locale} = await params;
   if (!routing.locales.includes(locale as Locale)) {
     notFound();
   }
 
-  // Enable static rendering
-  // ensures correct locale is applied during (SSR)
+  // Enable static rendering ensures correct locale is applied during (SSR)
   setRequestLocale(locale);
 
-  // Providing all messages to the client
-  // side is the easiest way to get started
+  // Providing all messages to the client side
   const messages = await getMessages();
 
   return (
@@ -179,7 +168,6 @@ export default async function LocaleLayout({
 /*
 next-intl :
 https://next-intl.dev/docs/getting-started/app-router/with-i18n-routing
-
 
 
 Next.js i18n: App Router + next-intl Tutorial :

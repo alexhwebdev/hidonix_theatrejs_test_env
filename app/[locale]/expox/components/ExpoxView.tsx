@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import parse from 'html-react-parser';
 import { usePathname } from 'next/navigation';
-import MitFormModal from '@/components/Modals/MitFormModal';
+import ExpoxFormModal from '@/components/Modals/ExpoxFormModal';
 import ItMitFormModal from '@/components/Modals/ItMitFormModal';
 import Accordion from './Accordian/Accordion';
 import { IGlobalAssetsProps } from '@/types/pageContent.types';
@@ -463,7 +463,7 @@ const ExpoxView = (
 
         {
           pathname.substring(1, 3) === 'en' 
-          ? isModalOpen && <MitFormModal 
+          ? isModalOpen && <ExpoxFormModal 
               onClose={() => setIsModalOpen(false)} 
               closeIcons={ closeIcons }
             />

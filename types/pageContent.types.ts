@@ -746,3 +746,13 @@ export type IonFormData = {
   which_kind_of_navigation_you_want_to_use: string;
   additional_information: string;
 };
+
+export type ExpoxFormData = {
+  firstname: string;
+  lastname: string;
+  company: string;
+  email: string;
+  expox_features?: string[];
+  your_number_of_visitors_per_year: string;
+  message: string;
+};

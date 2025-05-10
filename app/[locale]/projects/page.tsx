@@ -73,7 +73,10 @@ export default async function ProjectsListingServer(
       <header>
         {
           locale === 'en'
-            ? <>{parse(projectsListingPageModel.projectListingPageHeadingBody)}</>
+            ? <>
+                {parse(projectsListingPageModel.projectListingPageHeadingBody)}
+                .
+              </>
             : 
             <div className={`it__project_header`}>.
               {parse(projectsListingPageModel.projectListingPageHeadingBody)}

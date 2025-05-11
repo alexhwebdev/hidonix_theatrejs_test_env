@@ -76,7 +76,6 @@ export default async function ProjectsListingServer(
             ? <>
                 {parse(projectsListingPageModel.projectListingPageHeadingBody)}
                 <></>
-                <></>
               </>
             : 
             <div className={`it__project_header`}>.

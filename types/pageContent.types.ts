@@ -753,6 +753,6 @@ export type ExpoxFormData = {
   company: string;
   email: string;
   expox_features?: string[];
-  your_number_of_visitors_per_year: string;
+  surface_you_want_to_map__sq__ft_: string;
   message: string;
 };

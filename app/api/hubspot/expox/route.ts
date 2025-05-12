@@ -8,7 +8,7 @@ export async function POST(req: Request) {
     email, 
     expox_features, 
     message, 
-    your_number_of_visitors_per_year 
+    surface_you_want_to_map__sq__ft_ 
   } = await req.json();
   const HUBSPOT_TOKEN = process.env.HUBSPOT_TOKEN;
   const HUBSPOT_PORTAL_ID = process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID;
@@ -31,7 +31,7 @@ export async function POST(req: Request) {
           { name: 'email', value: email },
           { name: 'expox_features', value: formattedExpoxFeatures },
           { name: 'message', value: message },
-          { name: 'your_number_of_visitors_per_year', value: your_number_of_visitors_per_year }
+          { name: 'surface_you_want_to_map__sq__ft_', value: surface_you_want_to_map__sq__ft_ }
         ]
       }),
     });

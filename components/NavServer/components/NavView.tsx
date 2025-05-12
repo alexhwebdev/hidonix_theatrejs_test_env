@@ -34,7 +34,7 @@ const NavView = (
     // { path: "/", label: "ShowShopper (Coming Soon!)", prefetching: false },
     // { path: "/", label: "SafeSchool (Coming Soon!)", prefetching: false },
   ];
-console.log("locale ", locale)
+
   return (
     <header id="nav__header">
       <nav className={`nav ${open_sans.className}`}>

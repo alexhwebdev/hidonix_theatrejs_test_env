@@ -160,12 +160,12 @@ export default async function LocaleLayout({
         </PostHogProvider>
 
         {/* HubSpot tracking script */}
-        <Script
+        {/* <Script
           // id="hubspot-tracking"
           id="hs-script-loader"
           strategy="afterInteractive"
           src="//js.hs-scripts.com/42347932.js"
-        />
+        /> */}
       </body>
       
     </html>

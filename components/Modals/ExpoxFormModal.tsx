@@ -99,7 +99,7 @@ const ExpoxFormModal = (
             </div>
 
 
-            <div className={`mit_checkboxes`}>
+            <div className={`expox_checkboxes`}>
               <p>What feature are you interested in? *</p>
 
               <div className={`checkboxes`}>
@@ -131,25 +131,22 @@ const ExpoxFormModal = (
               </div>
             </div>
 
-            <div className={`other_number_visitors`}>
+            <div className={`other__surface_map`}>
               <div className={`other`}>
                 <label htmlFor='other'>Message</label>
                 <textarea rows={4} placeholder='Tell us briefly about your needs'
                   {...register('message', { required: true })}
                 ></textarea>
               </div>
-              <div className={`number_visitors_options`}>
-                <label htmlFor='number_visitors_options'>
-                  Your number of visitors per year
-                </label>
 
-                <select {...register("your_number_of_visitors_per_year", { required: true })}>
-                  <option value="">0 - 1000</option>
-                  <option value="0-1000">0-1000</option>
-                  <option value="2000-10000">2000-10000</option>
-                  <option value="10000-50000">10000-50000</option>
-                  <option value="+50000">+50000</option>
-                </select>
+
+              <div className={`surface_map`}>
+                <label htmlFor='surface_map'>
+                  Surface you want to map (sq. ft)
+                </label>
+                <input type='surface_map' placeholder=''
+                  {...register('surface_you_want_to_map__sq__ft_', { required: true })}
+                />
               </div>
             </div>
 

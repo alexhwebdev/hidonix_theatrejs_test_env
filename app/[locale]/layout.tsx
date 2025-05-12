@@ -1,6 +1,6 @@
 import {ReactNode} from 'react';
 import type { Metadata } from "next";
-import Script from 'next/script'
+// import Script from 'next/script'
 import { ThemeProvider } from "next-themes";
 import ThemeSwitcher from "@/components/ThemeSwitcher/ThemeSwitcher";
 import NavServer from "@/components/NavServer/NavServer";

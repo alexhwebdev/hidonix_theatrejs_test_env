@@ -1,5 +1,6 @@
 import {ReactNode} from 'react';
 import type { Metadata } from "next";
+import Script from 'next/script'
 import { ThemeProvider } from "next-themes";
 import ThemeSwitcher from "@/components/ThemeSwitcher/ThemeSwitcher";
 import NavServer from "@/components/NavServer/NavServer";
@@ -157,7 +158,14 @@ export default async function LocaleLayout({
             </ThemeProvider>
           </NextIntlClientProvider>
         </PostHogProvider>
-        
+
+        {/* HubSpot tracking script */}
+        <Script
+          // id="hubspot-tracking"
+          id="hs-script-loader"
+          strategy="afterInteractive"
+          src="//js.hs-scripts.com/42347932.js"
+        />
       </body>
       
     </html>

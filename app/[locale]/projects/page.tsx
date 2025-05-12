@@ -12,7 +12,7 @@ import ItProjectsListingComponenet from './components/ItProjectListing';
 // NextJS looks for export of 'const metadata'.
 export const metadata = {
   // https://nextjs.org/docs/app/api-reference/functions/generate-metadata
-  title: 'Projects | Hidonix',
+  title: 'Projects',
   description: 'Transforming Challenges into Innovations',
   // keywords: ['Next.js', 'React', 'JavaScript'],
   // manifest: '/manifest.json',

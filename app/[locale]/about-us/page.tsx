@@ -8,7 +8,7 @@ import { IPageContent } from '@/types/pageContent.types';
 // NextJS looks for export of 'const metadata'.
 export const metadata = {
   // https://nextjs.org/docs/app/api-reference/functions/generate-metadata
-  title: 'About Us | Hidonix',
+  title: 'About Us',
   description: 'We are not your typical software company—we are a deep tech pioneer at the forefront of innovation.',
   // keywords: ['Next.js', 'React', 'JavaScript'],
   // manifest: '/manifest.json',

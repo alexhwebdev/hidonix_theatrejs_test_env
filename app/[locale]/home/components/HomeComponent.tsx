@@ -12,6 +12,8 @@ import CenterModeSlider from '@/app/[locale]/home/components/ReactSlick/CenterMo
 import FadeSlider from '@/app/[locale]/home/components/ReactSlick/FadeSlider/FadeSlider';
 import {useLocale} from 'next-intl';
 import '../home.scss';
+import Cookies from 'js-cookie';
+
 
 interface HomeProps {
   homeGlobalAssets: {
@@ -109,6 +111,9 @@ const HomeComponent: React.FC<HomeProps> = (
     sectionSevenData
   }
 ) => {
+  const hutk = Cookies.get('hubspotutk');
+  console.log('hutk ', hutk)
+  
   useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger);
 

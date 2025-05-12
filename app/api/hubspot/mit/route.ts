@@ -2,13 +2,17 @@ import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
   const { 
+    hutk,
+    pageUri,
+    pageName,
     name_and_surname, 
     museum_company, 
     email, 
     mit_features, 
     other, 
-    your_number_of_visitors_per_year 
+    your_number_of_visitors_per_year
   } = await req.json();
+
   const HUBSPOT_TOKEN = process.env.HUBSPOT_TOKEN;
   const HUBSPOT_PORTAL_ID = process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID;
   const HUBSPOT_FORM_ID = process.env.NEXT_PUBLIC_HUBSPOT_MIT_FORM_ID;
@@ -30,7 +34,12 @@ export async function POST(req: Request) {
           { name: 'mit_features', value: formattedMitFeatures },
           { name: 'other', value: other },
           { name: 'your_number_of_visitors_per_year', value: your_number_of_visitors_per_year }
-        ]
+        ],
+        context: {
+          hutk,       // visitor tracking token
+          pageUri,    // full URL
+          pageName,   // page title
+        }
       }),
     });
 

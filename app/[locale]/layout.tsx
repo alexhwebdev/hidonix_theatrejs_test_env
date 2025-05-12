@@ -161,10 +161,10 @@ export default async function LocaleLayout({
 
         {/* HubSpot tracking script */}
         <Script
-          // id="hubspot-tracking"
-          id="hs-script-loader"
+          id="hubspot-tracking"
+          // id="hs-script-loader"
           strategy="afterInteractive"
-          src="//js.hs-scripts.com/42347932.js"
+          src={`//js.hs-scripts.com/${process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID}.js`}
         />
       </body>
       

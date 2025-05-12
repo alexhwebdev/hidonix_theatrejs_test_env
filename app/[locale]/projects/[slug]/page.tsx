@@ -258,6 +258,21 @@ const {
 
 
 
+// // DOC : Metadata - https://nextjs.org/docs/app/api-reference/functions/generate-metadata
+// // NextJS looks for export of 'const metadata'.
+// export const metadata = {
+//   // https://nextjs.org/docs/app/api-reference/functions/generate-metadata
+//   title: `Projects `,
+//   description: 'Transforming Challenges into Innovations',
+//   // keywords: ['Next.js', 'React', 'JavaScript'],
+//   // manifest: '/manifest.json',
+// }
+// console.log(
+//   '--------- projectsListingPageModel ', 
+//   projectsListingPageModel.projectListingPageEachProject
+// )
+
+
 const ProjectServer = async (
   { params }: { params: Promise<{ locale: string, slug: string }> }
 ) => {

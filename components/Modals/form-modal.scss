@@ -231,12 +231,14 @@
           }
         }
       }
-      .other__surface_map {
+      .other__surface_map,
+      .other_number_visitors {
         display: flex;
         margin-bottom: 20px;
         justify-content: space-between;
 
-        .other {
+        .other,
+        .number_visitors_options {
           width: 49%;
 
           textarea {
@@ -345,7 +347,8 @@
   .modal__mit_ion_form .container {
     height: 85%;
   }
-  .other__surface_map {
+  .other__surface_map,
+  .other_number_visitors {
     flex-direction: column;
 
     .other,
@@ -443,6 +446,7 @@ html.dark {
   .modal__mit_ion_form {
     .container {
       .modal {
+        .other_number_visitors,
         .other__surface_map {
           .other,
           .surface_map {

@@ -98,8 +98,8 @@ const ItExpoxFormModal = (
             </button>
           </div>
 
-          <h2>Let&apos;s study together the best solution</h2>
-          <p>Please fill out this short form so that we can best respond to your request.</p>
+          <h2>Studiamo insieme la soluzione migliore.</h2>
+          <p>Per favore, compila questo breve modulo affinché possiamo rispondere al meglio alla tua richiesta.</p>
 
           {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
           {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
@@ -110,13 +110,13 @@ const ItExpoxFormModal = (
             <div className={`name_company expox__container`}>
               <div className={`full_name`}>
                 <div className={`first_name`}>
-                  <label htmlFor='first_name'>First Name</label>
+                  <label htmlFor='first_name'>Nome</label>
                   <input type='text' placeholder='' required
                     {...register('firstname', { required: true })}
                   />
                 </div>
                 <div className={`last_name`}>
-                  <label htmlFor='last_name'>Last Name</label>
+                  <label htmlFor='last_name'>Cognome</label>
                   <input type='text' placeholder='' required
                     {...register('lastname', { required: true })}
                   />
@@ -124,7 +124,7 @@ const ItExpoxFormModal = (
               </div>
 
               <div className={`company`}>
-                <label htmlFor='company'>Company <span>*</span></label>
+                <label htmlFor='company'>Azienda <span>*</span></label>
                 <input type='company' placeholder=''
                   {...register('company', { required: true })}
                 />
@@ -133,7 +133,7 @@ const ItExpoxFormModal = (
 
             <div className={`expox_email`}>
               <div className={`email`}>
-                <label htmlFor='email'>Email address <span>*</span></label>
+                <label htmlFor='email'>Email <span>*</span></label>
                 <input type='email' placeholder='example@domain.com'
                   {...register('email', { required: true })}
                 />
@@ -142,32 +142,32 @@ const ItExpoxFormModal = (
 
 
             <div className={`expox_checkboxes`}>
-              <p>What feature are you interested in? *</p>
+              <p>Quali funzionalità ti interessano? *</p>
 
               <div className={`checkboxes`}>
                 <label className={`block`}>
-                  <input type="checkbox" {...register('expox_features')} value="Indoor/Outdoor Navigation" /> 
-                  Indoor/Outdoor Navigation
+                  <input type="checkbox" {...register('expox_features')} value="Navigazione Indoor/Outdoor" /> 
+                  Navigazione Indoor/Outdoor
                 </label>
                 <label className={`block`}>
                   <input type="checkbox" {...register('expox_features')} value="Proximity Marketing" /> 
                   Proximity Marketing
                 </label>
                 <label className={`block`}>
-                  <input type="checkbox" {...register('expox_features')} value="Visitor App" /> 
-                  Visitor App
+                  <input type="checkbox" {...register('expox_features')} value="App per Visitatori" /> 
+                  App per Visitatori
                 </label>
                 <label className={`block`}>
-                  <input type="checkbox" {...register('expox_features')} value="Security Tools" /> 
-                  Security Tools
+                  <input type="checkbox" {...register('expox_features')} value="Strumenti di Sicurezz" /> 
+                  Strumenti di Sicurezz
                 </label>   
                 <label className={`block`}>
-                  <input type="checkbox" {...register('expox_features')} value="Ticketing & Entry" /> 
-                  Ticketing & Entry
+                  <input type="checkbox" {...register('expox_features')} value="Biglietteria e Accesso" /> 
+                  Biglietteria e Accesso
                 </label>
                 <label className={`block`}>
-                  <input type="checkbox" {...register('expox_features')} value="Exhibitors Promotional Tools" /> 
-                  Exhibitors Promotional Tools
+                  <input type="checkbox" {...register('expox_features')} value="Strumenti Promozionali per Espositori" /> 
+                  Strumenti Promozionali per Espositori
                 </label>
                 
               </div>
@@ -175,8 +175,8 @@ const ItExpoxFormModal = (
 
             <div className={`message_surface_map`}>
               <div className={`message`}>
-                <label htmlFor='message'>Message</label>
-                <textarea rows={4} placeholder='Tell us briefly about your needs'
+                <label htmlFor='message'>Messaggio</label>
+                <textarea rows={4} placeholder='Raccontaci brevemente di cosa hai bisogno'
                   {...register('message', { required: true })}
                 ></textarea>
               </div>
@@ -184,7 +184,7 @@ const ItExpoxFormModal = (
 
               <div className={`surface_map`}>
                 <label htmlFor='surface_map'>
-                  Surface you want to map (sq. ft)
+                  Superficie da mappare (in mq)
                 </label>
                 <input type='surface_map' placeholder=''
                   {...register('surface_you_want_to_map__sq__ft_', { required: true })}

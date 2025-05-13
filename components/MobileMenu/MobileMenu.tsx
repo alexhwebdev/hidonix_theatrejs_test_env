@@ -173,7 +173,9 @@ const Hamburger = (
       <div className={`nav__nested_menu ${nestedMenuIsToggled ? 'nested_open' : ''}`}>
         <ul className={`nav__nested_links`}>
           {nestedNavLinks.map((link, index) => (
-            <li key={`nested_nav` + index} className={locale === "it" ? "it-class" : ""}>
+            <li key={`nested_nav` + index} 
+              // className={locale === "it" ? "it-class" : ""}
+            >
               {
                 link.icon ? 
                 <>

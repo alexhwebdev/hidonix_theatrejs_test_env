@@ -582,15 +582,19 @@ const MitView = (
         </div>
 
         {
-          pathname.substring(1, 3) === 'en' 
-          ? isModalOpen && <MitFormModal 
-              onClose={() => setIsModalOpen(false)} 
-              closeIcons={ closeIcons }
-            />
-          : isModalOpen && <ItMitFormModal 
-              onClose={() => setIsModalOpen(false)} 
-              closeIcons={ closeIcons }
-            />
+          isModalOpen && (
+            pathname?.substring(1, 3) === 'en' ? (
+              <MitFormModal 
+                onClose={() => setIsModalOpen(false)} 
+                closeIcons={closeIcons} 
+              />
+            ) : (
+              <ItMitFormModal 
+                onClose={() => setIsModalOpen(false)} 
+                closeIcons={closeIcons} 
+              />
+            )
+          )
         }
       </section>
 

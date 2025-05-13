@@ -2,6 +2,7 @@ import ThemeSwitchAssetsNoLink from '@/utils/ThemeSwitchAssetsNoLink';
 import React, { useEffect, useState } from 'react'
 import { MitFormData, IGlobalAssetsProps } from '@/types/pageContent.types';
 import { useForm } from 'react-hook-form';
+import Cookies from 'js-cookie';
 // import { sendIonForm } from "@/utils/SendEmail";
 import axios from 'axios';
 import "./mit-form-modal.scss";
@@ -23,8 +24,16 @@ const ItMitFormModal = (
     try {
       setErrorMessage("");
       setSuccessMessage("");
-      
-      const response = await axios.post("/api/hubspot/mit", data);
+
+      const hutk = Cookies.get('hubspotutk');
+      const payload = {
+        ...data,
+        hutk,
+        pageUri: window.location.href,
+        pageName: document.title,
+      };
+
+      const response = await axios.post("/api/hubspot/mit", payload);
       
       if (response.status === 200) {
         setSuccessMessage("Form submitted successfully!");
@@ -75,7 +84,7 @@ const ItMitFormModal = (
 
   return (
     <div
-      className={`modal__mit_ion_form`}
+      className={`mit__form_modal`}
       onClick={onClose}
     >
       <div

@@ -10,16 +10,6 @@ import "./ion-form-modal.scss";
 
 interface IApplicationModalProps {
   onClose: () => void;
-  //   careersPage: {
-  //       heroImage: {
-  //     alt: string;
-  //     url: string;
-  //   }
-  //   heading: string;
-  //   body: string;
-  //   unsolicitedApplication: string;
-  //   unsolicitedApplicationSentence: string;
-  // }
   closeIcons: IGlobalAssetsProps[];
 }
 

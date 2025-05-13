@@ -111,9 +111,6 @@ const HomeComponent: React.FC<HomeProps> = (
     sectionSevenData
   }
 ) => {
-  const hutk = Cookies.get('hubspotutk');
-  console.log('hutk ', hutk)
-  
   useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger);
 

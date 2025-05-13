@@ -45,10 +45,12 @@ export default function LocaleSwitcherSelect({
     } else if (currentPath.includes('/blog/')) {
       // Fallback for blog detail pages with no match in slug map
       localizedRoute = `/blog`;
-    } else if (!matchedRoute && currentPath.includes('/expox')) {
-      // Fallback for expox pages with no match
-      localizedRoute = `/`;
     } 
+    // ----- ADD THIS IF ITALIAN VERSION DOESNT EXIST
+    // else if (!matchedRoute && currentPath.includes('/expox')) {
+    //   // Fallback for expox pages with no match
+    //   localizedRoute = `/`;
+    // } 
     else {
       // Generic fallback
       localizedRoute = currentPath;

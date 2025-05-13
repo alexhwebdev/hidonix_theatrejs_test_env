@@ -2,10 +2,10 @@ import { performRequest } from '@/lib/datocms';
 import { IGlobalAssetsProps, IPageContent } from '@/types/pageContent.types';
 import React from 'react'
 import ExpoxView from './components/ExpoxView';
-import { 
-  // notFound, 
-  redirect 
-} from 'next/navigation';
+// import { 
+//   // notFound, 
+//   redirect 
+// } from 'next/navigation';
 // import { redirect } from '@/i18n/navigation';
 
 // DOC : Metadata - https://nextjs.org/docs/app/api-reference/functions/generate-metadata

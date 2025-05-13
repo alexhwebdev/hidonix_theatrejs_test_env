@@ -39,10 +39,10 @@ export default async function IonServer(
 
               video {
                 muxPlaybackId
+                blurUpThumb
                 title
                 width
                 height
-                blurUpThumb
               }
             }
           }

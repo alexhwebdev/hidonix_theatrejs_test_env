@@ -37,6 +37,7 @@ export interface IIonProps {
 
       video: {
         muxPlaybackId: string;
+        blurUpThumb: string;
         title: string;
         width: number;
         height: number;
@@ -366,7 +367,6 @@ const IonView = (
 
   return (
     <div id={`ion__id`}>
-
       {/* ---------- S1 - MAP. NAVIGATE. MONITOR ---------- */}
       <section className={`ion__section1`}>
         <div className={`overlay`}></div>
@@ -380,19 +380,21 @@ const IonView = (
 
         <div className={`hero`}>
           <VideoPlayer 
-            // data={{ 
-            //   muxPlaybackId: ionS1HeadingBodyButtonsVideo.gallery[0].video.muxPlaybackId,
-            //   thumbnailUrl: ionS1HeadingBodyButtonsVideo.gallery[0].video.blurUpThumb
-            // }}
-            data={ionS1HeadingBodyButtonsVideo.gallery[0].video}
+            data={{ 
+              muxPlaybackId: ionS1HeadingBodyButtonsVideo.gallery[0].video.muxPlaybackId,
+              thumbnailUrl: ionS1HeadingBodyButtonsVideo.gallery[0].video.blurUpThumb
+            }}
+            // data={ionS1HeadingBodyButtonsVideo.gallery[0].video}
             // style={{ aspectRatio: '1 / 1' }}
             style={{
-              width: '100%',
+              width: 'auto',
               height: '100%',
               objectFit: 'cover', // important!
+              display: 'flex'
             }}
             autoPlay
-            muted
+            playsInline
+            muted={true}
             loop={true}
             disableCookies={false}
             // poster={ionS1HeadingBodyButtonsVideo.gallery[0].video.blurUpThumb}

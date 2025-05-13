@@ -21,8 +21,16 @@
     }
     .hero {
       width: 100%;
+      // height: auto;
       object-fit: cover;
       position: absolute;
+
+      mux-player {
+        // width: 50% !important;
+        height: 100% !important;
+        display: flex !important;
+        transform: scale(1.2);
+      }
     }
 
     .copy__container {

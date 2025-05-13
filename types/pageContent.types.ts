@@ -89,7 +89,7 @@ export interface IPageContent {
     }[];
   }[];
 
-  
+
   // ---------- HOME PAGE
   homePage: {
     homeGlobalAssets: {
@@ -327,6 +327,7 @@ export interface IPageContent {
     
           video: {
             muxPlaybackId: string;
+            blurUpThumb: string;
             title: string;
             width: number;
             height: number;

@@ -1,9 +1,10 @@
 import ThemeSwitchAssetsNoLink from '@/utils/ThemeSwitchAssetsNoLink';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { MitFormData, IGlobalAssetsProps } from '@/types/pageContent.types';
 import { useForm } from 'react-hook-form';
+import Cookies from 'js-cookie';
 // import { sendIonForm } from "@/utils/SendEmail";
-import "./form-modal.scss";
+import "./mit-form-modal.scss";
 import axios from 'axios';
 
 
@@ -12,7 +13,7 @@ interface IApplicationModalProps {
   closeIcons: IGlobalAssetsProps[];
 }
 
-const ItMitFormModal = (
+const MitFormModal = (
   { onClose, closeIcons }: IApplicationModalProps
 ) => {
   const { register, handleSubmit, reset } = useForm<MitFormData>();
@@ -23,8 +24,16 @@ const ItMitFormModal = (
     try {
       setErrorMessage("");
       setSuccessMessage("");
-      
-      const response = await axios.post("/api/hubspot/mit", data);
+
+      const hutk = Cookies.get('hubspotutk');
+      const payload = {
+        ...data,
+        hutk,
+        pageUri: window.location.href,
+        pageName: document.title,
+      };
+
+      const response = await axios.post("/api/hubspot/mit", payload);
       
       if (response.status === 200) {
         setSuccessMessage("Form submitted successfully!");
@@ -44,9 +53,38 @@ const ItMitFormModal = (
     }
   };
 
+  // ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- 
+  // ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- 
+  useEffect(() => {
+    const loadHubSpotForm = () => {
+      if (window.hbspt) {
+        window.hbspt.forms.create({
+          region: "na1", // or your HubSpot region
+          portalId: process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID as string,
+          formId: process.env.NEXT_PUBLIC_HUBSPOT_MIT_FORM_ID as string,
+          target: "#hubspot-form-container",
+        });
+      }
+    };
+  
+    const script = document.createElement('script');
+    script.src = "https://js.hsforms.net/forms/embed/v2.js";
+    script.async = true;
+    script.defer = true;
+    script.onload = loadHubSpotForm;
+  
+    document.body.appendChild(script);
+  
+    return () => {
+      // Cleanup (if modal closes and unmounts)
+      const formContainer = document.querySelector("#hubspot-form-container");
+      if (formContainer) formContainer.innerHTML = "";
+    };
+  }, []);
+
   return (
     <div
-      className={`modal__mit_ion_form`}
+      className={`mit__form_modal`}
       onClick={onClose}
     >
       <div
@@ -60,21 +98,27 @@ const ItMitFormModal = (
             </button>
           </div>
 
-          <h2>Studiamo insieme la soluzione migliore per il tuo museo</h2>
-          <p>Compila questo breve form per consentirci di rispondere al meglio alla tua richiesta.</p>
+          <h2>Let&apos;s study together the best solution for your museum</h2>
+          <p>Please fill out this short form so that we can best respond to your request.</p>
+
+          {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
+          {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
+          <div id="hubspot-form-container" />
+          {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
+          {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
 
           <form onSubmit={handleSubmit(onSubmit)}>
 
             <div className={`name_company`}>
               <div className={`full_name`}>
-                <label htmlFor='full_name'>Nome e Cognome <span>*</span></label>
+                <label htmlFor='full_name'>Name and Surname <span>*</span></label>
                 <input type='text' placeholder='John Doe' required
                   {...register('name_and_surname', { required: true })}
                 />
               </div>
 
               <div className={`company`}>
-                <label htmlFor='company'>Museo/Azienda <span>*</span></label>
+                <label htmlFor='company'>Museum/Company <span>*</span></label>
                 <input type='company' placeholder=''
                   {...register('museum_company', { required: true })}
                 />
@@ -92,54 +136,54 @@ const ItMitFormModal = (
 
 
             <div className={`mit_checkboxes`}>
-              <p>A quale funzionalità sei interessato/a? *</p>
+              <p>What feature are you interested in? *</p>
 
               <div className={`checkboxes`}>
                 <label className={`block`}>
-                  <input type="checkbox" {...register('mit_features')} value="Digitalizzazione e gestione del catalogo" /> 
-                  Digitalizzazione e gestione del catalogo
+                  <input type="checkbox" {...register('mit_features')} value="Catalog digitization and management" /> 
+                  Catalog digitization and management
                 </label>
                 <label className={`block`}>
-                  <input type="checkbox" {...register('mit_features')} value="Gestione e analisi dei flussi" /> 
-                  Gestione e analisi dei flussi
+                  <input type="checkbox" {...register('mit_features')} value="Flow management and analysis" /> 
+                  Flow management and analysis
                 </label>
                 <label className={`block`}>
                   <input type="checkbox" {...register('mit_features')} value="e-Commerce" /> 
                   e-Commerce
                 </label>
                 <label className={`block`}>
-                  <input type="checkbox" {...register('mit_features')} value="Realtà Aumentata" /> 
-                  Realtà Aumentata
+                  <input type="checkbox" {...register('mit_features')} value="Augmented Reality" /> 
+                  Augmented Reality
                 </label>   
                 <label className={`block`}>
                   <input type="checkbox" {...register('mit_features')} value="Indoor/Outdoor Navigation" /> 
                   Indoor/Outdoor Navigation
                 </label>
                 <label className={`block`}>
-                  <input type="checkbox" {...register('mit_features')} value="Membership e donazioni" /> 
-                  Membership e donazioni
+                  <input type="checkbox" {...register('mit_features')} value="Membership and donations" /> 
+                  Membership and donations
                 </label>
                 <label className={`block`}>
-                  <input type="checkbox" {...register('mit_features')} value="Scansione delle opere d'arte" /> 
-                  Scansione delle opere d&apos;arte
+                  <input type="checkbox" {...register('mit_features')} value="Artwork image recognition" /> 
+                  Artwork image recognition
                 </label>
                 <label className={`block`}>
-                  <input type="checkbox" {...register('mit_features')} value="Contenuti geolocalizzati" /> 
-                  Contenuti geolocalizzati
+                  <input type="checkbox" {...register('mit_features')} value="Content based on location" /> 
+                  Content based on location
                 </label>                  
               </div>
             </div>
 
             <div className={`other_number_visitors`}>
               <div className={`other`}>
-                <label htmlFor='other'>Altro (specificare)</label>
-                <textarea rows={4} placeholder=''
+                <label htmlFor='other'>Other</label>
+                <textarea rows={4} placeholder='Tell us briefly about your needs'
                   {...register('other', { required: true })}
                 ></textarea>
               </div>
               <div className={`number_visitors_options`}>
                 <label htmlFor='number_visitors_options'>
-                  Il numero di visitatori annui del tuo museo è
+                  Your number of visitors per year
                 </label>
 
                 <select {...register("your_number_of_visitors_per_year", { required: true })}>
@@ -153,7 +197,7 @@ const ItMitFormModal = (
             </div>
 
 
-            <button className={`btn__submit_ion_form`}>
+            <button className={`btn__submit_mit_form`}>
               <p>Send</p>
             </button>
 
@@ -178,4 +222,4 @@ const ItMitFormModal = (
   );
 }
 
-export default ItMitFormModal;
+export default MitFormModal

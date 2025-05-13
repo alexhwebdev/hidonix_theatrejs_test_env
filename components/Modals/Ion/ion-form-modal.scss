@@ -1,0 +1,320 @@
+#hubspot-form-container {
+  visibility: hidden;
+}
+
+.ion__form_modal {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  overflow-y: scroll;
+  position: fixed;
+  margin: auto;
+  /* max-width: 850px; */
+  z-index: 9999;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  .container {
+    width: 80%;
+    height: 75%;
+    background: white;
+    display: flex;
+    margin: auto;
+    max-width: 700px;
+    max-width: 875px;
+    min-height: 800px;
+    padding: 25px;
+    position: relative;
+
+    .modal {
+      width: 100%;
+      margin: auto;
+      max-width: 800px;
+
+      .btn__close_modal {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+
+        button {
+          &:hover {
+            cursor: pointer;
+          }          
+        }
+
+      }
+
+      h2 {
+        width: 75%;
+        color: black;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+      p {
+        color: black;
+        font-size: 1rem;
+        margin-bottom: 20px;
+      }
+
+
+      .name_company,
+      .email_surface {
+        display: flex;
+        margin-bottom: 20px;
+        justify-content: space-between;
+        
+        .full_name,
+        .company,
+        .email,
+        .surface_map {
+          width: 49%;
+          display: flex;
+          flex-direction: column;
+
+          label {
+            color: black;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+          }
+          input {
+            width: 100%;
+            height: 45px;
+            background-color: white;
+            border: 1px solid silver;
+            border-radius: 0;
+            color: black;
+            padding-left: 10px;
+
+            font-family: open sans;
+            font-weight: 300;
+            font-size: 0.9rem;
+            &::placeholder {
+              color: #a6a6a6;
+            }
+          }
+        }
+      }
+      .select_options {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+
+        label {
+          color: black;
+          font-size: 1.1rem;
+          font-weight: 600;
+          margin-bottom: 8px;
+        }
+        select {
+          width: 100%;
+          height: 45px;
+          background-color: white;
+          border: 1px solid silver;
+          border-radius: 2px;
+          color: #a6a6a6;
+
+          padding-left: 10px;
+
+          font-family: open sans;
+          font-weight: 300;
+          font-size: 0.9rem;
+        }
+      }
+      .message {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+
+        label {
+          color: black;
+          font-size: 1.1rem;
+          font-weight: 600;
+          margin-bottom: 8px;
+        }
+        textarea {
+          width: 100%;
+          height: 100px;
+          background-color: white;
+          border: 1px solid silver;
+          border-radius: 2px;
+          color: gray;
+          font-family: open sans;
+          font-weight: 300;
+          font-size: 0.9rem;
+          padding: 10px;
+
+          &::placeholder {
+            color: #a6a6a6;
+          }
+        }
+      }
+
+      .btn__submit_ion_form {
+        background-color: black;
+        border: none;
+        border-radius: 3px;
+        padding: 13px 35px;
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        p {
+          color: white;
+          font-weight: bold;
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+.no-scroll {
+  overflow: hidden;
+}
+
+
+
+// -------------------- MEDIA QUERIES
+@media (max-width: 768px) {
+  .ion__form_modal .container .modal .name_company, 
+  .ion__form_modal .container .modal .email_surface {
+    flex-direction: column;
+    margin-bottom: 0;
+  }
+  .ion__form_modal .container .modal .name_company .full_name, 
+  .ion__form_modal .container .modal .name_company .company, 
+  .ion__form_modal .container .modal .name_company .email, 
+  .ion__form_modal .container .modal .name_company .surface_map, 
+  .ion__form_modal .container .modal .email_surface .full_name, 
+  .ion__form_modal .container .modal .email_surface .company, 
+  .ion__form_modal .container .modal .email_surface .email, 
+  .ion__form_modal .container .modal .email_surface .surface_map {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .ion__form_modal .container {
+    height: 85%;
+  }
+  // .other__surface_map,
+  // .other_number_visitors {
+  //   flex-direction: column;
+
+  //   .other,
+  //   .surface_map,
+  //   .number_visitors_options {
+  //     width: 100% !important;
+  //   }
+  // }
+}
+
+
+@media (max-width: 568px) {
+  .ion__form_modal {
+    .container {
+      min-height: 1000px;
+    }
+  }
+}
+@media (max-width: 430px) {
+  .ion__form_modal {
+    .container {
+      width: 95%;
+      height: 95%;
+
+      .modal {
+        h2 {
+          width: 100%;
+          font-size: 1.5rem !important;
+        }
+        .name_company .full_name label,
+        .name_company .company label,
+        .email_surface .email label,
+        .email_surface .surface_map label,
+        .select_options label,
+        .message label {
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+  .ion__form_modal .container {
+    width: 100%;
+    height: 100%;
+
+    .modal .name_company .full_name input,
+    .modal .name_company .company input,
+    .modal .mit__email input,
+    .modal .other__surface_map .other textarea,
+    .modal .other__surface_map .number_visitors_options select {
+      height: 40px;
+    }
+  }
+}
+
+
+
+// -------------------- LIGHT / DARK MODE
+html.light {
+  .btn__close_modal {
+    button {
+      border: none;
+      background: unset;
+    }
+  }
+}
+html.dark {
+  .btn__close_modal {
+    button {
+      border: none;
+      background: unset;
+    }
+  }
+
+  .ion__form_modal {
+    background-color: rgba(0, 0, 0, 0.5);
+
+    .container {
+      background: var(--dark-gray-2B282C);
+
+      .modal {
+        h2, p, label {
+          color: white;
+        }
+        form {
+          .name_company,
+          .email_surface {
+            label {
+              color: white;
+            }
+          }
+        }
+      }
+    }
+  }
+  .ion__form_modal {
+    .container {
+      .modal {
+        .other_number_visitors,
+        .other__surface_map {
+          .other,
+          .surface_map {
+            label {
+              color: white;
+            }
+          }
+          .number_visitors_options {
+            label {
+              color: white;
+            }
+          }
+        }
+      }
+    }
+  }
+}

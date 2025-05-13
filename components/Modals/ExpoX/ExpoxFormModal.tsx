@@ -4,8 +4,8 @@ import { ExpoxFormData, IGlobalAssetsProps } from '@/types/pageContent.types';
 import { useForm } from 'react-hook-form';
 import Cookies from 'js-cookie';
 // import { sendIonForm } from "@/utils/SendEmail";
-import "./expox-form-modal.scss";
 import axios from 'axios';
+import "./expox-form-modal.scss";
 
 
 interface IApplicationModalProps {
@@ -100,6 +100,10 @@ const ExpoxFormModal = (
 
           <h2>Let&apos;s study together the best solution</h2>
           <p>Please fill out this short form so that we can best respond to your request.</p>
+
+          {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
+          {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
+          <div id="hubspot-form-container" />
 
           <form onSubmit={handleSubmit(onSubmit)}>
 

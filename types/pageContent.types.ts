@@ -9,6 +9,25 @@ export interface IGlobalAssetsProps {
   };
 };
 
+export interface IImgProps {
+  title: string;
+  description: string;
+  url: string;
+  link: string;
+}
+
+export interface IPageDataProps {
+  title: string;
+  // customData: string;
+  customData: {
+    dataType: string;
+    link: string;
+  };
+  url: string;
+  alt: string;  
+  video: []
+}
+
 export interface IFooterProps {
   _allAboutUsLocales: {
     locale: string;
@@ -70,9 +89,7 @@ export interface IPageContent {
     }[];
   }[];
 
-
-
-
+  
   // ---------- HOME PAGE
   homePage: {
     homeGlobalAssets: {
@@ -694,28 +711,6 @@ export interface IPageContent {
     }
   }
 };
-
-
-
-
-export interface IImgProps {
-  title: string;
-  description: string;
-  url: string;
-  link: string;
-}
-
-export interface IPageDataProps {
-  title: string;
-  // customData: string;
-  customData: {
-    dataType: string;
-    link: string;
-  };
-  url: string;
-  alt: string;  
-  video: []
-}
 
 
 

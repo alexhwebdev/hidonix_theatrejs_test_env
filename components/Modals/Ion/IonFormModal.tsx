@@ -4,8 +4,8 @@ import { IonFormData, IGlobalAssetsProps } from '@/types/pageContent.types';
 import { useForm } from 'react-hook-form';
 import Cookies from 'js-cookie';
 // import { sendIonForm } from "@/utils/SendEmail";
-import "./ion-form-modal.scss";
 import axios from 'axios';
+import "./ion-form-modal.scss";
 
 
 interface IApplicationModalProps {
@@ -114,8 +114,6 @@ const IonFormModal = (
           {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
           {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
           <div id="hubspot-form-container" />
-          {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
-          {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
 
           <form onSubmit={handleSubmit(onSubmit)}>
 

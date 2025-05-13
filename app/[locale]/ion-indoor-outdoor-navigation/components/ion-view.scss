@@ -482,6 +482,10 @@
         color: black;
         padding: 15px 30px;
 
+        &:hover {
+          cursor: pointer;
+        }
+
         p {
           font-weight: 400;
         }        

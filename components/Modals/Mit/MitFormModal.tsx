@@ -4,8 +4,8 @@ import { MitFormData, IGlobalAssetsProps } from '@/types/pageContent.types';
 import { useForm } from 'react-hook-form';
 import Cookies from 'js-cookie';
 // import { sendIonForm } from "@/utils/SendEmail";
-import "./mit-form-modal.scss";
 import axios from 'axios';
+import "./mit-form-modal.scss";
 
 
 interface IApplicationModalProps {
@@ -104,8 +104,6 @@ const MitFormModal = (
           {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
           {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
           <div id="hubspot-form-container" />
-          {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
-          {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
 
           <form onSubmit={handleSubmit(onSubmit)}>
 

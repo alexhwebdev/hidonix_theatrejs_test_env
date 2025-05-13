@@ -4,7 +4,7 @@ import Image from 'next/image';
 import parse from 'html-react-parser';
 import { usePathname } from 'next/navigation';
 import ExpoxFormModal from '@/components/Modals/ExpoX/ExpoxFormModal';
-import ItMitFormModal from '@/components/Modals/Mit/ItMitFormModal';
+import ItExpoxFormModal from '@/components/Modals/ExpoX/ItExpoxFormModal';
 import Accordion from './Accordian/Accordion';
 import { IGlobalAssetsProps } from '@/types/pageContent.types';
 import gsap from 'gsap';
@@ -467,7 +467,7 @@ const ExpoxView = (
               onClose={() => setIsModalOpen(false)} 
               closeIcons={ closeIcons }
             />
-          : isModalOpen && <ItMitFormModal 
+          : isModalOpen && <ItExpoxFormModal 
               onClose={() => setIsModalOpen(false)} 
               closeIcons={ closeIcons }
             />

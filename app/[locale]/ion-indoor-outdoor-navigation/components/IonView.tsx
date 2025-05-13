@@ -158,7 +158,6 @@ const IonView = (
     };
   }, [isModalOpen]);
 
-
   useEffect(() => {
     const tl = gsap.timeline();
   

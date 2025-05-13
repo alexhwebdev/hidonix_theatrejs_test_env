@@ -3,7 +3,6 @@ import React, { MouseEvent, useEffect, useState } from 'react';
 import Image from 'next/image';
 import parse from 'html-react-parser';
 import { usePathname } from 'next/navigation';
-import './mit-view.scss';
 import Accordion from './Accordian/Accordion';
 import MultipleItemsSlider from './ReactSlick/MultipleItemsSlider/MultipleItemsSlider';
 import MitFormModal from '@/components/Modals/Mit/MitFormModal';
@@ -14,6 +13,7 @@ import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { GsapAnimateElement } from '@/utils/GsapAnimateElement';
 import { VideoPlayer } from 'react-datocms';
+import './mit-view.scss';
 
 export interface IMitProps {
   globalAsset: {

@@ -1,10 +1,11 @@
 import ThemeSwitchAssetsNoLink from '@/utils/ThemeSwitchAssetsNoLink';
 import React, { useEffect, useState } from 'react'
-import { IonFormData, IGlobalAssetsProps } from '@/types/pageContent.types';
+import { ExpoxFormData, IGlobalAssetsProps } from '@/types/pageContent.types';
 import { useForm } from 'react-hook-form';
+import Cookies from 'js-cookie';
 // import { sendIonForm } from "@/utils/SendEmail";
 import axios from 'axios';
-import "./ion-form-modal.scss";
+import "./expox-form-modal.scss";
 
 
 interface IApplicationModalProps {
@@ -12,19 +13,27 @@ interface IApplicationModalProps {
   closeIcons: IGlobalAssetsProps[];
 }
 
-const IonFormModal = (
+const ItExpoxFormModal = (
   { onClose, closeIcons }: IApplicationModalProps
 ) => {
-  const { register, handleSubmit, reset } = useForm<IonFormData>();
+  const { register, handleSubmit, reset } = useForm<ExpoxFormData>();
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-
-  const onSubmit = async (data: IonFormData) => {
+  
+  const onSubmit = async (data: ExpoxFormData) => {
     try {
       setErrorMessage("");
       setSuccessMessage("");
-      
-      const response = await axios.post("/api/hubspot/ion", data);
+
+      const hutk = Cookies.get('hubspotutk');
+      const payload = {
+        ...data,
+        hutk,
+        pageUri: window.location.href,
+        pageName: document.title,
+      };
+
+      const response = await axios.post("/api/hubspot/expox", payload);
       
       if (response.status === 200) {
         setSuccessMessage("Form submitted successfully!");
@@ -52,7 +61,7 @@ const IonFormModal = (
         window.hbspt.forms.create({
           region: "na1", // or your HubSpot region
           portalId: process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID as string,
-          formId: process.env.NEXT_PUBLIC_HUBSPOT_ION_FORM_ID as string,
+          formId: process.env.NEXT_PUBLIC_HUBSPOT_EXPOX_FORM_ID as string,
           target: "#hubspot-form-container",
         });
       }
@@ -75,8 +84,8 @@ const IonFormModal = (
 
   return (
     <div
-      className={`modal__mit_ion_form`}
-      onClick={(e) => e.stopPropagation()}
+      className={`expox__form_modal`}
+      onClick={onClose}
     >
       <div
         className={`container`}
@@ -89,8 +98,8 @@ const IonFormModal = (
             </button>
           </div>
 
-          <h2>Studiamo insieme la soluzione migliore per la tua struttura</h2>
-          <p>Compila questo breve form per consentirci di rispondere al meglio alla tua richiesta.</p>
+          <h2>Let&apos;s study together the best solution</h2>
+          <p>Please fill out this short form so that we can best respond to your request.</p>
 
           {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
           {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
@@ -98,33 +107,84 @@ const IonFormModal = (
 
           <form onSubmit={handleSubmit(onSubmit)}>
 
-            <div className={`name_company`}>
+            <div className={`name_company expox__container`}>
               <div className={`full_name`}>
-                <label htmlFor='full_name'>Nome e cognome <span>*</span></label>
-                <input type='text' placeholder='John Doe' required
-                  {...register('name_and_surname', { required: true })}
-                />
+                <div className={`first_name`}>
+                  <label htmlFor='first_name'>First Name</label>
+                  <input type='text' placeholder='' required
+                    {...register('firstname', { required: true })}
+                  />
+                </div>
+                <div className={`last_name`}>
+                  <label htmlFor='last_name'>Last Name</label>
+                  <input type='text' placeholder='' required
+                    {...register('lastname', { required: true })}
+                  />
+                </div>
               </div>
 
               <div className={`company`}>
-                <label htmlFor='company'>Azienda <span>*</span></label>
+                <label htmlFor='company'>Company <span>*</span></label>
                 <input type='company' placeholder=''
                   {...register('company', { required: true })}
                 />
               </div>
             </div>
 
-            <div className={`email_surface`}>
+            <div className={`expox_email`}>
               <div className={`email`}>
-                <label htmlFor='email'>Email <span>*</span></label>
-                <input type='email' placeholder=''
+                <label htmlFor='email'>Email address <span>*</span></label>
+                <input type='email' placeholder='example@domain.com'
                   {...register('email', { required: true })}
                 />
               </div>
+            </div>
+
+
+            <div className={`expox_checkboxes`}>
+              <p>What feature are you interested in? *</p>
+
+              <div className={`checkboxes`}>
+                <label className={`block`}>
+                  <input type="checkbox" {...register('expox_features')} value="Indoor/Outdoor Navigation" /> 
+                  Indoor/Outdoor Navigation
+                </label>
+                <label className={`block`}>
+                  <input type="checkbox" {...register('expox_features')} value="Proximity Marketing" /> 
+                  Proximity Marketing
+                </label>
+                <label className={`block`}>
+                  <input type="checkbox" {...register('expox_features')} value="Visitor App" /> 
+                  Visitor App
+                </label>
+                <label className={`block`}>
+                  <input type="checkbox" {...register('expox_features')} value="Security Tools" /> 
+                  Security Tools
+                </label>   
+                <label className={`block`}>
+                  <input type="checkbox" {...register('expox_features')} value="Ticketing & Entry" /> 
+                  Ticketing & Entry
+                </label>
+                <label className={`block`}>
+                  <input type="checkbox" {...register('expox_features')} value="Exhibitors Promotional Tools" /> 
+                  Exhibitors Promotional Tools
+                </label>
+                
+              </div>
+            </div>
+
+            <div className={`message_surface_map`}>
+              <div className={`message`}>
+                <label htmlFor='message'>Message</label>
+                <textarea rows={4} placeholder='Tell us briefly about your needs'
+                  {...register('message', { required: true })}
+                ></textarea>
+              </div>
+
 
               <div className={`surface_map`}>
                 <label htmlFor='surface_map'>
-                  Superficie da mappare (mq)
+                  Surface you want to map (sq. ft)
                 </label>
                 <input type='surface_map' placeholder=''
                   {...register('surface_you_want_to_map__sq__ft_', { required: true })}
@@ -133,27 +193,7 @@ const IonFormModal = (
             </div>
 
 
-            <div className={`select_options`}>
-              <label htmlFor='nav_option'>
-               A che tipologia di navigazione sei interessato/a? <span>*</span>
-              </label>
-
-              <select {...register("which_kind_of_navigation_you_want_to_use", { required: true })}>
-                <option value="">Select...</option>
-                <option value="Indoor">Indoor</option>
-                <option value="Outdoor">Outdoor</option>
-                <option value="Entrambe">Entrambe</option>
-              </select>
-            </div>
-
-            <div className={`message`}>
-              <label htmlFor='message'>Note aggiuntive</label>
-              <textarea rows={4} placeholder=''
-                {...register('additional_information', { required: true })}
-              ></textarea>
-            </div>
-
-            <button className={`btn__submit_ion_form`}>
+            <button className={`btn__submit_expox_form`}>
               <p>Send</p>
             </button>
 
@@ -178,4 +218,4 @@ const IonFormModal = (
   );
 }
 
-export default IonFormModal
+export default ItExpoxFormModal

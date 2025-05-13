@@ -101,10 +101,6 @@ const ItMitFormModal = (
           <h2>Studiamo insieme la soluzione migliore per il tuo museo</h2>
           <p>Compila questo breve form per consentirci di rispondere al meglio alla tua richiesta.</p>
 
-          {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
-          {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
-          <div id="hubspot-form-container" />
-
           <form onSubmit={handleSubmit(onSubmit)}>
 
             <div className={`name_company`}>
@@ -214,6 +210,10 @@ const ItMitFormModal = (
             )}
 
           </form>
+
+          {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
+          {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
+          <div id="hubspot-form-container" />
         </div>
       </div>
     </div>

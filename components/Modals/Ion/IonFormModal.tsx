@@ -101,10 +101,6 @@ const IonFormModal = (
           <h2>We study together the best solution for you structure</h2>
           <p>Please fill out this short form so that we can best respond to your request.</p>
 
-          {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
-          {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
-          <div id="hubspot-form-container" />
-
           <form onSubmit={handleSubmit(onSubmit)}>
 
             <div className={`name_company`}>
@@ -181,6 +177,10 @@ const IonFormModal = (
             )}
 
           </form>
+
+          {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
+          {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
+          <div id="hubspot-form-container" />
         </div>
       </div>
     </div>

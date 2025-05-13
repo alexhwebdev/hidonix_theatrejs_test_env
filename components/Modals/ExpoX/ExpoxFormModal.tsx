@@ -101,10 +101,6 @@ const ExpoxFormModal = (
           <h2>Let&apos;s study together the best solution</h2>
           <p>Please fill out this short form so that we can best respond to your request.</p>
 
-          {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
-          {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
-          <div id="hubspot-form-container" />
-
           <form onSubmit={handleSubmit(onSubmit)}>
 
             <div className={`name_company expox__container`}>
@@ -212,6 +208,10 @@ const ExpoxFormModal = (
             )}
 
           </form>
+
+          {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
+          {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
+          <div id="hubspot-form-container" />
         </div>
       </div>
     </div>

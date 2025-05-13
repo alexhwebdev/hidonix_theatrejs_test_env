@@ -12,8 +12,8 @@ import {
 // NextJS looks for export of 'const metadata'.
 export const metadata = {
   // https://nextjs.org/docs/app/api-reference/functions/generate-metadata
-  title: 'ExpoX - Una piattaforma completa per trasformare ogni momento del tuo evento',
-  description: 'ExpoX è la soluzione all-in-one pensata per poli fieristici e organizzatori di eventi.',
+  title: 'ExpoX - One Platform to Power Your Entire Event Experience',
+  description: 'ExpoX is an all-encompassing event management platform that maps your venue, elevates visitor and exhibitor experience and gives you real-time analytics.',
   // keywords: ['Next.js', 'React', 'JavaScript'],
   // manifest: '/manifest.json',
 }

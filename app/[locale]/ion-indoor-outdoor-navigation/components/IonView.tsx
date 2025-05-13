@@ -390,7 +390,6 @@ const IonView = (
               width: 'auto',
               height: '100%',
               objectFit: 'cover', // important!
-              display: 'flex'
             }}
             autoPlay
             playsInline

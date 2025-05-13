@@ -2,10 +2,10 @@ import { performRequest } from '@/lib/datocms';
 import { IGlobalAssetsProps, IPageContent } from '@/types/pageContent.types';
 import React from 'react'
 import ExpoxView from './components/ExpoxView';
-// import { 
-//   // notFound, 
-//   redirect 
-// } from 'next/navigation';
+import { 
+  // notFound, 
+  redirect 
+} from 'next/navigation';
 // import { redirect } from '@/i18n/navigation';
 
 // DOC : Metadata - https://nextjs.org/docs/app/api-reference/functions/generate-metadata
@@ -132,10 +132,10 @@ export default async function ExpoxServer(
 
   // Defensive check: content might be missing
   const expoxPageData = expoxPageModel?.expoxPage;
-  // if (!expoxPageData) {
-  //   // Could also log a warning here
-  //   return redirect(`/${locale}`); // Or notFound();
-  // }
+  if (!expoxPageData) {
+    // Could also log a warning here
+    return redirect(`/${locale}`); // Or notFound();
+  }
 
   const closeIcons = globalAsset.images.filter(
     image => image.customData?.dataType === "close-icon"

@@ -132,10 +132,10 @@ export default async function ExpoxServer(
 
   // Defensive check: content might be missing
   const expoxPageData = expoxPageModel?.expoxPage;
-  if (!expoxPageData) {
-    // Could also log a warning here
-    return redirect(`/${locale}`); // Or notFound();
-  }
+  // if (!expoxPageData) {
+  //   // Could also log a warning here
+  //   return redirect(`/${locale}`); // Or notFound();
+  // }
 
   const closeIcons = globalAsset.images.filter(
     image => image.customData?.dataType === "close-icon"

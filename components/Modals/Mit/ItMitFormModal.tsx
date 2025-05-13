@@ -191,7 +191,7 @@ const ItMitFormModal = (
             </div>
 
 
-            <button className={`btn__submit_ion_form`}>
+            <button className={`btn__submit_mit_form`}>
               <p>Send</p>
             </button>
 

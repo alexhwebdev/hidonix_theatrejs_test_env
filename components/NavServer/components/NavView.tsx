@@ -67,7 +67,9 @@ const NavView = (
                     // ))
 
                     productsPageLinks.map((item, index) => (
-                      <li key={`products-nav-${index}`} className={locale === "it" ? "it-class" : ""}>
+                      <li key={`products-nav-${index}`} 
+                        // className={locale === "it" ? "it-class" : ""}
+                      >
                         <Link href={item.path}>
                           {item.label}
                         </Link>

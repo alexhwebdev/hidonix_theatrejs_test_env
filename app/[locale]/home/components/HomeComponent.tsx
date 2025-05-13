@@ -12,7 +12,6 @@ import CenterModeSlider from '@/app/[locale]/home/components/ReactSlick/CenterMo
 import FadeSlider from '@/app/[locale]/home/components/ReactSlick/FadeSlider/FadeSlider';
 import {useLocale} from 'next-intl';
 import '../home.scss';
-import Cookies from 'js-cookie';
 
 
 interface HomeProps {

@@ -1,5 +1,5 @@
 import ThemeSwitchAssetsNoLink from '@/utils/ThemeSwitchAssetsNoLink';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { MitFormData, IGlobalAssetsProps } from '@/types/pageContent.types';
 import { useForm } from 'react-hook-form';
 import Cookies from 'js-cookie';
@@ -33,8 +33,6 @@ const MitFormModal = (
         pageName: document.title,
       };
 
-      console.log('payload ', payload)
-
       const response = await axios.post("/api/hubspot/mit", payload);
       
       if (response.status === 200) {
@@ -55,6 +53,35 @@ const MitFormModal = (
     }
   };
 
+  // ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- 
+  // ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- 
+  useEffect(() => {
+    const loadHubSpotForm = () => {
+      if (window.hbspt) {
+        window.hbspt.forms.create({
+          region: "na1", // or your HubSpot region
+          portalId: process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID as string,
+          formId: process.env.NEXT_PUBLIC_HUBSPOT_MIT_FORM_ID as string,
+          target: "#hubspot-form-container",
+        });
+      }
+    };
+  
+    const script = document.createElement('script');
+    script.src = "https://js.hsforms.net/forms/embed/v2.js";
+    script.async = true;
+    script.defer = true;
+    script.onload = loadHubSpotForm;
+  
+    document.body.appendChild(script);
+  
+    return () => {
+      // Cleanup (if modal closes and unmounts)
+      const formContainer = document.querySelector("#hubspot-form-container");
+      if (formContainer) formContainer.innerHTML = "";
+    };
+  }, []);
+
   return (
     <div
       className={`modal__mit_ion_form`}
@@ -73,6 +100,12 @@ const MitFormModal = (
 
           <h2>Let&apos;s study together the best solution for your museum</h2>
           <p>Please fill out this short form so that we can best respond to your request.</p>
+
+          {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
+          {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
+          <div id="hubspot-form-container" />
+          {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
+          {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
 
           <form onSubmit={handleSubmit(onSubmit)}>
 

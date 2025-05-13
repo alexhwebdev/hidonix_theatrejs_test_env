@@ -2,6 +2,9 @@ import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
   const { 
+    hutk,
+    pageUri,
+    pageName,
     firstname,
     lastname, 
     company, 
@@ -10,6 +13,7 @@ export async function POST(req: Request) {
     message, 
     surface_you_want_to_map__sq__ft_ 
   } = await req.json();
+
   const HUBSPOT_TOKEN = process.env.HUBSPOT_TOKEN;
   const HUBSPOT_PORTAL_ID = process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID;
   const HUBSPOT_FORM_ID = process.env.NEXT_PUBLIC_HUBSPOT_EXPOX_FORM_ID;
@@ -32,7 +36,12 @@ export async function POST(req: Request) {
           { name: 'expox_features', value: formattedExpoxFeatures },
           { name: 'message', value: message },
           { name: 'surface_you_want_to_map__sq__ft_', value: surface_you_want_to_map__sq__ft_ }
-        ]
+        ],
+        context: {
+          hutk,       // visitor tracking token
+          pageUri,    // full URL
+          pageName,   // page title
+        }
       }),
     });
 

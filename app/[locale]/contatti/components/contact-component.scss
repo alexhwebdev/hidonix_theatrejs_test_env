@@ -167,6 +167,10 @@
       color: white;
       padding: 15px 25px;
 
+      &:hover {
+        cursor: pointer;
+      }
+      
       p {
         font-size: 0.9rem;
         letter-spacing: 1px;

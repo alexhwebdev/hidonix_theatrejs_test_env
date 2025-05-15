@@ -1,8 +1,9 @@
 "use client"
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import parse from 'html-react-parser';
 import ThemeSwitchAssets from "@/utils/ThemeSwitchAssets";
 import { useForm } from 'react-hook-form';
+import Cookies from 'js-cookie';
 // import { sendEmail } from "@/utils/SendEmail";
 import "./contact-component.scss";
 import { 
@@ -33,8 +34,16 @@ const ContactComponent = (
     try {
       setErrorMessage("");
       setSuccessMessage("");
-      
-      const response = await axios.post("/api/hubspot/contactus", data);
+
+      const hutk = Cookies.get('hubspotutk');
+      const payload = {
+        ...data,
+        hutk,
+        pageUri: window.location.href,
+        pageName: document.title,
+      };
+
+      const response = await axios.post("/api/hubspot/contactus", payload);
       
       if (response.status === 200) {
         setSuccessMessage("Form submitted successfully!");
@@ -54,6 +63,34 @@ const ContactComponent = (
     }
   };
 
+  // ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- 
+  // ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- 
+  useEffect(() => {
+    const loadHubSpotForm = () => {
+      if (window.hbspt) {
+        window.hbspt.forms.create({
+          region: "na1", // or your HubSpot region
+          portalId: process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID as string,
+          formId: process.env.NEXT_PUBLIC_HUBSPOT_FORM_ID as string,
+          target: "#hubspot-form-container",
+        });
+      }
+    };
+  
+    const script = document.createElement('script');
+    script.src = "https://js.hsforms.net/forms/embed/v2.js";
+    script.async = true;
+    script.defer = true;
+    script.onload = loadHubSpotForm;
+  
+    document.body.appendChild(script);
+  
+    return () => {
+      // Cleanup (if modal closes and unmounts)
+      const formContainer = document.querySelector("#hubspot-form-container");
+      if (formContainer) formContainer.innerHTML = "";
+    };
+  }, []);
 
   return (
     <div id={`contact_id`}>
@@ -149,6 +186,10 @@ const ContactComponent = (
         {/* Thank you for contacting us! */}
         {/* You are very important to us, all information received will always remain confidential. We will contact you as soon as we review your message */}
       </form>
+
+      {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
+      {/* ----- DO NOT REMOVE ----- DO NOT REMOVE ----- DO NOT REMOVE ----- */}
+      <div id="hubspot-form-container" />
     </div>
   );
 }

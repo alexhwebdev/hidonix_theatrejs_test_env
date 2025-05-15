@@ -1,7 +1,18 @@
 import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
-  const { first_name, last_name, email, company, message, nextjs_how_did_you_find_out_about_us } = await req.json();
+  const {
+    hutk,
+    pageUri,
+    pageName,
+    first_name, 
+    last_name, 
+    email, 
+    company, 
+    message, 
+    nextjs_how_did_you_find_out_about_us 
+  } = await req.json();
+
   const HUBSPOT_TOKEN = process.env.HUBSPOT_TOKEN;
   const HUBSPOT_PORTAL_ID = process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID;
   const HUBSPOT_FORM_ID = process.env.NEXT_PUBLIC_HUBSPOT_FORM_ID;
@@ -24,7 +35,12 @@ export async function POST(req: Request) {
           { name: 'company', value: company },
           { name: 'message', value: message },
           { name: 'nextjs_how_did_you_find_out_about_us', value: formattedSources }  // Ensure sources is a semicolon-separated string
-        ]
+        ],
+        context: {
+          hutk,       // visitor tracking token
+          pageUri,    // full URL
+          pageName,   // page title
+        }
       }),
     });
 

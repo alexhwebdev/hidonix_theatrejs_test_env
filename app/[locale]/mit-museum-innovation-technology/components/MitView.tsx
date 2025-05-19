@@ -450,6 +450,8 @@ const MitView = (
     );
   }, [])
 
+  // Section 1 - Video
+  const [videoLoaded, setVideoLoaded] = useState(false);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   useEffect(() => {
@@ -510,7 +512,7 @@ const MitView = (
     'analytics', 'inclusive', 'augmented',
     'brand', 'indoor'
   ];
-
+  
   return (
     <div id={`mit__id`}>
 
@@ -525,7 +527,39 @@ const MitView = (
           priority
         /> */}
 
-        <div className={`hero`}>
+        <div className="video-wrapper hero">
+          {!videoLoaded && (
+            <Image
+              className={`video-placeholder ${videoLoaded ? 'hide' : ''}`}
+              src={mitS1HeadingBodyButtonsGallery.gallery[1].video.blurUpThumb}
+              alt="Video Placeholder"
+              fill
+              style={{ objectFit: 'cover' }}
+              priority
+            />
+          )}
+          
+          <VideoPlayer
+            data={{
+              muxPlaybackId: mitS1HeadingBodyButtonsGallery.gallery[1].video.muxPlaybackId,
+              thumbnailUrl: mitS1HeadingBodyButtonsGallery.gallery[1].video.blurUpThumb,
+            }}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+            }}
+            autoPlay
+            muted
+            loop
+            disableCookies={false}
+            onCanPlay={() => setVideoLoaded(true)}
+          />
+        </div>
+
+
+
+        {/* <div className={`hero`}>
           <VideoPlayer 
             // data={mitS1HeadingBodyButtonsGallery.gallery[1].video} 
             data={{ 
@@ -534,8 +568,8 @@ const MitView = (
             }}
             // style={{ aspectRatio: '1 / 1' }}
             style={{
-              // width: '100%',
-              // height: '100%',
+              width: '100%',
+              height: '100%',
               objectFit: 'cover', // important!
             }}
             autoPlay
@@ -543,7 +577,7 @@ const MitView = (
             loop={true}
             disableCookies={false}
           />
-        </div>
+        </div> */}
 
         <div className={`copy_gif__container`}>
           <div className={`copy`}>

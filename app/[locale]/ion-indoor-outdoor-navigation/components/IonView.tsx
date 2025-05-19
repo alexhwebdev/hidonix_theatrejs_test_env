@@ -143,6 +143,9 @@ const IonView = (
     ionS9HeadingButtonImage,
   }: IIonProps
 ) => {
+  // Section 1 - Video
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [playSection4Video, setPlaySection4Video] = useState(false);
   const pathname = usePathname();
@@ -378,7 +381,37 @@ const IonView = (
           priority
         /> */}
 
-        <div className={`hero`}>
+        <div className="video-wrapper hero">
+          {!videoLoaded && (
+            <Image
+              className={`video-placeholder ${videoLoaded ? 'hide' : ''}`}
+              src={ionS1HeadingBodyButtonsVideo.gallery[0].video.blurUpThumb}
+              alt="Video Placeholder"
+              fill
+              style={{ objectFit: 'cover' }}
+              priority
+            />
+          )}
+          
+          <VideoPlayer
+            data={{
+              muxPlaybackId: ionS1HeadingBodyButtonsVideo.gallery[0].video.muxPlaybackId,
+              thumbnailUrl: ionS1HeadingBodyButtonsVideo.gallery[0].video.blurUpThumb
+            }}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+            }}
+            autoPlay
+            muted
+            loop
+            disableCookies={false}
+            onCanPlay={() => setVideoLoaded(true)}
+          />
+        </div>
+
+        {/* <div className={`hero`}>
           <VideoPlayer 
             data={{ 
               muxPlaybackId: ionS1HeadingBodyButtonsVideo.gallery[0].video.muxPlaybackId,
@@ -398,7 +431,7 @@ const IonView = (
             disableCookies={false}
             // poster={ionS1HeadingBodyButtonsVideo.gallery[0].video.blurUpThumb}
           />
-        </div>
+        </div> */}
 
         <div className={`copy__container`}>
           <div className={`copy`}>

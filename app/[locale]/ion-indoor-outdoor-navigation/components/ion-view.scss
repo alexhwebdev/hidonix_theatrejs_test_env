@@ -6,11 +6,13 @@
   // ---------- SECTION 1
   .ion__section1 {
     width: 100vw;
-    height: 750px;
+    height: 625px;
     display: flex;
+    justify-content: center;
     align-items: center;
     overflow: hidden;
     position: relative;
+    z-index: 0;
     
     .overlay {
       width: 100%;
@@ -19,17 +21,47 @@
       position: absolute;
       z-index: 1;
     }
-    .hero {
+    // .hero {
+    //   width: 100%;
+    //   // height: auto;
+    //   object-fit: cover;
+    //   position: absolute;
+
+    //   mux-player {
+    //     width: 100% !important;
+    //     height: 100% !important;
+    //     transform: scale(1.2);
+    //   }
+    // }
+
+    .video-wrapper {
+      // position: relative;
+      // width: 100%;
+      // height: 100%;
+      overflow: hidden;
+
       width: 100%;
-      // height: auto;
+      height: auto;
       object-fit: cover;
       position: absolute;
 
-      mux-player {
-        width: 100% !important;
-        height: 100% !important;
-        transform: scale(1.2);
+      .video-placeholder {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        transition: opacity 0.5s ease;
+        opacity: 1;
+        &.hide {
+          opacity: 0;
+          pointer-events: none;
+        }
       }
+
+      video {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+      }      
     }
 
     .copy__container {
@@ -506,6 +538,7 @@
     .ion__section1 {
       .hero {
         width: max-content;
+        height: 650px;
       }
     }
     .ion__section2 .copy .heading {
@@ -603,7 +636,7 @@
       }
     }
     .ion__section7 {
-      padding: 75px 0;
+      padding: 75px 0 0;
 
       .heading {
         padding: 0 25px;
@@ -617,8 +650,8 @@
       }
     }
     .ion__section9 {
-      height: 550px;
-      padding: 100px 25px 125px;
+      height: 500px;
+      padding: 100px 25px;
     }
   }
 
@@ -631,6 +664,9 @@
     }
     .ion__section5 .subheading_body_gallery .copy_gallery .gallery {
       width: 75%;
+    }
+    .ion__section6 .image_subheading_body .img_subheading_body p {
+      width: 100%;
     }
   }
 

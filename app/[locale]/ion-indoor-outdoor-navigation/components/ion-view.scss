@@ -671,6 +671,10 @@
   }
 
   @media (max-width: 430px) {
+    .ion__section1{
+      height: 600px;
+      margin-top: 50px;
+    }
     .ion__section2 {
       padding: 50px 25px;
 
@@ -793,8 +797,4 @@ html.dark {
       }
     }
   }
-
-
-
-
 }

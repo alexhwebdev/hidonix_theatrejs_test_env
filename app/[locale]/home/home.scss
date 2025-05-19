@@ -428,6 +428,7 @@
       }
     }
   }
+
   @media (max-width: 750px) {
     .home__hero #rs__fade_slider {
       .home__hero_image {
@@ -438,6 +439,7 @@
       }
     }
   }
+
   @media (max-width: 568px) {
     .home__hero #rs__fade_slider {
       .home__hero_image_copy {
@@ -478,6 +480,17 @@
     }
     #rs__fade_slider .slick-slider .slick-list .slick-track .slick-slide > div .slide .overlay {
       display: block;
+    }
+    .home__hero {
+      height: 100vh;
+
+      #rs__fade_slider {
+        height: 100vh;
+
+        .slick-slider .slick-list {
+          height: 100vh !important;
+        }
+      }
     }
     .home__hero_image_copy {
       button {

@@ -39,6 +39,8 @@
                 width: 500px;
                 height: fit-content;
                 margin: auto;
+                overflow: hidden;
+                padding: 50px 0;
                 position: absolute;
                 text-align: left;
                 z-index: 1;
@@ -84,9 +86,17 @@
                   text-decoration: none;
                 }
               }
-  
+              .overlay {
+                display: none;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(255, 255, 255, 0.5);
+                position: absolute;
+                z-index: 0;
+              }
               .home__hero_image {
                 height: auto !important;
+                z-index: -1;
               }
               // img {
               //   height: auto !important;

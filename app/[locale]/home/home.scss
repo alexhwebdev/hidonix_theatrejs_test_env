@@ -476,6 +476,9 @@
     #rs__fade_slider .slick-slider .slick-next {
       right: -45px !important;
     }
+    #rs__fade_slider .slick-slider .slick-list .slick-track .slick-slide > div .slide .overlay {
+      display: block;
+    }
     .home__hero_image_copy {
       button {
         a {

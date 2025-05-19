@@ -158,6 +158,7 @@ const FadeSlider: React.FC<IFadeSliderProps> = (
               </button> */}
 
             </div>
+            <div className={`overlay`}></div>
             <Image
               className={`home__hero_image`}
               src={item.image.url}

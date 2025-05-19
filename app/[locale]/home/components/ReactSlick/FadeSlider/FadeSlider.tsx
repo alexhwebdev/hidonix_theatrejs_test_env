@@ -138,13 +138,11 @@ const FadeSlider: React.FC<IFadeSliderProps> = (
             <div className={`home__hero_image_copy`}>
               <h1>{item.heading}</h1>
               <p>{item.body}</p>
-              <div className={`button__container`}>
-                <button>
-                  <a href={`${locale}${item.link}`}>
-                    {item.button}
-                  </a>
-                </button>
-              </div>
+              <button aria-hidden="true" disabled tabIndex={-1}>
+                <a href={`${locale}${item.link}`}>
+                  {item.button}
+                </a>
+              </button>
 
             </div>
             <Image

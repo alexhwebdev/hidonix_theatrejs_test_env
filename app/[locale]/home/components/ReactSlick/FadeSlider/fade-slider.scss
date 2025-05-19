@@ -60,14 +60,15 @@
                   position: relative;
                 }
                 button {
+                  height: 50px;
                   background-color: var(--dark-gray-2B282C);
                   border: none;
                   border-radius: unset;
-                  padding: 15px 25px;
                   position: relative;
 
                   a {
                     color: white;
+                    padding: 15px 25px;
                     text-decoration: none;
                   }
                 }

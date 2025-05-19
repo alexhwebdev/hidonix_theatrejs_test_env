@@ -139,10 +139,18 @@ const FadeSlider: React.FC<IFadeSliderProps> = (
               <h1>{item.heading}</h1>
               <p>{item.body}</p>
               
-                <a href={`${locale}${item.link}`}>
-                  {item.button}
-                </a>
-              
+              <a 
+                href={`${locale}${item.link}`}
+                tabIndex={-1} 
+                aria-hidden="true"
+              >
+                {item.button}
+              </a>
+
+              {/* {!isHidden && (
+                <a href={`${locale}${item.link}`}>Link</a>
+              )} */}
+
               {/* <button aria-hidden="true" disabled tabIndex={-1}>
                 <a href={`${locale}${item.link}`}>
                   {item.button}

@@ -303,7 +303,7 @@ const HomeComponent: React.FC<HomeProps> = (
                     width={300}
                     height={190}
                   />
-                  <h4>{item.subheading}</h4>
+                  <p>{item.subheading}</p>
                   <MarkdownComponent>
                     <p>{item.body}</p>
                   </MarkdownComponent>

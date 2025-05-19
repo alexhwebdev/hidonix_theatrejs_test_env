@@ -80,8 +80,13 @@
             width: 100%;
             height: auto;
           }
-          h4 {
+          // h4 {
+          //   font-size: 18px;
+          //   padding: 0 0 35px;
+          // }
+          p:nth-of-type(1) {
             font-size: 18px;
+            font-weight: 400;
             padding: 0 0 35px;
           }
           p {

@@ -61,7 +61,7 @@ export default function ThemeSwitchAssets(
               alt={asset?.alt}
               width={25}
               height={25}
-              loading="eager" // disables lazy loadin
+              loading="eager" // disables lazy loading
             />
           </Link>            
         )

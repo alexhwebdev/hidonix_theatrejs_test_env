@@ -492,6 +492,12 @@
       }
     }
     .home__hero_image_copy {
+      h1 {
+        line-height: 140% !important;
+      }
+      p {
+        line-height: 160% !important;
+      }
       button {
         a {
           font-size: 1rem;
@@ -539,6 +545,12 @@
 html.light {
   @media (max-width: 430px) {
     #rs__fade_slider .slick-slider .slick-list .slick-track .slick-slide > div .slide {
+      .home__hero_image_copy {
+        h1, p {
+          color: #000000;
+          text-shadow: 0 0 1px black;
+        }
+      }
       .overlay {
         background-color: rgba(255, 255, 255, 0.7);
         display: block;
@@ -580,6 +592,7 @@ html.dark {
       .home__hero_image_copy {
         h1, p {
           color: #ffffff;
+          text-shadow: 0 0 1px #ffffff;
         }
       }
       .overlay {

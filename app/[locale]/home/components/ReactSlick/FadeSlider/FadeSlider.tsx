@@ -66,6 +66,8 @@ const FadeSlider: React.FC<IFadeSliderProps> = (
         }, "-=0.6");
   }, []);
 
+  console.log("secOneData", secOneData);
+
   const pathname = usePathname();
   const locale = pathname.substring(1, 3);
   

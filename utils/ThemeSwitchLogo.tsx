@@ -65,7 +65,7 @@ export default function ThemeSwitchLogo(
               priority
               // fetchPriority="high"
             />
-          </Link>            
+          </Link>
         )
       })}
     </>

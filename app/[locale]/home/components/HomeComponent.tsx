@@ -6,7 +6,6 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import MarkdownComponent from '@/utils/ReactMarkdown';
-import techPartner from "../../../../public/home-imgs/tech-partner.png"
 import Accordion from '@/app/[locale]/home/components/Accordian/Accordion';
 import CenterModeSlider from '@/app/[locale]/home/components/ReactSlick/CenterModeSlider/CenterModeSlider';
 import FadeSlider from '@/app/[locale]/home/components/ReactSlick/FadeSlider/FadeSlider';
@@ -64,8 +63,9 @@ interface HomeProps {
 
   secFiveData: {
     image: {
+      alt: string;
       url: string;
-    }[];
+    };
     heading: string;
     button: string;
   }[];
@@ -319,11 +319,12 @@ const HomeComponent: React.FC<HomeProps> = (
       <section className={`home__tech_partner`}>
         <Image 
           className={`home_tech_partner_img`}
-          src={techPartner} 
-          alt="Looking for a technology partner to bring innovation to your project?"
+          src={secFiveData[0].image.url} 
+          alt={secFiveData[0].image.alt}
           // width={300}
           // height={225}
-          // fill={true}
+          fill={true}
+          style={{ objectFit: 'cover' }}
         />
         <div>
           <h2>{secFiveData[0].heading}</h2>

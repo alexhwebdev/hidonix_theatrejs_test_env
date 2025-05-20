@@ -1,12 +1,13 @@
 "use client";
 import React, { useRef, useEffect, useState, useTransition } from 'react';
 import { Link } from '@/i18n/navigation';
+// import Image from "next/image";
 import { usePathname, useParams } from 'next/navigation';
 import {useRouter} from '@/i18n/navigation';
 import ThemeSwitchAssetsNoLink from '@/utils/ThemeSwitchAssetsNoLink';
 import { IGlobalAssetsProps } from '@/types/pageContent.types';
 import ThemeSwitchAssets from '@/utils/ThemeSwitchAssets';
-import ThemeSwitchLogo from '@/utils/ThemeSwitchLogo';
+// import ThemeSwitchLogo from '@/utils/ThemeSwitchLogo';
 import {useLocale} from 'next-intl';
 import "./mobile-menu.scss";
 
@@ -46,7 +47,7 @@ interface IHamburgerProps {
 
 const Hamburger = (
   {
-    hidonixLogo, 
+    // hidonixLogo, 
     mobileMenuArrows,
     socialIcons
   }: IHamburgerProps
@@ -111,7 +112,32 @@ const Hamburger = (
       >
         {/* HIDONIX LOGO */}
         <div className={`hidonix__logo`}>
-          <ThemeSwitchLogo receivedAssets={hidonixLogo} />
+          {/* <ThemeSwitchLogo receivedAssets={hidonixLogo} /> */}
+          
+          <a href={`/`} className={`logo__link`}>
+            <div className={`logo`}></div>
+          </a>
+
+          {/* {hidonixLogo.map((asset, index) => {
+            return (
+              <Link 
+                href={asset.customData.link} 
+                className={`theme-switch-asset`}
+                prefetch={false} 
+                key={`asset-` + index}
+              >
+                <Image
+                  src={asset?.url}
+                  alt={asset?.alt}
+                  width={25}
+                  height={25}
+                  // loading="eager" // disables lazy loading
+                  priority
+                  // fetchPriority="high"
+                />
+              </Link>
+            )
+          })} */}
         </div>
         <div className="hamburger" onClick={handleToggleMenu}></div>
       </div>

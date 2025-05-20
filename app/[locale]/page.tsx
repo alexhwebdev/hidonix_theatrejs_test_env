@@ -75,6 +75,7 @@ export default async function HomePage(
         }
         homeS5TechPartner {
           image {
+            alt
             url
           }
           heading

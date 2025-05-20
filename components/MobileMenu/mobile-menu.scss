@@ -459,6 +459,22 @@
 // -------------------- DARK / LIGHT MODE
 // This way prevents : Hydration error. Server/Client mismatch.
 html.light {
+  @media (max-width: 768px) {
+    .mobile_menu {
+      .hamburger__container {
+        .hidonix__logo {
+          .logo {
+            width: 55px;
+            height: 35px;
+            background-image: url("../../public/hidonix-line-logo-black.svg");
+            background-size: contain;
+            background-repeat: no-repeat;
+          }
+        }      
+      }
+    }
+  }
+
   .mobile_menu {
     // background-color: white;
 
@@ -501,9 +517,23 @@ html.light {
 }
 
 html.dark {
-  .mobile_menu {
-    // background-color: white;
+  @media (max-width: 768px) {
+    .mobile_menu {
+      .hamburger__container {
+        .hidonix__logo {
+          .logo {
+            width: 55px;
+            height: 35px;
+            background-image: url("../../public/hidonix-line-logo-white.svg");
+            background-size: contain;
+            background-repeat: no-repeat;
+          }
+        }      
+      }
+    }
+  }
 
+  .mobile_menu {
     .nav__menu {
       ul.nav__links {
         li {

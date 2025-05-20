@@ -143,8 +143,9 @@ export interface IPageContent {
 
     homeS5TechPartner: {
       image: {
+        alt: string;
         url: string;
-      }[];
+      };
       heading: string;
       button: string;
     }[];

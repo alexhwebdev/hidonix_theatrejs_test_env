@@ -1,10 +1,10 @@
 "use client";
 import Image from "next/image";
 import Slider from "react-slick"; 
-import gsap from "gsap";
+// import gsap from "gsap";
 // import { useGSAP } from "@gsap/react";
 import "./fade-slider.scss";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { usePathname } from 'next/navigation';
 
 interface IFadeSliderProps {

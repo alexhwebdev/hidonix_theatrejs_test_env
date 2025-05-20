@@ -1,11 +1,9 @@
 "use client";
-import Image from "next/image";
-import Slider from "react-slick"; 
-// import gsap from "gsap";
-// import { useGSAP } from "@gsap/react";
 import "./fade-slider.scss";
-// import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from 'next/navigation';
+import Image from "next/image";
+import Slider from "react-slick";
 
 interface IFadeSliderProps {
   secOneData: {
@@ -65,6 +63,17 @@ const FadeSlider: React.FC<IFadeSliderProps> = (
   //         duration: 1,
   //       }, "-=0.6");
   // }, []);
+
+  const [quality, setQuality] = useState(75); // default
+
+  useEffect(() => {
+    const width = window.innerWidth;
+    if (width <= 768) {
+      setQuality(25); // Lower quality for mobile
+    } else {
+      setQuality(75); // Higher for desktop
+    }
+  }, []);
 
   const pathname = usePathname();
   const locale = pathname.substring(1, 3);
@@ -172,6 +181,7 @@ const FadeSlider: React.FC<IFadeSliderProps> = (
               alt={item.image.alt}
               fill={true}
               priority
+              quality={quality}
             />
           </div>
         ))}

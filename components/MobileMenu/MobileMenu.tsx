@@ -6,6 +6,7 @@ import {useRouter} from '@/i18n/navigation';
 import ThemeSwitchAssetsNoLink from '@/utils/ThemeSwitchAssetsNoLink';
 import { IGlobalAssetsProps } from '@/types/pageContent.types';
 import ThemeSwitchAssets from '@/utils/ThemeSwitchAssets';
+import ThemeSwitchLogo from '@/utils/ThemeSwitchLogo';
 import {useLocale} from 'next-intl';
 import "./mobile-menu.scss";
 
@@ -110,7 +111,7 @@ const Hamburger = (
       >
         {/* HIDONIX LOGO */}
         <div className={`hidonix__logo`}>
-          <ThemeSwitchAssets receivedAssets={hidonixLogo} />
+          <ThemeSwitchLogo receivedAssets={hidonixLogo} />
         </div>
         <div className="hamburger" onClick={handleToggleMenu}></div>
       </div>

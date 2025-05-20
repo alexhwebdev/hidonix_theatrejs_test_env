@@ -27,6 +27,7 @@ import { PostHogProvider } from '@/providers/ph-providers';
 // import LayoutComponent from './home/components/LayoutComponent';
 
 import IubendaConsent from '@/components/IubendaConsent/IubendaConsent';
+import DealFront from '@/components/DealFront/DealFront';
 
 // import Seo from '@/components/SEO/SEO';
 // import Script from 'next/script';
@@ -136,6 +137,7 @@ export default async function LocaleLayout({
     </head>
       <body>
         <IubendaConsent />
+
         <PostHogProvider>
           <NextIntlClientProvider messages={messages}>
             <ThemeProvider
@@ -166,6 +168,8 @@ export default async function LocaleLayout({
           strategy="afterInteractive"
           src={`//js.hs-scripts.com/${process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID}.js`}
         />
+
+        <DealFront />
       </body>
       
     </html>

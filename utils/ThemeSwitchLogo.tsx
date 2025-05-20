@@ -53,7 +53,7 @@ export default function ThemeSwitchLogo(
           <Link 
             href={asset.customData.link} 
             className={`theme-switch-asset`}
-            prefetch={true} 
+            prefetch={false} 
             key={`asset-` + index}
           >
             <Image
@@ -63,7 +63,7 @@ export default function ThemeSwitchLogo(
               height={25}
               // loading="eager" // disables lazy loading
               priority
-              fetchPriority="high"
+              // fetchPriority="high"
             />
           </Link>            
         )

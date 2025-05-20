@@ -33,40 +33,38 @@ interface IArrowProps {
 const FadeSlider: React.FC<IFadeSliderProps> = (
   { secOneData, homeGlobalAssets }
 ) => {
-  useEffect(() => {
-    const tl = gsap.timeline();
+  // useEffect(() => {
+  //   const tl = gsap.timeline();
   
-    tl.fromTo(
-      ".home__hero_image_copy h1", 
-      { opacity: 0, top: "75px" },
-      { 
-        delay: 0,
-        opacity: 1, 
-        top: "0px", 
-        ease: "power1.out", 
-        duration: 1,
-      })
-      .fromTo(
-        ".home__hero_image_copy p", 
-        { opacity: 0, top: "75px" },
-        { 
-          opacity: 1, 
-          top: "0px", 
-          ease: "power1.out", 
-          duration: 1,
-        }, "-=0.8")
-      .fromTo(
-        ".home__hero_image_copy a", 
-        { opacity: 0, top: "75px" },
-        { 
-          opacity: 1, 
-          top: "0px", 
-          ease: "power1.out", 
-          duration: 1,
-        }, "-=0.6");
-  }, []);
-
-  console.log("secOneData", secOneData);
+  //   tl.fromTo(
+  //     ".home__hero_image_copy h1", 
+  //     { opacity: 0, top: "75px" },
+  //     { 
+  //       delay: 0,
+  //       opacity: 1, 
+  //       top: "0px", 
+  //       ease: "power1.out", 
+  //       duration: 1,
+  //     })
+  //     .fromTo(
+  //       ".home__hero_image_copy p", 
+  //       { opacity: 0, top: "75px" },
+  //       { 
+  //         opacity: 1, 
+  //         top: "0px", 
+  //         ease: "power1.out", 
+  //         duration: 1,
+  //       }, "-=0.8")
+  //     .fromTo(
+  //       ".home__hero_image_copy a", 
+  //       { opacity: 0, top: "75px" },
+  //       { 
+  //         opacity: 1, 
+  //         top: "0px", 
+  //         ease: "power1.out", 
+  //         duration: 1,
+  //       }, "-=0.6");
+  // }, []);
 
   const pathname = usePathname();
   const locale = pathname.substring(1, 3);
@@ -138,16 +136,23 @@ const FadeSlider: React.FC<IFadeSliderProps> = (
         {secOneData.map((item, index) => (
           <div key={`home-hero-${index}`} className={`slide`}>
             <div className={`home__hero_image_copy`}>
-              <h1>{item.heading}</h1>
-              <p>{item.body}</p>
+              <h1 className={`fade_in delay_1`}>
+                {item.heading}
+              </h1>
+              <p className={`fade_in delay_2`}>
+                {item.body}
+              </p>
               
-              <a 
-                href={`${locale}${item.link}`}
-                tabIndex={-1} 
-                aria-hidden="true"
-              >
-                {item.button}
-              </a>
+              <div className={`button__container fade_in delay_3`}>
+                <a 
+                  href={`${locale}${item.link}`}
+                  tabIndex={-1} 
+                  aria-hidden="true"
+                >
+                  {item.button}
+                </a>
+              </div>
+
 
               {/* {!isHidden && (
                 <a href={`${locale}${item.link}`}>Link</a>

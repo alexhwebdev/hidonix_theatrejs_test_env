@@ -61,29 +61,58 @@
                   margin-bottom: 35px;
                   position: relative;
                 }
-                button,
-                .button__container {
-                  height: 50px;
-                  background-color: var(--dark-gray-2B282C);
-                  border: none;
-                  border-radius: unset;
-                  position: relative;
+                // button,
+                // .button__container {
+                //   height: 50px;
+                //   background-color: var(--dark-gray-2B282C);
+                //   border: none;
+                //   border-radius: unset;
+                //   position: relative;
 
-                  a {
-                    color: white;
-                    padding: 15px 25px;
-                    text-decoration: none;
-                  }
+                //   a {
+                //     color: white;
+                //     padding: 15px 25px;
+                //     text-decoration: none;
+                //   }
+                // }
+                .button__container {
+                  width: 200px;
+                  position: relative;
                 }
                 a {
                   height: 50px;
                   background-color: var(--dark-gray-2B282C);
                   border: none;
                   border-radius: unset;
-                  position: relative;
                   color: white;
                   padding: 15px 25px;
+                  position: relative;
                   text-decoration: none;
+                }
+
+                h1.fade_in,
+                p.fade_in,
+                .button__container.fade_in {
+                  opacity: 0;
+                  // top: 50px;
+                  transform: translateY(50px);
+                  animation: fadeInUp 0.7s ease-out forwards;
+                }
+                .fade_in.delay_1 {
+                  animation-delay: 0.6s;
+                }
+                .fade_in.delay_2 {
+                  animation-delay: 0.9s;
+                }
+                .fade_in.delay_3 {
+                  animation-delay: 1.2s;
+                }
+                @keyframes fadeInUp {
+                  to {
+                    opacity: 1;
+                    // top: 0px;
+                    transform: translateY(0);
+                  }
                 }
               }
               .overlay {

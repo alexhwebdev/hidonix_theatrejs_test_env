@@ -104,8 +104,11 @@ const CenterModeSlider: React.FC<ICenterModeSliderProps> = (
               className={`image`}
               src={image.url}
               alt={image.alt}
-              width={275}
-              height={275}
+              width={200}
+              height={200}
+              quality={75}
+              // fill
+              // sizes="(max-width: 768px) 120px, 200px"
             />
           </div>
         ))}

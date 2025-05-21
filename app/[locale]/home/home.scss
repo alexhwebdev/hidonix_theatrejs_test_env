@@ -360,6 +360,7 @@
   }
 
   @media (max-width: 768px) {
+    // ---------- S1 - HERO
     .home__hero {
       height: 600px;
 
@@ -378,11 +379,18 @@
       }
     }
 
+    // ---------- S2 - BRANDS
     .home__brand_collab {
       .rs__center_mode_slider {
-        .slick-list .slick-slide img{
-          width: 200px;
-          height: 200px;
+        .slick-list {
+          .slick-track {
+            .slick-slide {
+              img {
+                width: 200px;
+                height: 200px;
+              }
+            }
+          }
         }
       }
     }

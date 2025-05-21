@@ -473,21 +473,6 @@
 // -------------------- DARK / LIGHT MODE
 // This way prevents : Hydration error. Server/Client mismatch.
 html.light {
-  @media (max-width: 768px) {
-    .mobile_menu {
-      .hamburger__container {
-        .hidonix__logo {
-          .logo_black {
-            display: block;
-            background-image: url("../../public/hidonix-line-logo-black.svg");
-            background-size: contain;
-            background-repeat: no-repeat;
-          }
-        }      
-      }
-    }
-  }
-
   .mobile_menu {
     // background-color: white;
 
@@ -523,20 +508,13 @@ html.light {
       background-color: white;
     }
   }
-  .nav__contact_us {
-    background-color: black;
-    color: white;
-  }
-}
-
-html.dark {
   @media (max-width: 768px) {
     .mobile_menu {
       .hamburger__container {
         .hidonix__logo {
-          .logo_white {
+          .logo_black {
             display: block;
-            background-image: url("../../public/hidonix-line-logo-white.svg");
+            background-image: url("../../public/hidonix-line-logo-black.svg");
             background-size: contain;
             background-repeat: no-repeat;
           }
@@ -545,6 +523,13 @@ html.dark {
     }
   }
 
+  .nav__contact_us {
+    background-color: black;
+    color: white;
+  }
+}
+
+html.dark {
   .mobile_menu {
     .nav__menu {
       ul.nav__links {
@@ -555,7 +540,6 @@ html.dark {
         }
       }      
     }
-
 
     .nav__menu,
     .nav__nested_menu,
@@ -582,6 +566,21 @@ html.dark {
       }
     }
   }
+  @media (max-width: 768px) {
+    .mobile_menu {
+      .hamburger__container {
+        .hidonix__logo {
+          .logo_white {
+            display: block;
+            background-image: url("../../public/hidonix-line-logo-white.svg");
+            background-size: contain;
+            background-repeat: no-repeat;
+          }
+        }      
+      }
+    }
+  }
+
   .nav__contact_us {
     background-color: white;
     color: black;

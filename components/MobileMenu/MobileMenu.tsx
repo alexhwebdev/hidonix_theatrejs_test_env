@@ -103,6 +103,8 @@ const Hamburger = (
     }
   }, [isToggled])
 
+  console.log('pathname ', pathname)
+
   return (
     <div className={`mobile_menu ${isToggled ? 'open' : ''}`}>
       {/* HAMBURGER */}
@@ -114,7 +116,7 @@ const Hamburger = (
         <div className={`hidonix__logo`}>
           {/* <ThemeSwitchLogo receivedAssets={hidonixLogo} /> */}
           
-          <Link href={"https://hidonix.com/"} className={`logo__link`} 
+          <Link href={`https://hidonix.com/${pathname}`} className={`logo__link`} 
             rel="preload"
             // as="image"
             // type="image/svg+xml"

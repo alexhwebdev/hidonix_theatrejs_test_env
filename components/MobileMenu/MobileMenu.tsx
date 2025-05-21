@@ -114,7 +114,7 @@ const Hamburger = (
         <div className={`hidonix__logo`}>
           {/* <ThemeSwitchLogo receivedAssets={hidonixLogo} /> */}
           
-          <Link href={`/`} className={`logo__link`} 
+          <Link href={hostDomain} className={`logo__link`} 
             rel="preload"
             as="image"
             type="image/svg+xml"

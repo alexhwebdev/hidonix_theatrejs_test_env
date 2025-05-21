@@ -423,14 +423,21 @@
 
     .hamburger__container {
       .hidonix__logo {
-        .logo {
-          width: 55px;
-          height: 35px;
-          // background-image: url("../../public/hidonix-line-logo-black.svg");
-          // background-size: contain;
-          // background-repeat: no-repeat;
-          display: none;
-          position: absolute;
+        .logo__link {
+          // border: 1px solid red;
+          // width: 55px;
+          // height: 35px;
+          // display: block;
+
+          .logo {
+            width: 55px;
+            height: 35px;
+            // background-image: url("../../public/hidonix-line-logo-black.svg");
+            // background-size: contain;
+            // background-repeat: no-repeat;
+            display: none;
+            position: absolute;
+          }
         }
       }      
     }

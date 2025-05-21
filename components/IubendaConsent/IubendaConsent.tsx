@@ -1,10 +1,18 @@
 'use client';
 
 import Script from 'next/script';
-// import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function IubendaConsent() {
-  // useEffect(() => {}, []);
+  const [showConsent, setShowConsent] = useState(false);
+
+  useEffect(() => {
+    const handleInteraction = () => setShowConsent(true);
+    window.addEventListener('scroll', handleInteraction, { once: true });
+    return () => window.removeEventListener('scroll', handleInteraction);
+  }, []);
+
+  if (!showConsent) return null;
 
   return (
     <>

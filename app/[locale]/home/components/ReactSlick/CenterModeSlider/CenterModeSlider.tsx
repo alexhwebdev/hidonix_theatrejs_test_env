@@ -91,6 +91,16 @@ const CenterModeSlider: React.FC<ICenterModeSliderProps> = (
           // infinite: true,
           // dots: true
         }
+      },
+      {
+        breakpoint: 430,
+        settings: {
+          centerPadding: "0px",
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          // infinite: true,
+          // dots: true
+        }
       }
     ]
   };

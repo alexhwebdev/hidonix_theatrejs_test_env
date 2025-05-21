@@ -17,6 +17,7 @@
       position: absolute;
 
       .slick-track {
+        // width: 100% !important;
         height: 100%;
 
         .slick-slide {
@@ -125,7 +126,7 @@
                 z-index: 0;
               }
               .home__hero_image {
-                width: 100% !important;
+                // width: 100% !important;
                 height: auto !important;
                 z-index: -1;
               }

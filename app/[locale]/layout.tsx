@@ -133,6 +133,8 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
+        <link rel="preconnect" href="https://cdn.iubenda.com" />
+        <link rel="preconnect" href="https://cs.iubenda.com" />
       </head>
       <body>
         <IubendaConsent />

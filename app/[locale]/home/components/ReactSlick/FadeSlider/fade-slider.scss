@@ -32,6 +32,7 @@
               height: 100%;
               display: flex !important;
               justify-content: center;
+              overflow: hidden;
               position: relative;
   
               .home__hero_image_copy {
@@ -124,6 +125,7 @@
                 z-index: 0;
               }
               .home__hero_image {
+                width: 100% !important;
                 height: auto !important;
                 z-index: -1;
               }

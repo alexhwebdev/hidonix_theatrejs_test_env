@@ -132,9 +132,8 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-    <head>
-
-    </head>
+      <head>
+      </head>
       <body>
         <IubendaConsent />
 
@@ -147,6 +146,7 @@ export default async function LocaleLayout({
               // disableTransitionOnChange
             > 
               <NavServer />
+              
               <MobileMenu 
                 // lightDarkModeIcons={lightDarkModeIcons} 
                 hidonixLogo={hidonixLogo}

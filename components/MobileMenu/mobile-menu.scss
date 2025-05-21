@@ -420,6 +420,20 @@
     // border-bottom: 1px solid silver;
     display: block;
     top: 0;
+
+    .hamburger__container {
+      .hidonix__logo {
+        .logo {
+          width: 55px;
+          height: 35px;
+          // background-image: url("../../public/hidonix-line-logo-black.svg");
+          // background-size: contain;
+          // background-repeat: no-repeat;
+          display: none;
+          position: absolute;
+        }
+      }      
+    }
   }
 
   @media (max-width: 568px) {
@@ -463,9 +477,8 @@ html.light {
     .mobile_menu {
       .hamburger__container {
         .hidonix__logo {
-          .logo {
-            width: 55px;
-            height: 35px;
+          .logo_black {
+            display: block;
             background-image: url("../../public/hidonix-line-logo-black.svg");
             background-size: contain;
             background-repeat: no-repeat;
@@ -521,9 +534,8 @@ html.dark {
     .mobile_menu {
       .hamburger__container {
         .hidonix__logo {
-          .logo {
-            width: 55px;
-            height: 35px;
+          .logo_white {
+            display: block;
             background-image: url("../../public/hidonix-line-logo-white.svg");
             background-size: contain;
             background-repeat: no-repeat;

@@ -60,6 +60,28 @@ button:focus {
 }
 
 
+// ---------- MOBILE LOGO ----------
+@media (max-width: 768px) {
+  html.light {
+    .hidonix__logoe {
+      width: 53px;
+      height: 35px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-image: url("/hidonix-line-logo-black.svg");
+    }
+  }
+  html.dark {
+    .hidonix__logoe {
+      width: 53px;
+      height: 35px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-image: url("/hidonix-line-logo-white.svg");
+    }
+  }
+}
+
 
 
 

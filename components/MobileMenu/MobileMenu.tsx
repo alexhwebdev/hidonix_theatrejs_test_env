@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef, useEffect, useState, useTransition } from 'react';
 import { Link } from '@/i18n/navigation';
-// import Image from "next/image";
+import Image from "next/image";
 import { usePathname, useParams } from 'next/navigation';
 import {useRouter} from '@/i18n/navigation';
 import ThemeSwitchAssetsNoLink from '@/utils/ThemeSwitchAssetsNoLink';
@@ -47,7 +47,7 @@ interface IHamburgerProps {
 
 const Hamburger = (
   {
-    // hidonixLogo, 
+    hidonixLogo, 
     mobileMenuArrows,
     socialIcons
   }: IHamburgerProps
@@ -114,9 +114,32 @@ const Hamburger = (
         <div className={`hidonix__logo`}>
           {/* <ThemeSwitchLogo receivedAssets={hidonixLogo} /> */}
           
-          <a href={`/`} className={`logo__link`}>
-            <div className={`logo`}></div>
-          </a>
+          <Link href={`/`} className={`logo__link`} 
+            rel="preload"
+            as="image"
+            type="image/svg+xml"
+          >
+            <Image
+              className={`logo logo_black`}
+              src={hidonixLogo[0]?.url}
+              alt={'Hidonix Logo'}
+              width={25}
+              height={25}
+              priority
+              // loading="eager" // disables lazy loading
+              // fetchPriority="high"
+            />
+            <Image
+              className={`logo logo_white`}
+              src={hidonixLogo[1]?.url}
+              alt={'Hidonix Logo'}
+              width={25}
+              height={25}
+              priority
+              // loading="eager" // disables lazy loading
+              // fetchPriority="high"
+            />
+          </Link>
 
           {/* {hidonixLogo.map((asset, index) => {
             return (

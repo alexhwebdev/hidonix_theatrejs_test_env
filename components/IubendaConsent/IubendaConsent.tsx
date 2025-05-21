@@ -8,7 +8,7 @@ export default function IubendaConsent() {
 
   return (
     <>
-      <Script id="iubenda-config" strategy="beforeInteractive" dangerouslySetInnerHTML={{
+      <Script id="iubenda-config" strategy="afterInteractive" dangerouslySetInnerHTML={{
         __html: `
           var _iub = _iub || [];
           _iub.csConfiguration = {

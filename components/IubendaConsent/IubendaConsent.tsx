@@ -47,15 +47,15 @@ export default function IubendaConsent() {
 
       <Script
         src="https://cs.iubenda.com/sync/1927160.js"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
       <Script
         src="https://cdn.iubenda.com/cs/ccpa/stub.js"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
       <Script
         src="https://cdn.iubenda.com/cs/iubenda_cs.js"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
         charSet="UTF-8"
       />
     </>

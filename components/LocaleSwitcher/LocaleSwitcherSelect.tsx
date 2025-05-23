@@ -59,13 +59,17 @@ export default function LocaleSwitcherSelect({
     }
   
     // PROJECTS PAGES : If the matched route exists, try to get the localized version
-    if (currentPath.includes('/projects/')) {
+    if (matchedRoute) {
+      const nextLocalePath = (matchedRoute[1] as Record<Locale, string>)[nextLocale];
+      localizedRoute = nextLocalePath ?? `/projects`;  // fallback to /blog if undefined
+    } 
+    else if (currentPath.includes('/projects/')) {
       // Fallback for projects page with no match in slug map
-      localizedRoute = `/projects`;
+      localizedRoute = `/progetti`;
     } 
     else if (currentPath.includes('/progetti/')) {
       // Fallback for progetti page with no match in slug map
-      localizedRoute = `/progetti`;
+      localizedRoute = `/projects`;
     } 
     // ----- ADD THIS IF ITALIAN VERSION DOESNT EXIST
     // else if (!matchedRoute && currentPath.includes('/expox')) {

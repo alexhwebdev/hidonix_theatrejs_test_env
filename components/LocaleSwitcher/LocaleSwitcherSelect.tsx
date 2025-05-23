@@ -35,10 +35,12 @@ export default function LocaleSwitcherSelect({
         return (locales as Record<Locale, string>)[locale as Locale] === currentPath;
       }
     );
+    console.log('currentPath', currentPath);
+    console.log('matchedRoute', matchedRoute);
   
     let localizedRoute: string;
 
-    // If the matched route exists, try to get the localized version
+    // BLOG PAGES : If the matched route exists, try to get the localized version
     if (matchedRoute) {
       const nextLocalePath = (matchedRoute[1] as Record<Locale, string>)[nextLocale];
       localizedRoute = nextLocalePath ?? `/blog`;  // fallback to /blog if undefined
@@ -56,6 +58,27 @@ export default function LocaleSwitcherSelect({
       localizedRoute = currentPath;
     }
   
+    // PROJECTS PAGES : If the matched route exists, try to get the localized version
+    if (currentPath.includes('/projects/')) {
+      // Fallback for projects page with no match in slug map
+      localizedRoute = `/projects`;
+    } 
+    else if (currentPath.includes('/progetti/')) {
+      // Fallback for progetti page with no match in slug map
+      localizedRoute = `/progetti`;
+    } 
+    // ----- ADD THIS IF ITALIAN VERSION DOESNT EXIST
+    // else if (!matchedRoute && currentPath.includes('/expox')) {
+    //   // Fallback for expox pages with no match
+    //   localizedRoute = `/`;
+    // } 
+    else {
+      // Generic fallback
+      localizedRoute = currentPath;
+    }
+
+
+
     startTransition(() => {
       router.replace(
         {

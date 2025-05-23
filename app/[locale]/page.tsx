@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 // import Image from "next/image";
 // import { performRequest } from '../lib/datocms';
 import { IPageContent } from "@/types/pageContent.types";
@@ -11,7 +12,7 @@ import HomeComponent from "./home/components/HomeComponent";
 // DOC : Metadata - https://nextjs.org/docs/app/api-reference/functions/generate-metadata
 // NextJS looks for export of 'const metadata'.
 // Page Metadata overrides layout Metadata
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Home | Hidonix',
   description: 'We are not your typical software company—we are a deep tech pioneer at the forefront of innovation.',
   // keywords: ['Next.js', 'React', 'JavaScript'],

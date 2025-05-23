@@ -1,8 +1,9 @@
 import React from 'react';
+import type { Metadata } from "next";
 import { performRequest } from '@/lib/datocms';
 import BlogListing from './components/BlogListing';
 import { IPageContent } from '@/types/pageContent.types';
-import { Metadata } from 'next';
+
 
 // DOC : Metadata - https://nextjs.org/docs/app/api-reference/functions/generate-metadata
 // NextJS looks for export of 'const metadata'.
@@ -28,6 +29,7 @@ export default async function BlogLayout(
       }
 
       allBlogPageModels(locale: ${locale}) {
+        slug
         blogPage {
           blogArticleImage {
             alt
@@ -59,7 +61,7 @@ export default async function BlogLayout(
     blogPageHeadingModel, 
     allBlogPageModels 
   }: IPageContent = await performRequest(BLOG_PAGE_CONTENT_QUERY);
-
+  // console.log('allBlogPageModels', allBlogPageModels);
   const filteredBlogPage = allBlogPageModels.filter(
     item => item.blogPage.length > 0
   );

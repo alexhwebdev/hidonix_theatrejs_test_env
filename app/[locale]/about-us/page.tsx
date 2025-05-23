@@ -1,4 +1,5 @@
 import React from 'react';
+import type { Metadata } from "next";
 import { performRequest } from '@/lib/datocms';
 import AboutView from './components/AboutView';
 import { IPageContent } from '@/types/pageContent.types';
@@ -6,7 +7,7 @@ import { IPageContent } from '@/types/pageContent.types';
 
 // DOC : Metadata - https://nextjs.org/docs/app/api-reference/functions/generate-metadata
 // NextJS looks for export of 'const metadata'.
-export const metadata = {
+export const metadata: Metadata = {
   // https://nextjs.org/docs/app/api-reference/functions/generate-metadata
   title: 'About Us',
   description: 'We are not your typical software company—we are a deep tech pioneer at the forefront of innovation.',

@@ -92,6 +92,10 @@ export interface IPageContent {
 
   // ---------- HOME PAGE
   homePage: {
+    _allSlugLocales: {
+      locale: string;
+      value: string;
+    }[]
     homeGlobalAssets: {
       alt: string;
       url: string;
@@ -180,6 +184,10 @@ export interface IPageContent {
 
   // ---------- MIT PAGE
   mitPageModel: {
+    _allSlugLocales: {
+      locale: string;
+      value: string;
+    }[];
     mitPage: {
       mitS1HeadingBodyButtonsGallery: {
         heading: string;
@@ -320,6 +328,10 @@ export interface IPageContent {
 
   // ---------- ION PAGE
   ionPageModel: {
+    _allSlugLocales: {
+      locale: string;
+      value: string;
+    }[];
   	ionPage: {
       ionS1HeadingBodyButtonsVideo: {
         gallery: {
@@ -418,6 +430,10 @@ export interface IPageContent {
 
   // ---------- EXPOX PAGE
   expoxPageModel: {
+    _allSlugLocales: {
+      locale: string;
+      value: string;
+    }[];
     expoxPage: {
       expoxS1HeadingBodyButtonsGallery: {
         heading: string;
@@ -500,6 +516,10 @@ export interface IPageContent {
 
   // ---------- ABOUT PAGE V2
 	aboutPageModel: {
+    _allSlugLocales: {
+      locale: string;
+      value: string;
+    }[];
     aboutPage: {
       aboutS1HeadingBodyImage: {
         heading: string;
@@ -672,6 +692,11 @@ export interface IPageContent {
 
 	allBlogPageModels: {
     title: string;
+    slug: string;
+    _allSlugLocales: {
+      locale: string;
+      value: string;
+    }[];
     blogPage: {
       blogArticleImage: {
         alt: string;
@@ -691,6 +716,10 @@ export interface IPageContent {
 
   // ---------- CAREERS PAGE
 	careersPage: {
+    _allSlugLocales: {
+      locale: string;
+      value: string;
+    }[];
 		heroImage: {
       alt: string;
       url: string;
@@ -707,6 +736,10 @@ export interface IPageContent {
   //   headingBody: string;
   // }
 	contactsPageModel: {
+    _allSlugLocales: {
+      locale: string;
+      value: string;
+    }[];
     contactPage: {
       heading: string;
       body: string;

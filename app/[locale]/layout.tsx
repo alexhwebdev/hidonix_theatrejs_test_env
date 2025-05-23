@@ -69,6 +69,7 @@ export const metadata: Metadata = {
   // manifest: '/manifest.json',
 
   // ADD HIDONIX OpenGraph IMG PATH HERE
+  // 11 mm : https://www.youtube.com/watch?v=wTGVHLyV09M&t=3042s
   // openGraph: {
   //   images:  "https://orcdev.com/images/orcdev.png"
   // }

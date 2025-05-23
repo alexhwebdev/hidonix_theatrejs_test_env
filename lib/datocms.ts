@@ -67,3 +67,17 @@ export const performFooterRequest = async (
 //     environment: process.env.NEXT_DATOCMS_ENVIRONMENT,
 //   });
 // }
+
+
+// Used for sitemap generation
+// This function fetches all blog slugs for a given locale from DatoCMS
+// and returns them as an array of strings.
+// It uses GraphQL to query the DatoCMS API and retrieve the slugs.
+// The function is asynchronous and returns a promise that resolves to an array of slugs.
+// The query is defined using GraphQL syntax and includes a variable for the locale.
+// The response is typed to ensure that the data returned matches the expected structure.
+// The function is exported for use in other parts of the application.
+// This function fetches all blog slugs for a given locale from DatoCMS
+// and returns them as an array of strings.
+
+

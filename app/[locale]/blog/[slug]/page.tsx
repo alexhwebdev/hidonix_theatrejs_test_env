@@ -6,11 +6,11 @@ import BlogPostView from './components/BlogPostView';
 import { IBlogValue } from '../components/BlogListing';
 import { fetchBlogData } from '@/lib/fetchBlogData';
 
-// // THIS RESULTS --> 
-// // ● (SSG) prerendered as static HTML (uses getStaticProps)
-// // instead of :
-// // ƒ  (Dynamic)  server-rendered on demand
-// // which builds the HTML when page requested
+// THIS RESULTS --> 
+// ● (SSG) prerendered as static HTML (uses getStaticProps)
+// instead of :
+// ƒ  (Dynamic)  server-rendered on demand
+// which builds the HTML when page requested
 export async function generateMetadata(
   { params }: { params: Promise<{ locale: string, slug: string }> }
 ): Promise<Metadata> {
@@ -39,6 +39,15 @@ export async function generateMetadata(
   return {
     title: currentBlog[0].blogArticleTitleMetadata,
     description: currentBlog[0].blogArticleDescMetadata,
+    // 20 mm : https://www.youtube.com/watch?v=wTGVHLyV09M&t=3042s
+    // openGraph: {
+    //   images: [
+    //     {
+    //       url: currentBlog[0].blogArticleImage.url,
+    //       alt: currentBlog[0].blogArticleImage.alt,
+    //     }
+    //   ]
+    // }
   };
 }
 

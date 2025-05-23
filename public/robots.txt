@@ -10,4 +10,4 @@ Allow: /
 Host: https://hidonix.com/en
 
 # Sitemaps
-Sitemap: https://hidonix.com/en/sitemap.xml
+Sitemap: https://hidonix.com/sitemap.xml

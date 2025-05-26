@@ -34,7 +34,7 @@ export default function LocaleSwitcherSelect({ children, defaultValue, label }: 
     if (pathWithoutLocale.startsWith('/blog')) {
       return '/blog';
     }
-  
+    
     // PROJECTS fallback routing
     if (pathWithoutLocale.startsWith('/projects/')) {
       return '/progetti';

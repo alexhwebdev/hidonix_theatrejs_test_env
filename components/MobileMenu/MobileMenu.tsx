@@ -34,6 +34,7 @@ const nestedNavLinks = [
   { path: "/mit-museum-innovation-technology", label: "MIT - Museum Innocation Technology"},
   { path: "/ion-indoor-outdoor-navigation", label: "ION - Indoor Outdoor Navigation"},
   { path: "/expox", label: "ExpoX"},
+  { path: "/safeschool", label: "SafeSchool"},
   // { path: "/", label: "ShowShopper (Coming Soon!)"},
   // { path: "/", label: "SafeSchool (Coming Soon!)"},
 ];

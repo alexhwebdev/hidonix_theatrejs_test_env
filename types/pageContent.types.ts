@@ -513,6 +513,95 @@ export interface IPageContent {
     }
   }
 
+  // ---------- SAFESCHOOL PAGE
+  safeschoolPageModel: {
+    _allSlugLocales: {
+      locale: string;
+      value: string;
+    }[];
+    safeschoolPage: {
+      safeschoolS1HeadingBodyButtonsGallery: {
+        heading: string;
+        body: string;
+        button1: string;
+        button2: string;
+        gallery: {
+          alt: string;
+          url: string;
+        }[];
+      }
+      safeschoolS2HeadingBody: {
+        heading: string;
+        body: string;
+      }
+      safeschoolS3ImageHeading: {
+        heading: string;
+        image: {
+          alt: string;
+          url: string;
+        }
+      }
+			safeschoolS3ImageHeadingBody: {
+        image: {
+          alt: string;
+          url: string;
+        }
+        heading: string;
+        body: string;
+			}[];
+      safeschoolS4ImageHeading: {
+        image: {
+        	alt: string;
+        	url: string;
+        }
+        heading: string;
+      }
+      safeschoolS4ImageHeadingBody: {
+        image: {
+        	alt: string;
+        	url: string;
+        }
+        heading: string;
+        body: string;
+      }[];
+      safeschoolS5GalleryHeadingBody: {
+        images: {
+          alt: string;
+          url: string;
+        }[];
+        heading: string;
+        body: string;
+      }
+      safeschoolS5ImageHeading: {
+        image: {
+          alt: string;
+          url: string;
+        }
+        heading: string;
+      }[];
+      safeschoolS6Image: {
+        image: {
+          alt: string;
+          url: string;
+        }
+      }
+      safeschoolS7HeadingSubheadingButtonImage: {
+        heading: string;
+        body: string;
+        button: string;
+        body2: string;
+        button2: string;
+        image: {
+          alt: string;
+          url: string;
+        }
+      }
+    }
+  }
+
+
+
+
 
   // ---------- ABOUT PAGE V2
 	aboutPageModel: {

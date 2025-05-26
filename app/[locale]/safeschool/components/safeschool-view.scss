@@ -1,0 +1,866 @@
+#safeschool__id {
+  width: 100vw;
+  height: auto;
+  position: relative;
+
+  // ---------- SECTION 1
+  .safeschool__section1 {
+    width: 100vw;
+    height: 650px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    
+    .overlay {
+      width: 100%;
+      height: 100%;
+      // background: rgba(255, 255, 255, 0.3);
+      position: absolute;
+      z-index: 1;
+    }
+    .hero {
+      width: 100%;
+      object-fit: cover;
+      position: absolute;
+    }
+
+    .copy_gif__container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 0 auto;
+      max-width: 1280px;
+      position: relative;
+
+      img {
+        object-fit: cover;
+        position: relative;
+
+        &.hero__graphic {
+          width: calc(50% - 50px);
+          height: auto;
+          position: relative;
+          right: 25px;
+          z-index: 1;
+        }
+      }
+      .copy {
+        width: calc(50% - 75px);
+        position: relative;
+        left: 50px;
+        z-index: 1;
+  
+        .heading {
+          margin-bottom: 20px;
+          position: relative;
+  
+          h1 {
+            font-size: 2rem;
+            font-weight: 400;
+          }
+        }
+        .body {
+          margin-bottom: 20px;
+          position: relative;
+
+          p {
+            color: black;
+            font-weight: 400;
+            // text-shadow: 0 0 1px black;
+          }
+        }
+        .buttons {
+          display: flex;
+        }
+        .button {
+          background-color: black;
+          border: none;
+          margin-right: 15px;
+          padding: 15px 20px;
+          position: relative;
+  
+          &:hover {
+            cursor: pointer;
+          }
+
+          p, a {
+            color: white;
+            font-family: open sans;
+            font-size: 0.9rem;
+            font-weight: 400;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+
+  // ---------- SECTION 2
+  .safeschool__section2 {
+    padding: 100px 50px;
+
+    .copy {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 auto;
+      max-width: 1280px;
+      
+      .heading {
+        width: 40%;
+        display: flex;
+        justify-content: flex-end;
+
+        h2 {
+          border-bottom: 1px solid black;
+          width: 65%;
+          height: fit-content;
+          color: var(--dark-gray-2B282C);
+          font-weight: 400;
+          padding-bottom: 40px;
+        }
+      }
+      .body {
+        width: 55%;
+
+        p {
+          margin-bottom: 20px;
+        }
+      }
+    }
+    .images {
+      display: flex;
+      justify-content: space-around;
+      margin: 0 auto;
+      max-width: 1280px;
+
+      .image__container {
+        text-align: center;
+
+        &:first-of-type {
+          margin-bottom: 100px;
+        }
+
+        img {
+          width: 150px;
+          height: auto;
+          position: relative;
+        }
+      }
+    }
+  }
+
+  // ---------- SECTION 3
+  .safeschool__section3 {
+    width: 100%;
+    // height: 800px;
+    height: auto;
+    background-color: var(--off-white-f5f5f5);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 0 50px 50px;
+    position: relative;
+
+    .bkgd {
+      width: 100%;
+      height: 10%;
+      background-color: #fff;
+      position: absolute;
+      top: 0;
+      z-index: 1;
+    }
+
+    .s3__graphic {
+      width: 65% !important;
+      height: auto !important;
+      // height: max-content !important;
+      margin: 0 auto 50px;
+      max-width: 700px;
+      position: relative !important;
+      z-index: 1;
+    }
+
+    .heading {
+      // border: 1px solid orange;
+      width: 100%;
+      height: auto;
+      font-size: 5rem;
+      margin-bottom: 50px;
+      max-width: 1440px;
+      // padding: 55px 0;
+      text-align: center;
+
+      h2 {
+        font-weight: 400;
+      }
+    }
+    .cards__container {
+      // border: 1px solid red;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      max-width: 900px;
+
+      .card {
+        // border: 1px solid blue;
+        width: calc(50% - 25px);
+        background-color: white;
+        border-radius: 13px;
+        margin-bottom: 25px;
+        padding: 30px;
+
+        img {
+          width: auto;
+          height: 60px;
+          margin-bottom: 10px;
+          position: relative;
+          left: -8px;
+        }
+        p:first-of-type {
+          font-weight: 400;
+          margin-bottom: 10px;
+        } 
+        p:last-of-type {
+          font-size: 1rem;
+          font-weight: 400;
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  // ---------- SECTION 4
+  .safeschool__section4 {
+    width: 100%;
+    // height: 800px;
+    height: auto;
+    background-color: var(--off-white-f5f5f5);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 0 50px 50px;
+    position: relative;
+
+    .s4__graphic {
+      width: 100% !important;
+      height: auto !important;
+      // height: max-content !important;
+      border-radius: 20px;
+      margin: 0 auto 50px;
+      max-width: 900px;
+      position: relative !important;
+      z-index: 1;
+    }
+
+    .heading {
+      // border: 1px solid orange;
+      width: 100%;
+      height: auto;
+      font-size: 5rem;
+      margin-bottom: 10px;
+      max-width: 800px;
+      position: relative;
+      z-index: 1;
+      // padding: 55px 0;
+      // text-align: center;
+
+      h2 {
+        color: #fff;
+        font-weight: 400;
+      }
+    }
+    .cards__container {
+      // border: 1px solid red;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      max-width: 900px;
+      z-index: 1;
+
+      .card {
+        // border: 1px solid blue;
+        width: calc(50% - 25px);
+        // background-color: white;
+        border-radius: 13px;
+        margin-bottom: 25px;
+        padding: 30px;
+
+        img {
+          width: auto;
+          height: 70px;
+          margin-bottom: 10px;
+          position: relative;
+          left: -8px;
+        }
+        p {
+          color: #fff;
+        }
+        p:first-of-type {
+          font-weight: 400;
+          margin-bottom: 10px;
+        } 
+        p:last-of-type {
+          font-size: 1rem;
+          font-weight: 400;
+          margin-bottom: 0;
+        }
+      }
+    }
+    .bkgd {
+      width: 100%;
+      height: 60%;
+      background-color: var(--dark-gray-2B282C);
+      position: absolute;
+      bottom: 0;
+      z-index: 0;
+    }
+  }
+
+  // ---------- SECTION 5
+  .safeschool__section5 {
+    width: 100%;
+    height: auto;
+    background-color: var(--off-white-f5f5f5);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 75px 50px;
+    position: relative;
+
+    .s5__graphic {
+      width: 100% !important;
+      height: auto !important;
+      // height: max-content !important;
+      border-radius: 20px;
+      margin: 0 auto 50px;
+      max-width: 900px;
+      position: relative !important;
+      z-index: 1;
+    }
+
+    .heading {
+      // border: 1px solid orange;
+      width: 100%;
+      height: auto;
+      font-size: 5rem;
+      margin-bottom: 25px;
+      max-width: 800px;
+      position: relative;
+      z-index: 1;
+      // padding: 55px 0;
+      // text-align: center;
+
+      h2 {
+        // color: #fff;
+        font-weight: 400;
+      }
+    }
+    .body {
+      width: 100%;
+      height: auto;
+      // font-size: 5rem;
+      margin-bottom: 25px;
+      max-width: 800px;
+      position: relative;
+      z-index: 1;
+
+      p {
+        margin-bottom: 20px;
+      }
+    }
+    .cards__container {
+      // border: 2px solid red;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin-bottom: 50px;
+      max-width: 850px;
+      z-index: 1;
+
+
+      .heading_subheading_body {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        margin: auto;
+        max-width: 1280px;
+        position: relative;
+        top: 50px;
+        right: 0;
+        left: 0;
+  
+        .heading {
+          margin-left: 50px;
+          position: relative;
+  
+          h2 {
+            color: black;
+          }
+        }
+      }
+    }
+  }
+
+  // ---------- SECTION 6
+  .safeschool__section6 {
+    width: 100vw;
+    height: 700px;
+    position: relative;
+
+    img {
+      width: auto;
+      height: auto;
+      object-fit: cover;
+    }
+  }
+
+
+  // ---------- SECTION 7
+  .safeschool__section7 {
+    width: 100vw;
+    height: 600px;
+    position: relative;
+
+    .overlay {
+      width: 100%;
+      height: 100%;
+      // background: rgba(255, 255, 255, 0.3);
+      position: absolute;
+      z-index: 1;
+    }
+
+    .image__container {
+      img {
+        width: auto;
+        height: auto;
+        object-fit: cover;
+      }
+    }
+    .copy {
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.3);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      text-align: center;
+      z-index: 1;
+
+      p:first-of-type {
+        margin-bottom: 25px;
+        font-weight: 400;
+        position: relative;
+      }
+      h2 {
+        width: 60%;
+        font-weight: 600;
+        margin: 0 auto 50px;
+        position: relative;
+      }
+
+      .body_button__container {
+        display: flex;
+        justify-content: center;
+
+        .body_button {
+          width: 350px;
+
+          button {
+            width: fit-content;
+            background-color: black;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            font-family: open sans;
+            font-weight: 400;
+            margin: 0 auto;
+            padding: 15px 25px;
+            position: relative;
+            text-decoration: none;
+            -webkit-font-smoothing: antialiased;
+
+            &:hover {
+              cursor: pointer;
+            }
+            
+            a {
+              color: white;
+              font-size: 1rem;
+              font-family: open sans;
+              font-weight: 400;
+              text-decoration: none;
+              -webkit-font-smoothing: antialiased;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // .expox_hr {
+  //   width: 90%;
+  //   border: none;
+  //   border-bottom: 1px solid black;
+  //   margin: 0 auto;
+  // }
+
+  // -------------------- MEDIA QUERIES
+  @media (max-width: 1024px) {
+    .safeschool__section1 {
+      .hero {
+        width: max-content;
+      }
+    }
+    .safeschool__section2 {
+      .copy {
+        .heading {
+          width: 40%;
+
+          h2 {
+            width: 100%;
+          }
+        }
+      }
+      .images .image__container img {
+        width: 125px;
+      }
+    }
+    .safeschool__section3 {
+      // height: 600px;
+    }
+  }
+  @media (max-width: 1000px) {
+    .safeschool__section4 {
+      .heading {
+        margin-bottom: 25px;
+        max-width: unset;
+      }
+      .cards__container {
+        justify-content: space-between;
+        max-width: unset;
+
+        .card {
+          width: calc(50% - 25px);
+          padding: 0;
+        }
+      }
+    }
+  }
+  @media (max-width: 912px) {
+    .safeschool__section2 .images .image__container img {
+      width: 100px;
+    }
+  }
+  @media (max-width: 820px) {
+    .safeschool__section1 {
+      height: 750px;
+
+      .copy_gif__container {
+        flex-direction: column-reverse;
+        justify-content: unset;
+
+        .copy {
+          width: 100%;
+          padding: 50px 50px 75px;
+          top: 0;
+          left: 0;
+        }
+        img.hero__graphic {
+          width: 60%;
+          right: 0;
+        }
+      }
+    }
+    .safeschool__section2 {
+      padding: 100px 50px 75px;
+    }
+    .safeschool__section3 {
+      .cards__container {
+        justify-content: space-between;
+      }
+    }
+    .safeschool__section6 {
+      height: 500px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .safeschool__section1 .copy_gif__container .copy {
+      padding: 50px 25px 75px;
+    }
+    .safeschool__section2 {
+      padding: 75px 25px;
+
+      .copy {
+        flex-direction: column;
+        padding-bottom: 0;
+
+        .heading {
+          width: 100%;
+        }
+        .body {
+          width: 100%;
+          padding-top: 50px;
+        }
+      }
+      .images .image__container img {
+        width: 125px;
+      }
+    }
+    .safeschool__section3 {
+      padding: 0 25px 50px;
+    }
+    .safeschool__section4 {
+      padding: 0 25px 50px;
+    }
+    .safeschool__section5 {
+      padding: 75px 25px;
+    }
+    .safeschool__section7 {
+      height: 500px;
+
+      .copy h2 {
+        width: 90%;
+      }
+    }
+  }
+  @media (max-width: 700px) {
+    .safeschool__section2 .images .image__container:first-of-type {
+      p {
+        width: 75%;
+        margin: 0 auto;
+        text-align: center;
+      }
+    }
+    .safeschool__section2 .images .image__container {
+      width: 33%;
+
+      img {
+        width: 100px;
+      }
+    }
+  }
+  @media (max-width: 568px) {
+    .safeschool__section1 {
+      height: 850px;
+
+      .copy_gif__container img.hero__graphic {
+        width: 80%;
+        right: 0;
+      }
+    }
+    .safeschool__section3 .cards__container .card {
+      width: calc(50% - 10px);
+    }
+    .safeschool__section4 .bkgd {
+      height: 75%;
+    }
+    .safeschool__section6 {
+      height: 400px;
+    }
+  }
+  @media (max-width: 430px) {
+    .safeschool__section1 {
+      height: 800px;
+
+      .copy_gif__container {
+        .copy {
+          // padding: 125px 25px 0;
+
+          .buttons {
+            flex-direction: column;
+
+            .button:first-of-type {
+              margin-bottom: 10px;
+            }
+            .button {
+              width: 200px;
+              text-align: center;
+            }
+          }
+        }
+        // img.hero__graphic {
+        //   width: 50%;
+        //   padding-top: 25px;
+        // }
+      }
+    }
+    .safeschool__section2 {
+      padding: 50px 25px;
+
+      h2 {
+        font-size: 1.6rem !important;
+      }
+
+      .images {
+        flex-wrap: wrap;
+        justify-content: unset;
+        padding-top: 25px;
+        
+        .image__container {
+          width: 50%;
+          height: 185px;
+
+          p {
+            font-size: 0.9rem;
+          }
+        }
+      }
+    }
+    .safeschool__section3 {
+      .s3__graphic {
+        width: 75% !important;
+      }
+      .cards__container .card {
+        width: 100%;
+      }
+    }
+    .safeschool__section4 {
+      .bkgd {
+        height: 85%;
+      }
+      .heading {
+        margin-bottom: 30px;
+      }
+      .cards__container {
+        .card {
+          width: 100%;
+          margin-bottom: 30px;
+
+          img {
+            margin-bottom: 0;
+          }
+        }      
+      }
+    }
+    .safeschool__section5 .rs__multi_items_slider .slick-slider .slick-list .slick-slide {
+      padding: 5px;
+    }
+    .safeschool__section6 {
+      height: 300px;
+    }
+    .safeschool__section7 {
+      height: 500px;
+
+      .copy {
+        .body_button__container {
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+          align-items: center;
+
+          .body_button:first-of-type {
+            margin-bottom: 25px;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+// -------------------- LIGHT / DARK MODE
+html.light {
+  #safeschool__id {
+    .safeschool__section1 .overlay {
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .safeschool__section7 {
+      .overlay {
+        background: rgba(255, 255, 255, 0.6);
+      }
+      .copy {
+        background-color: rgba(255, 255, 255, 0.3);
+      }
+    }
+  }
+}
+html.dark {
+  #safeschool__id {
+    .safeschool__section1 {
+      .overlay {
+        background: rgba(0, 0, 0, 0.8);
+      }
+      .copy_gif__container {
+        .copy {
+          .heading {
+            h1 {
+              color: white;
+            }
+          }
+          .body {
+            p {
+              color: white;
+            }
+          }
+        }
+      }
+    }
+
+    .safeschool__section2 {
+      background-color: var(--dark-gray-2B282C);
+
+      .copy {
+        .heading {
+          h2 {
+            border-bottom: 1px solid #fff;
+            color: white;
+          }
+        }
+      }
+    }
+    .safeschool__section3 {
+      background-color: black;
+      
+      .bkgd {
+        background-color: var(--dark-gray-2B282C);
+      }
+
+      .cards__container .card p {
+        color: black;
+      }
+    }
+    .safeschool__section4 {
+      background-color: black;
+
+      .bkgd {
+        background-color: var(--dark-gray-2B282C);
+      }
+    }
+    .safeschool__section5 {
+      background-color: black;
+
+      .rs__multi_items_slider {
+        .slick-slider {
+          .slick-prev,
+          .slick-next {
+            background-color: rgba(255, 255, 255, 0.3);
+          }
+          .slick-list {
+            .slick-slide {
+              .slide p {
+                color: black;
+              }            
+            }          
+          }        
+        }      
+      }
+    }
+
+    .safeschool__section7 .copy {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+  }
+}

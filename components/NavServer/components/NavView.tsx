@@ -31,6 +31,7 @@ const NavView = (
     { path: tNav("routes.mit"), label: "MIT - Museum Innovation Technology", prefetching: false },
     { path: tNav("routes.ion"), label: "ION - Indoor Outdoor Navigation", prefetching: false },
     { path: tNav("routes.expox"), label: "ExpoX", prefetching: false},
+    { path: tNav("routes.safeschool"), label: "SafeSchool", prefetching: false},
     // { path: "/", label: "ShowShopper (Coming Soon!)", prefetching: false },
     // { path: "/", label: "SafeSchool (Coming Soon!)", prefetching: false },
   ];

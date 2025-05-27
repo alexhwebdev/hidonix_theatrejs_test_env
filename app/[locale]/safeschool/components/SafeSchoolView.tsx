@@ -449,11 +449,11 @@ const SafeSchoolView = (
                 {parse(safeschoolS1HeadingBodyButtonsGallery.button1)}
               </button> */}
               <button className={`button`}>
-                <a href="https://hidonix.com/en/contact">
+                {/* <a href="https://hidonix.com/en/contact">
                   {parse(safeschoolS1HeadingBodyButtonsGallery.button1)}
-                </a>
+                </a> */}
 
-                {/* {
+                {
                   pathname.substring(1, 3) === 'en' 
                   ? <a href="https://hidonix.com/en/contact">
                       {parse(safeschoolS1HeadingBodyButtonsGallery.button1)}
@@ -461,7 +461,7 @@ const SafeSchoolView = (
                   : <a href="https://hidonix.com/it/contact">
                       {parse(safeschoolS1HeadingBodyButtonsGallery.button1)}
                     </a>
-                } */}
+                }
               </button>
 
               {/* Download a brochure */}
@@ -659,11 +659,11 @@ const SafeSchoolView = (
                 </a> */}
 
                 {/* Contact page for now */}
-                <a href="https://hidonix.com/en/contact">
+                {/* <a href="https://hidonix.com/en/contact">
                   {parse(safeschoolS7HeadingSubheadingButtonImage.button)}
-                </a>
+                </a> */}
                 
-                {/* {
+                {
                   pathname.substring(1, 3) === 'en' 
                   ? <a href="https://hidonix.com/en/contact">
                       {parse(safeschoolS7HeadingSubheadingButtonImage.button)}
@@ -671,7 +671,7 @@ const SafeSchoolView = (
                   : <a href="https://hidonix.com/it/contact">
                       {parse(safeschoolS7HeadingSubheadingButtonImage.button)}
                     </a>
-                } */}
+                }
 
               </button>
             </div>

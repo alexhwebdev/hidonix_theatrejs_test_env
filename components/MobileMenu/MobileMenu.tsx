@@ -252,12 +252,7 @@ const Hamburger = (
                   // onClick={handleNestedNavToggle}
                   onClick={handleToggleMenu}
                 >
-                  {/* {link.label} */}
-                  {
-                    pathname.slice(0, 3) === "/it" && link.label === "SafeSchool" 
-                    ? <></>
-                    : <>{link.label}</>
-                  }
+                  {link.label}
                 </Link>
 
               }

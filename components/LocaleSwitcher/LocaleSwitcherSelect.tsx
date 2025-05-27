@@ -42,11 +42,6 @@ export default function LocaleSwitcherSelect({ children, defaultValue, label }: 
     if (pathWithoutLocale.startsWith('/progetti/')) {
       return '/projects';
     }
-  
-    // SAFESCHOOL fallback routing
-    if (pathWithoutLocale.startsWith('/safeschool/')) {
-      return '/';
-    }
 
 
 

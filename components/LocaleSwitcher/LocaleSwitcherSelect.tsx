@@ -43,6 +43,13 @@ export default function LocaleSwitcherSelect({ children, defaultValue, label }: 
       return '/projects';
     }
   
+    // SAFESCHOOL fallback routing
+    if (pathWithoutLocale.startsWith('/safeschool/')) {
+      return '/';
+    }
+
+
+
     // Slug map match
     const matchedRoute = Object.entries(pageSlugMap.routes).find(
       ([, locales]) => (locales as Record<Locale, string>)[currentLocale] === pathWithoutLocale

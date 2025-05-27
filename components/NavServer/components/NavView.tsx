@@ -71,7 +71,12 @@ const NavView = (
                         // className={locale === "it" ? "it-class" : ""}
                       >
                         <Link href={item.path}>
-                          {item.label}
+                          {/* {item.label} */}
+                          {
+                              pathname.slice(0, 3) === "/it" && item.label === "SafeSchool" 
+                              ? <></>
+                              : <>{item.label}</>
+                            }
                         </Link>
                       </li>
                     ))

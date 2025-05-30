@@ -1,0 +1,92 @@
+.canvas__component {
+  // position: absolute;
+  // top: 0;
+
+  > div {
+    canvas {
+      width: 100vw;
+      height: 100vh;
+    }
+    > div {
+      // border: 5px solid teal;
+
+      // > div:first-of-type,
+      // > div:nth-of-type(2) {
+      //   display: none !important;
+      // }
+
+      > div:nth-of-type(3) {
+        top: -50% !important;
+        left: -50% !important;
+
+        // > div {
+        //   .sections_container {
+        //     // border: 5px solid white;
+        //     width: 100vw;
+        //     height: 200vh;
+        //     color: white;
+        //     position: relative;
+        //     top: 0px;
+
+        //     .section {
+        //       border: 5px solid blue;
+        //       width: 100vw;
+        //       height: 100vh;
+        //       display: flex;
+        //       justify-content: center;
+        //       align-items: center;
+        //     }
+
+        //     // #section_two__id {
+        //     //   border: 5px solid blue;
+        //     //   width: 100vw;
+        //     //   height: 100vh;
+
+        //     //   .sticky_element {
+        //     //     border: 5px solid orange;
+        //     //     width: 100vw;
+        //     //     height: 200px;
+        //     //     position: sticky;
+        //     //     top: 0px;
+        //     //   }
+        //     // }
+        //   }
+        // }
+      }
+    }
+  }
+}
+
+
+// .scroll_html__container {
+//   // Cont. from page.scss
+//   // border: 5px solid red;
+//   width: 100vw;
+//   height: 300vh;
+//   position: relative;
+
+//   .sections_container {
+//     // width: 100%;
+//     // height: 100%;
+
+//     // .section {
+//     //   border: 1px solid red;
+//     //   width: 100%;
+//     //   height: 100vh;
+//     //   color: white;
+//     //   padding: 0;
+//     //   text-align: center;
+//     //   // top: 100vh;
+//     // }
+
+//   }
+// }
+// // .triangle__svg {
+// //   display: none;
+// //   margin: auto;
+// //   position: absolute;
+// //   top: 0;
+// //   right: 0;
+// //   bottom: 0;
+// //   left: 0;
+// // }

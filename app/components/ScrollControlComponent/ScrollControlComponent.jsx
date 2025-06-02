@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef, lazy, Suspense } from 'react';
 import { Canvas, useThree, useFrame } from '@react-three/fiber';
 import { EffectComposer, DepthOfField, Bloom, Vignette} from '@react-three/postprocessing'
-import Butterfly from './components/Butterfly'
+// import Butterfly from './components/Butterfly'
 import { 
   Backdrop,
   Environment, 
@@ -15,7 +15,8 @@ import {
   Stars,
   ScrollControls, 
   Scroll, 
-  useScroll
+  useScroll,
+  useDetectGPU
 } from '@react-three/drei';
 import './scroll-control.scss';
 
@@ -41,14 +42,19 @@ import ParticlePathAnimation from '../ParticlePathAnimation/ParticlePathAnimatio
 import S1ParticlePathAnimation from '../S1ParticlePathAnimation/S1ParticlePathAnimation'
 
 import ParticlesLoop from '../ParticlesLoop/ParticlesLoop'
-
+import {Comets} from '../Comets/Comets'
 // import OrbComputing from '../OrbComputing/OrbComputing'
 // import { AxesHelper } from 'three';
+
+import ParticlesLoopPage from "../ParticlesLoop/ParticlesLoop";
 
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react';
 import GsapAnimateElement from "@/utils/GsapAnimateElement";
+
+
+
 gsap.registerPlugin(ScrollTrigger);
 
 const ScrollContent = (
@@ -64,8 +70,6 @@ const ScrollContent = (
     const offset = scrollTop / maxScroll
     scroll.offset = offset // forces R3F scroll context to match external scroll
   })
-
-
 
 
   return (
@@ -128,6 +132,9 @@ const ScrollControlComponent = (
   //   }
   // }, [scroll]);
 
+  // COMETS
+  const { tier, isMobile } = useDetectGPU();
+
 
   return (
     <Canvas className="canvas__component" shadows gl={{ antialias: true }}>
@@ -170,6 +177,56 @@ const ScrollControlComponent = (
         // html
       >
         <ScrollContent externalScrollRef={externalScrollRef} />
+
+        <ParticlesLoopPage />
+        
+        
+        <Scroll>
+          {/* <Comets nbTrails={tier === 0 || isMobile ? 20 : 42} /> */}
+
+          {/* 
+          <Html className={`html_container`}>
+            <div className={`sections_container`}>
+              <section className={`section__zero section`}>Section 0</section>
+              <section className={`section__one section`}>Section 1</section>
+              <section className={`section__two section`}>Section 2</section>
+
+              <section className={`section__three section`}>Section 3</section>
+              <section className={`section__four section`}>Section 4</section>
+
+              <section className={`section__five section`}>Section 5</section>
+              <section className={`section__six section`}>Section 6</section>
+
+              <section className={`section__seven section`}>Section 7</section>
+              <section className={`section__eight section`}>Section 8</section>
+
+              <section className={`section__eight section`}>Section 9</section>
+              <section className={`section__ten section`}>Section 10</section>
+            </div> 
+            <svg className={`triangle__svg`} width="500" height="435" viewBox="0 0 500 435" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path className={`cls-1`} d="M501 1H1L255.007 434L501 1Z" stroke="black"/>
+            </svg>
+
+            <svg width="346" height="420" viewBox="0 0 346 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path className="cls-1" d="M0.5 55.5H341C343.667 85.1667 347.4 144.5 341 144.5C334.6 144.5 111.333 144.5 0.5 144.5V235.5H341V332.5H0.5V419M0.5 419H93.5V0.5H261.5L266.5 415.5L0.5 419Z" stroke="black"/>
+            </svg>
+
+            <svg width="282" height="268" viewBox="0 0 282 268" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path className="cls-1" d="M1 1C11.0493 1 139.262 1 281 1" stroke="black"/>
+              <path className="cls-1" d="M141 267C140.966 257.453 140.532 135.651 140.052 1.00001" stroke="black"/>
+              <path className="cls-1" d="M58.5166 267C58.4826 257.453 58.0484 135.651 57.5685 1.00001" stroke="black"/>
+              <path className="cls-1" d="M213.054 267C213.02 257.453 212.586 135.651 212.106 1.00001" stroke="black"/>
+              <path className="cls-1" d="M1 203.56C11.0493 203.56 139.262 203.56 281 203.56" stroke="black"/>
+              <path className="cls-1" d="M1 69.9478C11.0493 69.9478 139.262 69.9478 281 69.9478" stroke="black"/>
+              <path className="cls-1" d="M1 134C11.0493 134 139.262 134 281 134" stroke="black"/>
+              <path className="cls-1" d="M1 1V267H281V1" stroke="black"/>
+            </svg>
+
+          </Html> 
+          */}
+
+        </Scroll>
+
 
         {/* <S1ParticlePathAnimation /> */}
 
@@ -236,47 +293,6 @@ const ScrollControlComponent = (
           </Float>
           <TorusParticle scale={0.5} />
         </Scroll> */}
-        
-        <Scroll>
-          <Html className={`html_container`}>
-            {/* <div className={`sections_container`}>
-              <section className={`section__zero section`}>Section 0</section>
-              <section className={`section__one section`}>Section 1</section>
-              <section className={`section__two section`}>Section 2</section>
-
-              <section className={`section__three section`}>Section 3</section>
-              <section className={`section__four section`}>Section 4</section>
-
-              <section className={`section__five section`}>Section 5</section>
-              <section className={`section__six section`}>Section 6</section>
-
-              <section className={`section__seven section`}>Section 7</section>
-              <section className={`section__eight section`}>Section 8</section>
-
-              <section className={`section__eight section`}>Section 9</section>
-              <section className={`section__ten section`}>Section 10</section>
-            </div>  */}
-            {/* <svg className={`triangle__svg`} width="500" height="435" viewBox="0 0 500 435" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path className={`cls-1`} d="M501 1H1L255.007 434L501 1Z" stroke="black"/>
-            </svg> */}
-
-            {/* <svg width="346" height="420" viewBox="0 0 346 420" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path className="cls-1" d="M0.5 55.5H341C343.667 85.1667 347.4 144.5 341 144.5C334.6 144.5 111.333 144.5 0.5 144.5V235.5H341V332.5H0.5V419M0.5 419H93.5V0.5H261.5L266.5 415.5L0.5 419Z" stroke="black"/>
-            </svg> */}
-
-            {/* <svg width="282" height="268" viewBox="0 0 282 268" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path className="cls-1" d="M1 1C11.0493 1 139.262 1 281 1" stroke="black"/>
-              <path className="cls-1" d="M141 267C140.966 257.453 140.532 135.651 140.052 1.00001" stroke="black"/>
-              <path className="cls-1" d="M58.5166 267C58.4826 257.453 58.0484 135.651 57.5685 1.00001" stroke="black"/>
-              <path className="cls-1" d="M213.054 267C213.02 257.453 212.586 135.651 212.106 1.00001" stroke="black"/>
-              <path className="cls-1" d="M1 203.56C11.0493 203.56 139.262 203.56 281 203.56" stroke="black"/>
-              <path className="cls-1" d="M1 69.9478C11.0493 69.9478 139.262 69.9478 281 69.9478" stroke="black"/>
-              <path className="cls-1" d="M1 134C11.0493 134 139.262 134 281 134" stroke="black"/>
-              <path className="cls-1" d="M1 1V267H281V1" stroke="black"/>
-            </svg> */}
-
-          </Html>
-        </Scroll>
 
         {/* StarParticles need to be on this position */}
         {/* <StarParticles count={1000} /> */}

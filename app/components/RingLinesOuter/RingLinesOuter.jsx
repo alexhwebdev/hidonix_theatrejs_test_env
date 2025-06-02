@@ -89,7 +89,11 @@ const RingLinesOuter = ({
   }, [delay]);
 
   return (
-    <group ref={groupRef} scale={responsiveScale} rotation={[0, 0, 0]}>
+    <group ref={groupRef} 
+      scale={responsiveScale} 
+      // position={[0, 0, 12.5]}
+      rotation={[0, 0, 0]}
+    >
       {tubes.map((tubeGeometry, i) => (
         <mesh key={i} 
           geometry={tubeGeometry}

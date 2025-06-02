@@ -27,7 +27,7 @@ const RedOrb = () => {
   useEffect(() => {
     const updateScale = () => {
       const width = window.innerWidth;
-      const newScale = THREE.MathUtils.clamp(width / 1400, 0.5, 1);
+      const newScale = THREE.MathUtils.clamp(width / 1400, 0.9, 1);
       setResponsiveScale(newScale);
     };
     updateScale();

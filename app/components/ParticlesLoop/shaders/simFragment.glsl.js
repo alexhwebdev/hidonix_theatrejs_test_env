@@ -1,9 +1,17 @@
+// Your simulation shader (simFragment.glsl) is responsible for updating particle positions on each frame by reading from a position texture, applying forces, and outputting new positions. The vertex shader (vertexParticles.glsl) then reads those updated positions and renders the particles accordingly.
+
 export default `
 uniform float time;
 uniform sampler2D uPositions;
 uniform sampler2D uInfo;
 uniform vec2 uMouse;
 varying vec2 vUv;
+
+uniform vec2 resolution;
+uniform float scrollSpeed;
+uniform float uDirection;  // passed from JS
+uniform float direction;
+precision highp float;
 
 // CURL NOISE function (kept as is from your original)
 // ---------- CURL NOISE
@@ -116,39 +124,277 @@ vec3 curl( in vec3 p, in float noiseTime, in float persistence ) {
 }
 // ---------- /CURL NOISE
 
+
+// // ---------- KINDA WORKING : Scroll > speed up, Reverse > move reverse, with darkside 
+// void main() {
+//     vec2 vUv = gl_FragCoord.xy / resolution.xy;
+//     vec4 pos = texture2D(uPositions, vUv);
+//     vec4 info = texture2D(uInfo, vUv);
+
+//     float radius = length(pos.xy);
+//     float circularForce = 1.0 - smoothstep(10.3, 1.4, abs(pos.x - radius));
+
+//     float direction = uDirection; // Use last non-zero scroll direction
+
+//     float speedMultiplier = 1.0 + abs(scrollSpeed) * 10.0;
+
+//     float angle = atan(pos.y, pos.x) - info.y * 0.3 * direction * mix(0.5, 1.0, circularForce);
+
+//     float targetRadius = mix(
+//         info.x,
+//         4.0,
+//         0.5 + 0.45 * sin(angle + time * 0.0002)
+//     );
+
+//     radius += (targetRadius - radius) * mix(0.9, 0.05, circularForce);
+//     vec3 targetPos = vec3(cos(angle), sin(angle), 0.0) * radius;
+
+//     pos.xy += (targetPos.xy - pos.xy) * 0.03 * speedMultiplier;
+//     pos.xy += curl(pos.xyz * 0.7, time * 0.1, 1.0).xy * 0.003 * speedMultiplier * direction;
+
+//     gl_FragColor = vec4(pos.xy, 1.0, 1.0);
+// }
+
+
+
+
+// ---------- WORKING : Scroll > speed up, Reverse > move reverse
+// void main() {
+//     vec2 vUv = gl_FragCoord.xy / resolution.xy; // or your varying UV
+//     vec4 pos = texture2D(uPositions, vUv);
+//     vec4 info = texture2D(uInfo, vUv);
+
+//     float radius = length(pos.xy);
+//     float circularForce = 1.0 - smoothstep(0.3, 1.4, abs(pos.x - radius));
+    
+//     // Ensure direction is never zero to keep rotation always on
+//     float direction = sign(scrollSpeed);
+//     if (direction == 0.0) direction = 1.0;
+
+//     float speedMultiplier = 1.0 + abs(scrollSpeed) * 10.0;
+
+//     float angle = atan(pos.y, pos.x) - info.y * 0.3 * direction * mix(0.5, 1.0, circularForce);
+
+//     float targetRadius = mix(
+//         info.x,
+//         4.0,
+//         0.5 + 0.45 * sin(angle + time * 0.0002)
+//     );
+
+//     radius += (targetRadius - radius) * mix(0.9, 0.05, circularForce);
+//     vec3 targetPos = vec3(cos(angle), sin(angle), 0.0) * radius;
+
+//     pos.xy += (targetPos.xy - pos.xy) * 0.03 * speedMultiplier;
+//     pos.xy += curl(pos.xyz * 0.7, time * 0.1, 1.0).xy * 0.003 * speedMultiplier * direction;
+
+//     gl_FragColor = vec4(pos.xy, 1.0, 1.0);
+// }
+
+
+
+
+
+// ---------- ON NO SCROLL, paint brush stroke look with random pattern at finish
 void main() {
+    vec2 vUv = gl_FragCoord.xy / resolution.xy;
     vec4 pos = texture2D(uPositions, vUv);
     vec4 info = texture2D(uInfo, vUv);
 
-    // vec2 mouse = vec2(sin(time), cos(time));  // Show position of mouse
-    vec2 mouse = uMouse;
-    
     float radius = length(pos.xy);
-    float circularForce = 1. - smoothstep(0.3, 1.4, abs(pos.x - radius));
-    float angle = atan(pos.y, pos.x) - info.y * 0.3 * mix(0.5, 1.0, circularForce);
+    float direction = sign(scrollSpeed);
+    float speedMultiplier = 1.0 + abs(scrollSpeed) * 10.0;
+    float circularForce = 1.0 - smoothstep(10.3, 0.4, abs(pos.x - radius));
 
-    // Controls shape of particles. Ex: flower shape "angle * 5.0"
+    // Base angle + random angular offset to break layering
+    float angle = atan(pos.y, pos.x);
+    float randomAngleOffset = sin(info.z * 100.0) * 0.5;
+    angle += randomAngleOffset;
+
+    // Rotation only when scrolling, tiny motion when idle
+    float angularVelocity = info.y * 0.3 * direction * mix(0.5, 1.0, circularForce);
+    angle -= (abs(scrollSpeed) > 0.0001) ? angularVelocity : 0.05;
+
+    // --- Control thickness near bottom ---
+    // bottomAngle = -PI/2 ≈ -1.5708
+    float bottomAngle = -1.5708;
+    // angular distance from bottom (in radians)
+    float angleDist = abs(mod(angle - bottomAngle + 3.14159, 6.28318) - 3.14159);
+    // smoothstep to create a narrow range near bottom
+    float thicknessControl = smoothstep(0.0, 0.7, angleDist);
+    // thicknessControl == 0 near bottom (thin), 1 far from bottom (normal thickness)
+
+    // Radius wobble with randomized phase offset, amplitude modulated by thicknessControl
+    float wobbleAmplitude = 0.2 * thicknessControl; // reduce wobble near bottom
+    float wobble = sin(info.x * 10.0 + time * 0.5 + info.y * 5.0) * wobbleAmplitude;
+
     float targetRadius = mix(
-        info.x, 
-        2.0, // wider circle
-        0.5 + 0.45 * sin(angle * 2.0 + time * 0.0002)
+        info.x,
+        3.5,
+        0.5 + 0.45 * sin(angle + wobble)
     );
 
-    radius += (targetRadius - radius) * mix(0.2, 0.5, circularForce);
+    // Soften toward target radius
+    radius += (targetRadius - radius) * mix(0.9, 0.005, circularForce);
+
+    // Project new position
     vec3 targetPos = vec3(cos(angle), sin(angle), 0.0) * radius;
 
-    // Smoothly interpolate position towards the target position
-    pos.xy += (targetPos.xy - pos.xy) * 0.1;
+    // Move toward target
+    pos.xy += (targetPos.xy - pos.xy) * 0.03 * speedMultiplier;
 
-    // Add curl noise for organic swirling motion
-    pos.xy += curl(pos.xyz * 4.0, time * 0.1, 0.1).xy * 0.006;
-
-    float dist = length(pos.xy - mouse);
-    vec2 dir = normalize(pos.xy - mouse);
-    pos.xy += dir * 0.1 * smoothstep(0.3, 0.0, dist);
+    // Curl force (still present when idle, but smaller)
+    float curlFactor = mix(0.2, 1.0, step(0.0001, abs(scrollSpeed)));
+    pos.xy += curl(pos.xyz * 0.7, time * 0.5, 1.0).xy * 0.003 * speedMultiplier * direction * curlFactor;
 
     gl_FragColor = vec4(pos.xy, 1.0, 1.0);
 }
-`;
 
-// Your simulation shader (simFragment.glsl) is responsible for updating particle positions on each frame by reading from a position texture, applying forces, and outputting new positions. The vertex shader (vertexParticles.glsl) then reads those updated positions and renders the particles accordingly.
+
+
+
+
+
+// ---------- ON NO SCROLL, paint brush stroke look
+// void main() {
+//     vec2 vUv = gl_FragCoord.xy / resolution.xy; // or your varying UV
+//     vec4 pos = texture2D(uPositions, vUv);
+//     vec4 info = texture2D(uInfo, vUv);
+
+//     float radius = length(pos.xy);
+//     float circularForce = 1.0 - smoothstep(10.3, 0.4, abs(pos.x - radius));
+//     float direction = sign(scrollSpeed);
+//     float speedMultiplier = 1.0 + abs(scrollSpeed) * 10.0;
+
+//     float angle = atan(pos.y, pos.x) - info.y * 0.3 * direction * mix(0.5, 1.0, circularForce);
+
+//     float targetRadius = mix(
+//         info.x,
+//         3.5,
+//         0.5 + 0.45 * sin(angle + time * 0.0002)
+//     );
+
+//     radius += (targetRadius - radius) * mix(0.9, 0.05, circularForce);
+//     vec3 targetPos = vec3(cos(angle), sin(angle), 0.0) * radius;
+
+//     pos.xy += (targetPos.xy - pos.xy) * 0.03 * speedMultiplier;
+//     pos.xy += curl(pos.xyz * 0.7, time * 0.5, 1.0).xy * 0.003 * speedMultiplier * direction;
+
+//     gl_FragColor = vec4(pos.xy, 1.0, 1.0);
+// }
+
+
+
+// ---------- RED SWARM, BEST SO FAR
+// void main() {
+//     vec4 pos = texture2D(uPositions, vUv);
+//     vec4 info = texture2D(uInfo, vUv);
+
+//     vec2 mouse = uMouse;
+
+//     float radius = length(pos.xy);
+//     float circularForce = 1.0 - smoothstep(0.3, 1.4, abs(pos.x - radius));
+
+//     float angle = atan(pos.y, pos.x) - info.y * 0.3 * mix(0.5, 1.0, circularForce);
+
+//     float targetRadius = mix(
+//         info.x,
+//         3.5,
+//         0.5 + 0.45 * sin(angle + time * 0.0002)
+//     );
+
+//     radius += (targetRadius - radius) * mix(0.9, 0.05, circularForce);
+//     vec3 targetPos = vec3(cos(angle), sin(angle), 0.0) * radius;
+
+//     // 🔄 Rhythmic slowdown but never stop
+//     float pauseCycle = sin(time * 0.3 + info.z * 6.28); // unique cycle
+//     float pause = smoothstep(0.2, 0.6, pauseCycle);     // soft ease in/out
+
+//     // Clamp motion strength to never go below 0.2
+//     float motionStrength = mix(0.2, 1.0, 1.0 - pause);
+
+//     // Apply eased motion
+//     pos.xy += (targetPos.xy - pos.xy) * 0.03 * motionStrength;
+//     // pos.xyz * MORE RIPPLE, time * WAVY, 0.0 - 1.0 LOOK NATURAL
+//     pos.xy += curl(pos.xyz * 0.7, time * 0.1, 1.0).xy * 0.003 * motionStrength;
+
+//     float dist = length(pos.xy - mouse);
+//     vec2 dir = normalize(pos.xy - mouse);
+//     pos.xy += dir * 0.05 * smoothstep(0.9, 0.0, dist) * motionStrength;
+
+//     // vec2 radialDir = normalize(pos.xy);
+//     // pos.xy -= radialDir * 0.01 * (radius - targetRadius) * motionStrength;
+//     gl_FragColor = vec4(pos.xy, 1.0, 1.0);
+// }
+
+
+// ---------- SLUG SHAPE
+// void main() {
+//     vec4 pos = texture2D(uPositions, vUv);
+//     vec4 info = texture2D(uInfo, vUv);
+
+//     // vec2 mouse = vec2(sin(time), cos(time));  // Show position of mouse
+//     vec2 mouse = uMouse;
+    
+//     float radius = length(pos.xy);
+//     float circularForce = 1. - smoothstep(0.3, 1.4, abs(pos.x - radius));
+//     float angle = atan(pos.y, pos.x) - info.y * 0.3 * mix(0.5, 1.0, circularForce);
+
+//     // CIRCULAR LOOP : Controls shape of particles. Ex: flower shape "angle * 5.0"
+//     float targetRadius = mix(
+//         info.x, 
+//         3.0, // wider circle
+//         0.5 + 0.45 * sin(angle * 1.0 + time * 0.0002)
+//     );
+
+//     radius += (targetRadius - radius) * mix(0.9, 0.05, circularForce);
+//     vec3 targetPos = vec3(cos(angle), sin(angle), 0.0) * radius;
+
+//     // Smoothly interpolate position towards the target position
+//     pos.xy += (targetPos.xy - pos.xy) * 0.1;
+
+//     // Add curl noise for organic swirling motion
+//     pos.xy += curl(pos.xyz * 1.0, time * 0.1, 0.9).xy * 0.006;
+
+//     float dist = length(pos.xy - mouse);
+//     vec2 dir = normalize(pos.xy - mouse);
+//     pos.xy += dir * 0.1 * smoothstep(0.9, 0.0, dist);
+
+//     gl_FragColor = vec4(pos.xy, 1.0, 1.0);
+// }
+
+
+// Original Circular Loop Simulation
+// void main() {
+//     vec4 pos = texture2D(uPositions, vUv);
+//     vec4 info = texture2D(uInfo, vUv);
+
+//     // vec2 mouse = vec2(sin(time), cos(time));  // Show position of mouse
+//     vec2 mouse = uMouse;
+    
+//     float radius = length(pos.xy);
+//     float circularForce = 1. - smoothstep(0.3, 1.4, abs(pos.x - radius));
+//     float angle = atan(pos.y, pos.x) - info.y * 0.3 * mix(0.5, 1.0, circularForce);
+
+//     // CIRCULAR LOOP : Controls shape of particles. Ex: flower shape "angle * 5.0"
+//     float targetRadius = mix(
+//         info.x, 
+//         3.0, // wider circle
+//         0.5 + 0.45 * sin(angle * 2.0 + time * 0.0002)
+//     );
+
+//     radius += (targetRadius - radius) * mix(0.2, 0.5, circularForce);
+//     vec3 targetPos = vec3(cos(angle), sin(angle), 0.0) * radius;
+
+//     // Smoothly interpolate position towards the target position
+//     pos.xy += (targetPos.xy - pos.xy) * 0.1;
+
+//     // Add curl noise for organic swirling motion
+//     pos.xy += curl(pos.xyz * 4.0, time * 0.1, 0.1).xy * 0.006;
+
+//     float dist = length(pos.xy - mouse);
+//     vec2 dir = normalize(pos.xy - mouse);
+//     pos.xy += dir * 0.1 * smoothstep(0.3, 0.0, dist);
+
+//     gl_FragColor = vec4(pos.xy, 1.0, 1.0);
+// }
+`;

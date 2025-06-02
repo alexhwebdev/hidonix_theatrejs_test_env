@@ -193,7 +193,7 @@ const Overlay = forwardRef(({ caption, scroll }, ref) => {
           // markers: true,
           onUpdate: self => {
             scrolledAmount = self.scroll(); // update value
-            console.log('Scrolled amount:', scrolledAmount);
+            // console.log('Scrolled amount:', scrolledAmount);
           }
         }
       }

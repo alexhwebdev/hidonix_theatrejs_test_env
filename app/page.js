@@ -52,7 +52,7 @@ export default function Home() {
 
   return (
     <div className="page-wrapper">
-      {/* <div className={`white-overlay ${fadeIn ? 'fade-out' : ''}`} /> */}
+      <div className={`white-overlay ${fadeIn ? 'fade-out' : ''}`} />
 
       {/* <div className={`canvas-wrapper ${fadeIn ? 'fade-in' : ''}`}>
         <ScrollControlComponent externalScrollRef={overlay} />
@@ -61,11 +61,11 @@ export default function Home() {
         </div>
       </div> */}
 
-      {/* <Overlay ref={overlay} caption={caption} scroll={scroll} /> */}
-      
-      {/* <ScrollControlComponent externalScrollRef={overlay} /> */}
+      <Overlay ref={overlay} caption={caption} scroll={scroll} />
 
-      <ParticlesLoopPage />
+      <ScrollControlComponent externalScrollRef={overlay} />
+
+      {/* <ParticlesLoopPage /> */}
 
       <div className={`plotted_triangle__container`}>
         {/* <svg style={{display: ''}} width="909" height="814" viewBox="0 0 909 814" fill="none" xmlns="http://www.w3.org/2000/svg">

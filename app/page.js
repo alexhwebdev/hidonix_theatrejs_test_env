@@ -61,7 +61,7 @@ export default function Home() {
         </div>
       </div> */}
 
-      <Overlay ref={overlay} caption={caption} scroll={scroll} />
+      {/* <Overlay ref={overlay} caption={caption} scroll={scroll} /> */}
 
       <ScrollControlComponent externalScrollRef={overlay} />
 

@@ -210,7 +210,7 @@ function Particles({ size = 256, positionsTexture, scrollDirection }) {
 }
 
 
-export default function ParticlesLoopPage() {
+export default function ParticlesLoop() {
   const [mouse, setMouse] = useState(new THREE.Vector2(0, 0));
   const [positionsTexture, setPositionsTexture] = useState(null);
   const scroll = useScroll();

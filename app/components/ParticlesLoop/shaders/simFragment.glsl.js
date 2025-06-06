@@ -229,7 +229,7 @@ void main() {
 
     float targetRadius = mix(
         info.x,
-        3.5,
+        4.0,
         0.5 + 0.45 * sin(angle + wobble)
     );
 

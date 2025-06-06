@@ -24,7 +24,23 @@ const Overlay = forwardRef(({ caption, scroll }, ref) => {
   // }, [])
   useEffect(() => {
     const tl = gsap.timeline();
-    tl.fromTo(
+    tl
+      .fromTo(
+      ".numbered_boxes .one", 
+      { 
+        background: "#B21F29",
+        border: "1px solid black",
+        color: "black",
+      },
+      { 
+        // scroller: ".overlay_scroll", DOES NOT WORK HERE
+        delay: 1,
+        opacity: 1, 
+        // top: "0px", 
+        ease: "power1.out", 
+        duration: 1,
+      })
+      .fromTo(
       "#section_one__id", 
       { opacity: 0},
       { 
@@ -35,28 +51,13 @@ const Overlay = forwardRef(({ caption, scroll }, ref) => {
         ease: "power1.out", 
         duration: 1,
       })
-      .fromTo(
-        ".numbered_boxes .one", 
-        { 
-          background: "#B21F29",
-          border: "1px solid black",
-          color: "black",
-        },
-        { 
-          // scroller: ".overlay_scroll", DOES NOT WORK HERE
-          delay: 1,
-          opacity: 1, 
-          // top: "0px", 
-          ease: "power1.out", 
-          duration: 1,
-        })
       ScrollTrigger.refresh();
   }, []);
 
   useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    // -------------------- Fade Out : S1, S2, S3
+    // -------------------- Fade Out Sections : S1, S2, S3
     GsapAnimateElement(
       ".sticky", { opacity: 1 },{ opacity: 0 },
       {
@@ -164,11 +165,11 @@ const Overlay = forwardRef(({ caption, scroll }, ref) => {
       }
     );
 
-    // -------------------- SVG Line drawing animation
+    // --------------- SVG line drawing animation ---------------
     let svg = document.querySelector('.scroll_timeline__svg');
     let path = svg.querySelector('path');
     const pathLength = path.getTotalLength();
-    console.log('Path length:', pathLength);
+    // console.log('pathLength:', pathLength);  // 500
     
     gsap.set(path, {
       strokeDasharray: pathLength,
@@ -177,12 +178,69 @@ const Overlay = forwardRef(({ caption, scroll }, ref) => {
 
     let scrolledAmount;
 
+    const addColor = (boxNum) => {
+      gsap.to(
+        `.numbered_boxes ${boxNum}`, 
+        { 
+          background: "#B21F29",
+          border: "2px solid black",
+          // boxShadow: "0px 0px 10px white",
+          color: "black",
+          duration: 0.5
+        }
+      )
+      gsap.to(
+        `.numbered_boxes__text ${boxNum}`, 
+        { 
+          color: "#B21F29",
+          transition: 0.3,
+        }
+      );
+    }
+    const removeColor = (boxNum) => {
+      gsap.to(
+        `.numbered_boxes ${boxNum}`, 
+        { 
+          background: "#000",
+          border: "2px solid #fff",
+          // boxShadow: "0px 0px 10px black",
+          color: "#fff",
+        }
+      );
+      gsap.to(
+        `.numbered_boxes__text ${boxNum}`, 
+        { 
+          color: "darkgray",
+          transition: 0.3,
+        }
+      );
+    }
+
+    // const colorText = (textNum) => {
+    //   gsap.to(
+    //     `.numbered_boxes__text ${textNum}`, 
+    //     { 
+    //       color: "#B21F29",
+    //       transition: 0.3,
+    //     },
+    //   );
+    // }
+    // const uncolorText = (textNum) => {
+    //   gsap.to(
+    //     `.numbered_boxes__text ${textNum}`, 
+    //     { 
+    //       color: "darkgray",
+    //       transition: 0.3,
+    //     },
+    //   );
+    // }
+
     gsap.fromTo(
       path,
       { strokeDashoffset: pathLength },
       {
         strokeDashoffset: 0,
-        duration: 100,
+        duration: 1000,
         ease: "none",
         scrollTrigger: {
           trigger: ".scroll_timeline__svg",
@@ -191,13 +249,28 @@ const Overlay = forwardRef(({ caption, scroll }, ref) => {
           scrub: true,
           scroller: ".overlay_scroll",
           // markers: true,
+
           onUpdate: self => {
             scrolledAmount = self.scroll(); // update value
-            // console.log('Scrolled amount:', scrolledAmount);
+
+            // NUMBERED BOXES
+            self.scroll() >= 0 && self.scroll() < 1400 ? addColor('.one')  : removeColor('.one');
+            self.scroll() > 1400 && self.scroll() < 2600 ? addColor('.two') : removeColor('.two');
+            self.scroll() > 2600 && self.scroll() < 3800 ? addColor('.three') : removeColor('.three');
+            self.scroll() > 3800 ? addColor('.four') : removeColor('.four');
+
+            // TEXT
+            // self.scroll() >= 0 && self.scroll() < 1400 ? colorText('.one')  : uncolorText('.one');
+            // self.scroll() > 1400 && self.scroll() < 2600 ? colorText('.two') : uncolorText('.two');
+            // self.scroll() > 2600 && self.scroll() < 3800 ? colorText('.three') : uncolorText('.three');
+            // self.scroll() > 3800 ? colorText('.four') : uncolorText('.four');
           }
         }
       }
     );
+
+
+
 
     // GsapAnimateElement(
     //   ".numbered_boxes .two", 
@@ -240,25 +313,40 @@ const Overlay = forwardRef(({ caption, scroll }, ref) => {
       className="overlay_scroll"
       // onScroll={handleScroll}
     >
+      {/* --------------- SVG line drawing animation --------------- */}
       <div className={`scroll_timeline`}>
-        <div className={`scroll_timeline__svg`}>
-          <svg width="4" height="500" viewBox="0 0 4 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2 0V500" stroke="#9e1b24" strokeWidth="3"/>
+        <div className={`scroll_timeline__container`}>
+          <div className={`scroll_timeline__svg`}>
+            {/* Red line */}
+            <svg width="4" height="500" viewBox="0 0 4 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 0V500" stroke="#9e1b24" strokeWidth="3"/>
+            </svg>
+          </div>
+          
+          {/* Track */}
+          <svg className={`scroll_timeline__track`} 
+            width="1" height="6000" viewBox="0 0 1 6000" 
+            fill="none" xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M1 0V250V500" stroke="white" 
+              // strokeOpacity="1" 
+              strokeDasharray="3 3"
+            />
           </svg>
-          {/* <svg width="2" height="500" viewBox="0 0 2 500" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1 0V500" stroke="white"/>
-          </svg> */}
-        </div>
 
-        <svg className={`scroll_timeline__track`} width="1" height="8000" viewBox="0 0 1 8000" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1 0V500" stroke="darkgray"/>
-        </svg>
+          <div className="numbered_boxes">
+            <div className={`one`}>1</div>
+            <div className={`two`}>2</div>
+            <div className={`three`}>3</div>
+            <div className={`four`}>4</div>
+          </div>
 
-        <div className="numbered_boxes">
-          <div className={`one`}>1</div>
-          <div className={`two`}>2</div>
-          <div className={`three`}>3</div>
-          <div className={`four`}>4</div>
+          <div className="numbered_boxes__text">
+            <div className={`one`}>SPATIAL INTELLIGENCE</div>
+            <div className={`two`}>COMPUTER VISION</div>
+            <div className={`three`}>DRONES</div>
+            <div className={`four`}>IOT</div>
+          </div>
         </div>
       </div>
 

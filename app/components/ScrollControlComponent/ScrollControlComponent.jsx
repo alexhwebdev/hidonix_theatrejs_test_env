@@ -28,7 +28,8 @@ import ModelsTransition from '../ModelsTransition/ModelsTransition'
 import PngComponentGsapTl from '../PngComponentGsapTl/PngComponentGsapTl'
 import StarParticles from '../StarParticles/StarParticles'
 import CameraMovement from '../CameraMovement/CameraMovement'
-import BakedTexture from '../BakedTexture/BakedTexture'
+// import BakedTexture from '../BakedTexture/BakedTexture'
+import BakedTextureStadium from '../BakedTextureStadium/BakedTextureStadium'
 
 import RingLinesFacingCenter from '../RingLinesFacingCenter/RingLinesFacingCenter'
 import RingLinesOuter from '../RingLinesOuter/RingLinesOuter'
@@ -41,12 +42,14 @@ import BrainAnimation from '../BrainAnimation/BrainAnimation'
 import ParticlePathAnimation from '../ParticlePathAnimation/ParticlePathAnimation'
 import S1ParticlePathAnimation from '../S1ParticlePathAnimation/S1ParticlePathAnimation'
 
-import ParticlesLoop from '../ParticlesLoop/ParticlesLoop'
 import {Comets} from '../Comets/Comets'
 // import OrbComputing from '../OrbComputing/OrbComputing'
 // import { AxesHelper } from 'three';
 
-import ParticlesLoopPage from "../ParticlesLoop/ParticlesLoop";
+import ParticlesLoop from "../ParticlesLoop/ParticlesLoop";
+
+import ImgTransition from '../ImgTransition/ImgTransition'
+
 
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -75,7 +78,7 @@ const ScrollContent = (
   return (
     <>
       {/* Your 3D components */}
-      <RingLinesOuter count={100} 
+      {/* <RingLinesOuter count={100} 
         radius={3} 
         spinSpeed={0.04} 
         delay={0.0} 
@@ -88,7 +91,7 @@ const ScrollContent = (
         // delay={0.5} 
         scrollStart={0.02} 
         scrollDuration={1.0}
-      />
+      /> */}
       <RingLinesInner count={100} 
         radius={2} 
         spinSpeed={0.1} 
@@ -102,13 +105,15 @@ const ScrollContent = (
         // scrollStart={-0.2} 
         // scrollDuration={1.1} 
       />
-      <RedOrb />
+      {/* <RedOrb /> */}
+
+      <ImgTransition />
 
       {/* NEED SVG CLASS : .cls-1 */}
       {/* <ParticlePathAnimation 
         position={[-1.39, 1.2, 0]} 
       /> */}
-      <StarParticles count={1000} />
+      {/* <StarParticles count={1000} /> */}
     </>
   );
 };
@@ -139,7 +144,7 @@ const ScrollControlComponent = (
   return (
     <Canvas className="canvas__component" shadows gl={{ antialias: true }}>
       {/* <CameraMovement className="CameraMovement" /> */}
-      {/* <OrbitControls /> */}
+      <OrbitControls />
 
       {/* <EffectComposer>
         <DepthOfField focusDistance={0} focalLength={0.02} bokehScale={0.1} height={100} />
@@ -178,7 +183,7 @@ const ScrollControlComponent = (
       >
         <ScrollContent externalScrollRef={externalScrollRef} />
 
-        <ParticlesLoopPage />
+        {/* <ParticlesLoop /> */}
         
         
         <Scroll>
@@ -247,6 +252,7 @@ const ScrollControlComponent = (
         {/* <TorusParticle scale={1.5} /> */}
 
         {/* <BakedTexture position={[0, 0, -5]} /> */}
+        {/* <BakedTextureStadium position={[0, 0, 0]} /> */}
 
         {/* <OrbComputing position={[0, 0, 3]} /> */}
 

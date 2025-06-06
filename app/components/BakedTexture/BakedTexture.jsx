@@ -79,7 +79,7 @@ const Particles = ({ baseMesh, baseGeometry, count, gpgpuSize, particlesTextureR
 
 export default function BakedTexture({ position = [0, 0, 0] }) {
   const { gl, size } = useThree()
-  const model = useGLTF('/models/boat.glb')
+  const model = useGLTF('/boat.glb')
   // console.log('model ', model)
 
   // const model = useGLTF('/blueyard/computing.glb')

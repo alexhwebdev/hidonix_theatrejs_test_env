@@ -65,7 +65,7 @@ export default function SketchScene() {
         vec2 corUV = scaleUV(vUv, aspect);
         vec2 distUV = scaleUV(corUV, vec2(1.0 + length((vUv - 0.5))));
 
-        vec2 hexUv = distUV * 20.0;
+        vec2 hexUv = distUV * 10.0;
         vec4 hexCoords = hexCoordinates(hexUv);
         float hexDist = hexDistance(hexCoords.xy);
 
@@ -82,11 +82,17 @@ export default function SketchScene() {
 
         float merge = 1.0 - smoothstep(0.0, 0.5, abs(blendCut - 0.5));
         float center = uProgress + (y + z) * 0.15 * bounceTransition;
-        float easedCut = smoothstep(center - 0.05, center + 0.05, vUv.y);
+
+        // Liquid ripple distortion on diagonal fade
+        vec2 blendDirection = normalize(vec2(0.5, 1.0)); // angled fade
+        float diagUV = dot(vUv, blendDirection);
+        float ripple = sin(vUv.y * 30.0 + uTime * 2.0) * 0.01;
+        float liquidDiag = diagUV + ripple;
+
+        float easedCut = smoothstep(center - 0.05, center + 0.05, liquidDiag);
 
         vec2 textureUV = corUV + y * sin(vUv.y * 15.0 - uTime) * merge * 0.025;
 
-        // ✅ Proper UVs without double aspect correction
         vec2 fromUV = textureUV;
         vec2 toUV = scaleUV(textureUV, vec2(1.0 + z * 0.2 * merge + uProgress));
 
@@ -94,12 +100,17 @@ export default function SketchScene() {
         vec4 sample2 = texture2D(uTexture2, fromUV);
         vec4 final = mix(sample1, sample2, easedCut);
 
-        float hexEdge = smoothstep(0.45, 0.50, hexDist) * (1.0 - smoothstep(0.50, 0.55, hexDist));
-        float transitionBand = smoothstep(center - 0.05, center, vUv.y) * (1.0 - smoothstep(center, center + 0.05, vUv.y));
-        hexEdge *= transitionBand;
+        // Shrinking hex outline
+        float shrinkFactor = 1.0 - uProgress;
+        float hexFade = smoothstep(0.45 * shrinkFactor, 0.50 * shrinkFactor, hexDist) * 
+                        (1.0 - smoothstep(0.50 * shrinkFactor, 0.55 * shrinkFactor, hexDist));
+
+        float transitionBand = smoothstep(center - 0.09, center, liquidDiag) * 
+                               (1.0 - smoothstep(center, center + 0.09, liquidDiag));
+        hexFade *= transitionBand;
 
         float easing = pow(merge, 1.5);
-        vec3 glow = vec3(1.0, 0.4, 0.0) * easing * hexEdge * 2.0;
+        vec3 glow = vec3(1.0, 0.4, 0.0) * easing * hexFade * 2.0;
         final.rgb += glow;
 
         gl_FragColor = final;
@@ -125,7 +136,7 @@ export default function SketchScene() {
     <>
       <OrbitControls />
       <mesh ref={meshRef}>
-        <planeGeometry args={[1, 1]} />
+        <planeGeometry args={[8, 5.5]} />
         <primitive attach="material" object={shaderMaterial} />
       </mesh>
     </>

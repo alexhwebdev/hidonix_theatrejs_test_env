@@ -68,49 +68,39 @@ export default function SketchScene() {
 
         vec2 hexUv = distUV * 5.0;
         vec4 hexCoords = hexCoordinates(hexUv);
-        float hexDist = hexDistance(hexCoords.xy);
+        float hexDist = hexDistance(hexCoords.xy); // distance from center of hex
 
         float y = pow(max(0.0, 0.5 - hexDist), 10.0) * 1.5;
         float z = fract(sin(dot(hexCoords.zw, vec2(12.9898, 78.233))) * 43758.5453);
         float bounceTransition = 1.0 - smoothstep(0.0, 0.5, abs(uProgress - 0.5));
 
-        // Diagonal screen-space fade
-        vec2 blendDirection = normalize(vec2(-0.1, 1.0));
-        float diagUV = dot(vUv, blendDirection);
-        float ripple = sin(vUv.y * 30.0 + uTime * 2.0) * 0.01;
-        float liquidDiag = diagUV + ripple;
-
+        float merge = 1.0 - smoothstep(0.0, 0.5, abs(uProgress - 0.5));
         float center = uProgress + (y + z) * 0.15 * bounceTransition;
 
-        float easedCut = smoothstep(center - 0.05, center + 0.05, liquidDiag);
+        // HEX-CENTER LIQUID TRANSITION
+        float ripple = sin((hexDist * 25.0 - uTime * 5.0 + z * 10.0)) * 0.02;
+        float radius = mix(0.0, 0.6, uProgress); // grows from center outward
+        float easedCut = smoothstep(radius - 0.05 + ripple, radius + 0.05 + ripple, hexDist);
 
-        float merge = 1.0 - smoothstep(0.5, 0.5, abs(easedCut - 0.5));
-
-        // Use transitionBand ONLY to mask the distortion, NOT the blend
-        float transitionBand = smoothstep(center - 0.09, center, liquidDiag) * 
-                               (1.0 - smoothstep(center, center + 0.2, liquidDiag));
-
-        // Hex-based image distortion only near transition band
-        float hexRadius = mix(0.0, 0.6, uProgress);
-        float hexFade = smoothstep(hexRadius - 0.05, hexRadius + 0.05, hexDist);
-
-        // Only distort UVs inside the band
-        float distortionAmount = transitionBand * hexFade;
         vec2 textureUV = corUV + y * sin(vUv.y * 15.0 - uTime) * merge * 0.025;
-        vec2 fromUV = scaleUV(textureUV, vec2(1.0 - distortionAmount * 0.3));
-        vec2 toUV = scaleUV(textureUV, vec2(1.0 + (1.0 - distortionAmount) * 0.2));
 
-        vec4 sample1 = texture2D(uTexture1, fromUV);
-        vec4 sample2 = texture2D(uTexture2, toUV);
+        vec2 fromUV = scaleUV(textureUV, vec2(1.0 - easedCut * 0.3)); // old image shrinks out
+        vec2 toUV = scaleUV(textureUV, vec2(1.0 + (1.0 - easedCut) * 0.2)); // new image expands in
+
+        vec4 sample1 = texture2D(uTexture1, fromUV); // old image
+        vec4 sample2 = texture2D(uTexture2, toUV);   // new image
         vec4 final = mix(sample1, sample2, easedCut);
 
-        // Hex outline glow stays as-is
-        float hexOutline = smoothstep(0.45, 0.50, hexDist) * 
-                           (1.0 - smoothstep(0.50, 0.55, hexDist));
-        hexOutline *= transitionBand;
+        // Constant size hex outline
+        float hexFade = smoothstep(0.45, 0.50, hexDist) * 
+                        (1.0 - smoothstep(0.50, 0.55, hexDist));
+
+        float transitionBand = smoothstep(center - 0.09, center, hexDist) * 
+                               (1.0 - smoothstep(center, center + 0.09, hexDist));
+        hexFade *= transitionBand;
 
         float easing = pow(merge, 1.5);
-        vec3 glow = vec3(1.0, 0.4, 0.0) * easing * hexOutline * 2.0;
+        vec3 glow = vec3(1.0, 0.4, 0.0) * easing * hexFade * 2.0;
         final.rgb += glow;
 
         gl_FragColor = final;

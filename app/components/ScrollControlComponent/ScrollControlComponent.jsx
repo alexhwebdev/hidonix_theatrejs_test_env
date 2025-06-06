@@ -49,6 +49,8 @@ import {Comets} from '../Comets/Comets'
 import ParticlesLoop from "../ParticlesLoop/ParticlesLoop";
 
 import ImgTransition from '../ImgTransition/ImgTransition'
+import ImgTransitionTwo from '../ImgTransition/ImgTransitionTwo'
+import ImgTransitionThree from '../ImgTransition/ImgTransitionThree'
 
 
 import gsap from 'gsap'
@@ -108,6 +110,8 @@ const ScrollContent = (
       {/* <RedOrb /> */}
 
       <ImgTransition />
+      {/* <ImgTransitionTwo /> */}
+      {/* <ImgTransitionThree /> */}
 
       {/* NEED SVG CLASS : .cls-1 */}
       {/* <ParticlePathAnimation 

@@ -11,7 +11,7 @@ export default function BakedTextureStadium({ position = [0, 0, 0] }) {
   // const { scene } = useGLTF('/commercial_office_entertainment_complex_building.glb')
   const { scene } = useGLTF('/vallourec_stadium.glb')
 
-
+  console.log('Scene:', scene)
 
 
   // Collect all meshes from the deeply nested scene

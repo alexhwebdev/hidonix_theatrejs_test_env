@@ -28,7 +28,7 @@ import ModelsTransition from '../ModelsTransition/ModelsTransition'
 import PngComponentGsapTl from '../PngComponentGsapTl/PngComponentGsapTl'
 import StarParticles from '../StarParticles/StarParticles'
 import CameraMovement from '../CameraMovement/CameraMovement'
-// import BakedTexture from '../BakedTexture/BakedTexture'
+import BakedTexture from '../BakedTexture/BakedTexture'
 import BakedTextureStadium from '../BakedTextureStadium/BakedTextureStadium'
 
 import RingLinesFacingCenter from '../RingLinesFacingCenter/RingLinesFacingCenter'
@@ -109,7 +109,7 @@ const ScrollContent = (
       />
       {/* <RedOrb /> */}
 
-      <ImgTransition />
+      {/* <ImgTransition /> */}
       {/* <ImgTransitionTwo /> */}
       {/* <ImgTransitionThree /> */}
 
@@ -256,7 +256,7 @@ const ScrollControlComponent = (
         {/* <TorusParticle scale={1.5} /> */}
 
         {/* <BakedTexture position={[0, 0, -5]} /> */}
-        {/* <BakedTextureStadium position={[0, 0, 0]} /> */}
+        <BakedTextureStadium position={[0, 0, 0]} />
 
         {/* <OrbComputing position={[0, 0, 3]} /> */}
 

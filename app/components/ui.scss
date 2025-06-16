@@ -1,0 +1,73 @@
+.ui__container {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+}
+
+.ui__section {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+  transition: opacity 1s ease;
+}
+
+.ui__hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ui__section.center {
+  align-items: center;
+  text-align: center;
+}
+
+.ui__section.left {
+  align-items: flex-start;
+  text-align: left;
+}
+
+.ui__section.right {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.ui__content {
+  max-width: 40rem;
+}
+
+.ui__title {
+  font-size: 4rem;
+  font-weight: 800;
+  color: white;
+  opacity: 0.9;
+  margin-bottom: 1rem;
+}
+
+.ui__text {
+  color: white;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.ui__buttons,
+.ui__button {
+  display: inline-flex;
+}
+
+.ui__buttons {
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.ui__button {
+  background: rgba(128, 128, 128, 0.5);
+  color: white;
+  font-weight: 500;
+  padding: 0.75rem 1rem;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+}

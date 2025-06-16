@@ -1,81 +1,22 @@
-:root {
-  --font-inter: 'Inter', sans-serif;
-  font-family: var(--font-inter);
+body, html {
+  width: 100vw;
+  height: 100vh;
 }
 
-/* Box sizing rules */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html,
-body,
-#root {
-  background-color: black;
-  /* background-color: black;
+canvas {
   position: fixed;
   top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden; */
-  /* // font-family: var(--font-inter); */
 }
 
-/* Remove default margin */
-body,
-h1,
-h2,
-h3,
-h4,
-p,
-figure,
-blockquote,
-dl,
-dd {
+body {
+  background-color: black;
   margin: 0;
+  /* background-color: #d9afd9; */
+  /* background-image: linear-gradient(0deg, #d9afd9 0%, #97d9e1 100%); */
 }
 
-h1 {
-  font-size: 2.5rem;
-  font-weight: 300;
-}
 
-/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
-ul[role='list'],
-ol[role='list'] {
-  list-style: none;
-}
-
-/* html:focus-within {
-  scroll-behavior: smooth;
-} */
-
-/* body {
-  min-height: 100vh;
-  text-rendering: optimizeSpeed;
-  line-height: 1.5;
-  font-family: var(--font-inter), sans-serif;
-} */
-
-/* A elements that don't have a class get default styles */
-a:not([class]) {
-  text-decoration-skip-ink: auto;
-}
-
-/* Make images easier to work with */
-img,
-picture {
-  max-width: 100%;
-  display: block;
-}
-
-/* Inherit fonts for inputs and buttons */
-input,
-button,
-textarea,
-select {
-  font: inherit;
+.ui__container {
+  border: 5px solid red;
+  height: 100vh;
 }

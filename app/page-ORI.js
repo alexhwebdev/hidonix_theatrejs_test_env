@@ -1,9 +1,8 @@
 "use client"
 
 import { useEffect, useRef, useState, useLayoutEffect, Suspense } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { getProject } from "@theatre/core";
-import { invalidate } from '@react-three/fiber';
 import { PerspectiveCamera, SheetProvider, editable as e } from "@theatre/r3f";
 import extension from "@theatre/r3f/dist/extension";
 import studio from "@theatre/studio";
@@ -22,6 +21,7 @@ import CameraMovement from "./components/CameraMovement";
 import CustomGrid from "./components/CustomGrid";
 import ParticlesPlane from "./components/ParticlesPlane/ParticlesPlane";
 
+
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 
@@ -32,13 +32,7 @@ const gltfLoader = new GLTFLoader();
 gltfLoader.setDRACOLoader(dracoLoader);
 
 
-function ForceInvalidateEachFrame() {
-  const { invalidate } = useThree();
-  useFrame(() => {
-    invalidate(); // 🧠 This forces a full scene render every frame
-  });
-  return null;
-}
+
 
 export const isProd = process.env.NODE_ENV === "development";
 // console.log(" process.env.NODE_ENV:",  process.env.NODE_ENV);
@@ -56,8 +50,6 @@ const project = getProject(
       }
     : undefined
 );
-// Force R3F to render on each Theatre frame
-
 const mainSheet = project.sheet("Main");
 
 const sceneOrder = ["Scene1", "Scene2", "Scene3", "Scene4", "Scene5", "Scene6"];
@@ -71,11 +63,7 @@ const transitions = {
   Scene6: [18, 21],
 };
 
-
 function App() {
-  const cameraRef = useRef();
-  const targetRef = useRef();
-
   const cameraOffsetGroupRef = useRef()
   const cameraTargetRef = useRef();
   const [currentScreen, setCurrentScreen] = useState("Intro");
@@ -84,9 +72,9 @@ function App() {
 
 
   // Prevent scroll position from jumping on initial load
-  useLayoutEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  // useLayoutEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, []);
 
   // Run Theatre.js transition when targetScreen changes
   useEffect(() => {
@@ -102,7 +90,7 @@ function App() {
           range: transition,
           direction: reverse ? "reverse" : "normal",
           rate: reverse ? 1 : 1,
-          loop: false,
+          loop: true, // ⬅️ KEEP the sequence playing
         })
         .then(() => {
           setCurrentScreen(targetScreen);
@@ -183,9 +171,8 @@ function App() {
         shadows
         gl={{ preserveDrawingBuffer: true }}
       >
-        {/* <CameraMovement cameraGroupRef={cameraOffsetGroupRef} intensity={0.4} /> */}
+        <CameraMovement cameraGroupRef={cameraOffsetGroupRef} intensity={0.4} />
 
-        <ForceInvalidateEachFrame />
 
         {/* <SoftShadows /> */}
         <OrbitControls />
@@ -205,6 +192,17 @@ function App() {
           sectionColor={[1, 1, 1]} // Dark red
           fadeDistance={30} 
         /> */}
+
+        <CustomGrid
+          position={[0, -1.85, 0]}
+          cellSize={3.0}
+          cellThickness={0.005}       // thinner grid lines
+          dotRadius={0.02}            // larger dots
+          sectionColor={[0.5, 0.5, 0.5]}    // grid line color
+          dotColor={[0.6, 0.1, 0.1]} 
+          fadeDistance={15}
+          planeSize={50}
+        />
 
         {/* <ParticlesPlane
           width={150}
@@ -239,20 +237,8 @@ function App() {
           </e.mesh>
 
           <Experience />
-
         </SheetProvider>
-
-
-        <CustomGrid
-          position={[0, -1.85, 0]}
-          cellSize={3.0}
-          cellThickness={0.005}       // thinner grid lines
-          dotRadius={0.02}            // larger dots
-          sectionColor={[0.5, 0.5, 0.5]}    // grid line color
-          dotColor={[0.6, 0.1, 0.1]} 
-          fadeDistance={15}
-          planeSize={50}
-        />
+        
       </Canvas>
 
 

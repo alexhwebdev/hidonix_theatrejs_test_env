@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo } from 'react'
-import { OrbitControls } from '@react-three/drei'
+import { OrbitControls, useGLTF } from '@react-three/drei'
 import { useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
@@ -24,6 +24,7 @@ export default function Stadium({ position = [0, 0, 0] }) {
     })
     return found
   }, [gltf])
+  // console.log("meshes:", meshes)
 
   useEffect(() => {
     const box = new THREE.Box3().setFromObject(gltf.scene)
@@ -35,9 +36,22 @@ export default function Stadium({ position = [0, 0, 0] }) {
   return (
     <>
       <OrbitControls />
-      <ambientLight intensity={1} />
+      {/* <ambientLight intensity={0.1} /> */}
 
-      <group position={position} scale={[0.1, 0.1, 0.1]}>
+{/* <directionalLight
+  position={[10, 100, 0]}
+  intensity={1.2}
+  castShadow
+  shadow-mapSize-width={2048}
+  shadow-mapSize-height={2048}
+  shadow-bias={-0.0001}
+/> */}
+{/* <hemisphereLight
+  skyColor="#000000"
+  groundColor="#000000"
+  intensity={0.9}
+/> */}
+      <group position={position} scale={[1.0, 1.0, 1.0]}>
         {meshes.map((mesh, i) => (
           <mesh
             key={i}
@@ -46,12 +60,21 @@ export default function Stadium({ position = [0, 0, 0] }) {
             rotation={mesh.rotation}
             scale={mesh.scale}
           >
-            <meshBasicMaterial
+
+            <meshStandardMaterial
+              // color="#aaaaaa"
+              color="white"
+              metalness={0.9}
+              roughness={0.6}
+              wireframe
+            />
+            
+            {/* <meshBasicMaterial
               wireframe
               color="red"
               opacity={0.9}
               transparent
-            />
+            /> */}
           </mesh>
         ))}
       </group>
@@ -123,4 +146,4 @@ export default function Stadium({ position = [0, 0, 0] }) {
 //     </>
 //   )
 // }
-// useGLTF.preload('/models/vallourec_stadium_draco.glb')
+useGLTF.preload('/models/vallourec_stadium_draco.glb')

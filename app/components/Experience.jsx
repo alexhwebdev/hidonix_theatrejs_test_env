@@ -50,7 +50,7 @@ export const Experience = () => {
       {/* <ambientLight intensity={10.9} /> */}
 
 
-      <e.group 
+      <group 
         theatreKey={"Stadium"}
         scale={[0.2, 0.2, 0.2]}
       >
@@ -66,10 +66,10 @@ export const Experience = () => {
             // position={[-1.39, 1.2, 0]} 
           />
         </group>
-      </e.group>
+      </group>
 
       {/* ⬇️ Only appears in Scene4 via Theatre.js scale animation */}
-      <e.group 
+      <group 
         theatreKey="StadiumTwo" 
         position={[10, 0, 10]}
         // scale={[0, 0, 0]}
@@ -90,7 +90,7 @@ export const Experience = () => {
             scale={[0, 0, 0]}
           />
         {/* </Float> */}
-      </e.group>
+      </group>
 
 
       {/* <e.mesh

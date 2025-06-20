@@ -1,3 +1,34 @@
+.section_one {
+  opacity: 0;
+}
+// .section_one {
+//   animation: fadeIn 1s ease-out forwards;
+//   animation-delay: 0.2s;
+// }
+
+// .section_two {
+//   animation: fadeIn 1s ease-out forwards;
+//   animation-delay: 0.4s;
+// }
+
+// .section_three {
+//   animation: fadeIn 1s ease-out forwards;
+//   animation-delay: 0.6s;
+// }
+// @keyframes fadeIn {
+//   from {
+//     opacity: 0;
+//     transform: translateY(40px);
+//   }
+//   to {
+//     opacity: 1;
+//     transform: translateY(0);
+//   }
+// }
+
+
+
+
 .ui__container {
   position: fixed;
   inset: 0;

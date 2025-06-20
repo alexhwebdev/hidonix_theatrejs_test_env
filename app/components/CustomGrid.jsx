@@ -1,12 +1,12 @@
 "use client";
-import React, { useRef, useEffect, useMemo } from 'react';
+import React, { useRef, useEffect, useMemo, memo } from 'react';
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from 'three';
 
 
 
 
-const CustomGrid = ({
+const CustomGrid = memo(({
   position = [0, -1.85, 0],
   cellSize = 1,
   cellThickness = 0.01,
@@ -122,6 +122,6 @@ const uniforms = useMemo(() => ({
       />
     </mesh>
   );
-};
+});
 
 export default CustomGrid;

@@ -3,7 +3,7 @@ import * as THREE from "three";
 import { useRef, useMemo } from "react";
 import { useFrame } from "@react-three/fiber";
 
-export default function ParticlesPlane({
+export default function ParticlesWavePlane({
   width = 50,
   height = 50,
   segments = 500,

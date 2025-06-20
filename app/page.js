@@ -13,7 +13,8 @@ import { Experience } from "./components/Experience";
 
 import CameraMovement from "./components/CameraMovement";
 import CustomGrid from "./components/CustomGrid";
-import ParticlesPlane from "./components/ParticlesPlane/ParticlesPlane";
+import ParticlesHoverPlane from "./components/ParticlesHoverPlane/ParticlesHoverPlane";
+import ParticlesWavePlane from "./components/ParticlesWavePlane/ParticlesWavePlane";
 
 import gsap from "gsap";
 import './page.scss'
@@ -40,17 +41,14 @@ export default function App() {
   const cameraOffsetGroupRef = useRef()
   const targetSceneRef = useRef("Scene1");
   const scrollLock = useRef(false);
-
   const triggerRef = useRef(null);
+  const particlesRef = useRef();
 
   function TriggerUiChange() {
-    console.log("HIT");
     triggerRef.current?.(); // 🔁 this will re-render SceneUI
   }
 
-  function CameraAnimator({ targetSceneRef }) {
-    console.log('targetSceneRef ', targetSceneRef)
-
+  function CameraAnimator({ targetSceneRef, particlesRef }) {
     const { camera } = useThree();
     const activeScene = useRef(null);
 
@@ -69,6 +67,8 @@ export default function App() {
         onUpdate: () => invalidate(),
         onComplete: () => {
           TriggerUiChange()
+          console.log("[CameraAnimator] triggering resetMouse()");
+          particlesRef.current?.resetMouse();
         },
       });
     });
@@ -99,7 +99,7 @@ export default function App() {
 
       setTimeout(() => {
         scrollLock.current = false;
-      }, 1200);
+      }, 2000);
     };
 
     window.addEventListener("wheel", handleWheel, { passive: true });
@@ -122,7 +122,7 @@ export default function App() {
 
   return (
     <>
-      <div style={{ height: "600vh", position: "absolute", top: 0, left: 0, width: "100%", zIndex: -1 }} />
+      <div style={{ height: "600vh", position: "absolute", top: 0, left: 0, width: "100%", zIndex: -5 }} />
 
       <UI
         targetSceneRef={targetSceneRef} // read-only
@@ -135,16 +135,27 @@ export default function App() {
         shadows
         gl={{ preserveDrawingBuffer: true }}
       >
-        <OrbitControls />
+        {/* <OrbitControls /> */}
         {/* <OrbitControls autoRotate autoRotateSpeed={0.05} enableZoom={false} makeDefault minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} /> */}
         
         <fog attach="fog" args={['black', 15, 22.5]} />
         {/* <SoftShadows /> */}
 
-        <CameraMovement cameraGroupRef={cameraOffsetGroupRef} intensity={0.4} />
+        {/* <CameraMovement cameraGroupRef={cameraOffsetGroupRef} intensity={0.4} /> */}
 
-        <PerspectiveCamera makeDefault fov={30} position={[5, 5, 20]} />
-        <CameraAnimator targetSceneRef={targetSceneRef} />
+        <group ref={cameraOffsetGroupRef}>
+          <PerspectiveCamera 
+            makeDefault 
+            fov={30} 
+            near={1}
+            position={[5, 5, 20]} 
+          />
+        </group>
+
+        <CameraAnimator 
+          targetSceneRef={targetSceneRef} 
+          particlesRef={particlesRef}
+        />
         <Experience />
         <CustomGrid
           position={[0, -1.85, 0]}
@@ -171,7 +182,18 @@ export default function App() {
         /> */}
 
 
-        <ParticlesPlane
+        <ParticlesHoverPlane
+          ref={particlesRef}
+          width={50}
+          height={50}
+          segments={100}
+          liftRadius={6}
+          liftStrength={1}
+          position={[0, -2, 0]}
+          rotation={[-Math.PI / 2, 0, 0]} // rotate to lay flat
+        />
+
+        {/* <ParticlesWavePlane
           width={150}
           height={150}
           segments={500}
@@ -180,7 +202,7 @@ export default function App() {
           speed={1.5}
           position={[0, -2, 0]}
           rotation={[-Math.PI / 2, 0, 1]} // rotate to lay flat
-        />
+        /> */}
 
         {/* <svg width="76" height="90" viewBox="0 0 76 90" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path className="cls-1" d="M32 89C32 87.4 11.3333 39 1 15L25.5 12L64.5 83" stroke="black"/>

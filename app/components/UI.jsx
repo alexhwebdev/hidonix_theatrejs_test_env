@@ -25,7 +25,7 @@ export const UI = ({ targetSceneRef, triggerRef }) => {
       ".section_one",
       { opacity: 0, top: current === "Scene1" ? "150px" : "0px" },
       {
-        delay: 2,
+        delay: current === "Scene1" ? 2 : 0,
         opacity: current === "Scene1" ? 1 : 0,
         top: "0px",
         ease: "power1.out",
@@ -38,6 +38,17 @@ export const UI = ({ targetSceneRef, triggerRef }) => {
       {
         delay: 0,
         opacity: current === "Scene2" ? 1 : 0,
+        top: "0px",
+        ease: "power1.out",
+        duration: 1,
+      }
+    );
+    gsap.fromTo(
+      ".section_three",
+      { opacity: 0, top: current === "Scene3" ? "150px" : "0px" },
+      {
+        delay: 0,
+        opacity: current === "Scene3" ? 1 : 0,
         top: "0px",
         ease: "power1.out",
         duration: 1,
@@ -100,7 +111,7 @@ export const UI = ({ targetSceneRef, triggerRef }) => {
   // }, []);
 
   return (
-    <>
+    <div className="ui__container">
       <div className={`
         section_one
         ui__sections 
@@ -126,6 +137,6 @@ export const UI = ({ targetSceneRef, triggerRef }) => {
       >
         Section 3
       </div>
-    </>
+    </div>
   );
 }

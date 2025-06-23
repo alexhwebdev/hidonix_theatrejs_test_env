@@ -73,7 +73,7 @@ const ParticlesHoverPlane = ({
     uniforms.uMousePos.value.copy(mousePos.current);
   });
 
-  const vertexShader = `
+  const vertexShader = /* glsl */`
     uniform vec2 uMousePos;
     uniform float uLiftRadius;
     uniform float uEdgeFadeRadius;
@@ -101,7 +101,7 @@ const ParticlesHoverPlane = ({
     }
   `;
 
-  const fragmentShader = `
+  const fragmentShader = /* glsl */`
     varying float vLift;
     varying float vEdgeFade;
 

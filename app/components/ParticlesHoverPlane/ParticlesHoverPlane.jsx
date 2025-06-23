@@ -1,136 +1,141 @@
 "use client";
-import * as THREE from "three";
-import {
-  useEffect,
-  useRef,
-  useMemo,
-  forwardRef,
-  useImperativeHandle,
-} from "react";
+
+import React, { useMemo, useRef, useState, useEffect } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
+import * as THREE from "three";
 
-const ParticlesHoverPlane = forwardRef(function ParticlesHoverPlane({
-  width = 50,
-  height = 50,
+const ParticlesHoverPlane = ({
+  width = 1,
+  height = 1,
   segments = 100,
-  liftRadius = 3,
-  liftStrength = 2,
+  liftRadius = 1,
+  liftStrength = 1,
   position = [0, 0, 0],
-  rotation = [-Math.PI / 2, 0, 0],
-}, ref) {
-  const pointsRef = useRef();
-  const shaderRef = useRef();
-  const mouse = useRef(new THREE.Vector2());
-  const { camera, raycaster, size } = useThree();
-  const mouseWorld = useRef(new THREE.Vector3());
+  rotation = [0, 0, 0],
+}) => {
+  const meshRef = useRef();
+  const { size, viewport, camera, gl } = useThree();
 
-  // 📤 Expose reset method
-  useImperativeHandle(ref, () => ({
-    resetMouse() {
-      console.log("[ParticlesHoverPlane] resetMouse() triggered");
+  const count = segments * segments;
 
-      // Reset mouse to center in NDC
-      mouse.current.x = 0;
-      mouse.current.y = 0;
+  // Generate positions grid
+  const positions = useMemo(() => {
+    const arr = new Float32Array(count * 3);
+    for (let i = 0; i < count; i++) {
+      const x = (i % segments) / (segments - 1) * width - width / 2;
+      const y = Math.floor(i / segments) / (segments - 1) * height - height / 2;
+      arr[i * 3] = x;
+      arr[i * 3 + 1] = y;
+      arr[i * 3 + 2] = 0;
     }
-    
-  }));
+    return arr;
+  }, [count, segments, width, height]);
 
-  // 🖱️ Track mouse in screen space
+  // Mouse position in plane coords (x,y)
+  const mousePos = useRef(new THREE.Vector2(10000, 10000)); // far away by default
+
+  // Update mouse position normalized to plane local space
   useEffect(() => {
-    const onMouse = (e) => {
-      mouse.current.x = (e.clientX / size.width) * 2 - 1;
-      mouse.current.y = -(e.clientY / size.height) * 2 + 1;
-    };
-    window.addEventListener("mousemove", onMouse);
-    return () => window.removeEventListener("mousemove", onMouse);
-  }, [size]);
+    const handleMouseMove = (event) => {
+      // Convert mouse screen coords to NDC (-1 to 1)
+      const x = (event.clientX / size.width) * 2 - 1;
+      const y = -(event.clientY / size.height) * 2 + 1;
 
-  // 📐 Generate particle grid
-  const { positions, count } = useMemo(() => {
-    const pos = [];
-    const dx = width / segments;
-    const dy = height / segments;
-    for (let i = 0; i <= segments; i++) {
-      for (let j = 0; j <= segments; j++) {
-        pos.push(-width / 2 + i * dx, -height / 2 + j * dy, 0);
+      // Create a raycaster from camera through mouse
+      const raycaster = new THREE.Raycaster();
+      raycaster.setFromCamera(new THREE.Vector2(x, y), camera);
+
+      // Intersect with the plane at position, rotation:
+      // Plane is in XY plane at Z=0 after applying position and rotation
+      // We'll intersect with plane at mesh's world matrix
+
+      // Define a plane in world space matching the plane orientation
+      const plane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0); // XY plane at Z=0
+
+      // Apply plane transform from mesh's world matrix
+      if (meshRef.current) {
+        const worldMatrix = meshRef.current.matrixWorld;
+        // Transform plane to mesh world space
+        plane.applyMatrix4(worldMatrix);
       }
-    }
-    return {
-      positions: new Float32Array(pos),
-      count: (segments + 1) * (segments + 1),
+
+      const intersectPoint = new THREE.Vector3();
+      raycaster.ray.intersectPlane(plane, intersectPoint);
+
+      if (intersectPoint) {
+        // Convert intersectPoint to local coords of mesh (plane)
+        if (meshRef.current) {
+          meshRef.current.worldToLocal(intersectPoint);
+          mousePos.current.set(intersectPoint.x, intersectPoint.y);
+        }
+      }
     };
-  }, [width, height, segments]);
 
-  // 🌀 Animate hover interaction
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [camera, size]);
+
+  // Uniforms including mousePos, liftRadius, liftStrength
+  const uniforms = useMemo(() => ({
+    uMousePos: { value: new THREE.Vector2(10000, 10000) },
+    uLiftRadius: { value: liftRadius },
+    uLiftStrength: { value: liftStrength },
+  }), [liftRadius, liftStrength]);
+
+  // Update mousePos uniform every frame
   useFrame(() => {
-    if (!pointsRef.current || !shaderRef.current) return;
-
-    pointsRef.current.updateMatrixWorld();
-
-    const normal = new THREE.Vector3(0, 0, 1).applyMatrix3(
-      new THREE.Matrix3().setFromMatrix4(pointsRef.current.matrixWorld)
-    ).normalize();
-
-    const origin = pointsRef.current.getWorldPosition(new THREE.Vector3());
-    const plane = new THREE.Plane().setFromNormalAndCoplanarPoint(normal, origin);
-
-    raycaster.setFromCamera(mouse.current, camera);
-    const hit = raycaster.ray.intersectPlane(plane, mouseWorld.current);
-
-    if (hit) {
-      const local = pointsRef.current.worldToLocal(mouseWorld.current.clone());
-      shaderRef.current.uniforms.uMouse.value.copy(local);
-    }
+    uniforms.uMousePos.value.copy(mousePos.current);
   });
 
+  const vertexShader = `
+    uniform vec2 uMousePos;
+    uniform float uLiftRadius;
+    uniform float uLiftStrength;
+
+    void main() {
+      float dist = distance(position.xy, uMousePos);
+      float lift = 0.0;
+      if(dist < uLiftRadius){
+        // smooth falloff: lift strongest at center, zero at radius edge
+        lift = (1.0 - dist / uLiftRadius) * uLiftStrength;
+      }
+
+      vec3 pos = position;
+      pos.z += lift;
+
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+      gl_PointSize = 4.0;
+    }
+  `;
+
+  const fragmentShader = `
+    void main() {
+      float dist = length(gl_PointCoord - vec2(0.5));
+      if (dist > 0.5) discard;
+      gl_FragColor = vec4(1.0);
+    }
+  `;
+
   return (
-    <points ref={pointsRef} position={position} rotation={rotation}>
+    <points ref={meshRef} position={position} rotation={rotation}>
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
-          array={positions}
           count={count}
+          array={positions}
           itemSize={3}
         />
       </bufferGeometry>
       <shaderMaterial
-        ref={shaderRef}
-        transparent
+        vertexShader={vertexShader}
+        fragmentShader={fragmentShader}
+        uniforms={uniforms}
+        transparent={true}
         depthWrite={false}
-        uniforms={{
-          uMouse: { value: new THREE.Vector3() },
-          uRadius: { value: liftRadius },
-          uStrength: { value: liftStrength },
-          pointSize: { value: 2.5 },
-        }}
-        vertexShader={/* glsl */`
-          uniform vec3 uMouse;
-          uniform float uRadius;
-          uniform float uStrength;
-          uniform float pointSize;
-
-          void main() {
-            vec3 p = position;
-            float dist = distance(p.xy, uMouse.xy);
-            float influence = smoothstep(uRadius, 0.0, dist);
-            p.z += influence * uStrength;
-
-            vec4 mvPosition = modelViewMatrix * vec4(p, 1.0);
-            gl_Position = projectionMatrix * mvPosition;
-            gl_PointSize = pointSize * (30.0 / -mvPosition.z);
-          }
-        `}
-        fragmentShader={/* glsl */`
-          void main() {
-            float r = length(gl_PointCoord - vec2(0.5));
-            float circle = smoothstep(0.5, 0.48, r);
-            gl_FragColor = vec4(vec3(1.0), circle);
-          }
-        `}
+        blending={THREE.AdditiveBlending}
       />
     </points>
   );
-});
+};
 
 export default ParticlesHoverPlane;

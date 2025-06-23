@@ -79,7 +79,8 @@ export default function App() {
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
+  
+  // Handle scroll position and snap
   useEffect(() => {
     const handleWheel = (e) => {
       if (scrollLock.current) return;
@@ -106,6 +107,7 @@ export default function App() {
     return () => window.removeEventListener("wheel", handleWheel);
   }, []);
 
+  // Sync scene index on manual scroll (e.g. user dragging scrollbar)
   useEffect(() => {
     const handleScroll = () => {
       const index = Math.round(window.scrollY / window.innerHeight);
@@ -122,6 +124,7 @@ export default function App() {
 
   return (
     <>
+      {/* Scrollable page: 1 full-height div per scene */}
       <div style={{ height: "600vh", position: "absolute", top: 0, left: 0, width: "100%", zIndex: -5 }} />
 
       <UI
@@ -183,11 +186,11 @@ export default function App() {
 
 
         <ParticlesHoverPlane
-          ref={particlesRef}
+          // ref={particlesRef}
           width={50}
           height={50}
           segments={100}
-          liftRadius={6}
+          liftRadius={4}
           liftStrength={1}
           position={[0, -2, 0]}
           rotation={[-Math.PI / 2, 0, 0]} // rotate to lay flat

@@ -80,57 +80,57 @@ export default function App() {
     window.scrollTo(0, 0);
   }, []);
   
-  // Handle scroll position and snap
-  useEffect(() => {
-    const handleWheel = (e) => {
-      if (scrollLock.current) return;
-      const direction = e.deltaY > 0 ? 1 : -1;
-      const currentIdx = sceneOrder.indexOf(targetSceneRef.current);
-      const newIdx = Math.max(0, Math.min(sceneOrder.length - 1, currentIdx + direction));
-      if (newIdx === currentIdx) return;
+  // // Handle scroll position and snap
+  // useEffect(() => {
+  //   const handleWheel = (e) => {
+  //     if (scrollLock.current) return;
+  //     const direction = e.deltaY > 0 ? 1 : -1;
+  //     const currentIdx = sceneOrder.indexOf(targetSceneRef.current);
+  //     const newIdx = Math.max(0, Math.min(sceneOrder.length - 1, currentIdx + direction));
+  //     if (newIdx === currentIdx) return;
 
-      const nextScene = sceneOrder[newIdx];
-      targetSceneRef.current = nextScene;
+  //     const nextScene = sceneOrder[newIdx];
+  //     targetSceneRef.current = nextScene;
 
-      scrollLock.current = true;
-      window.scrollTo({
-        top: newIdx * window.innerHeight,
-        behavior: "smooth",
-      });
+  //     scrollLock.current = true;
+  //     window.scrollTo({
+  //       top: newIdx * window.innerHeight,
+  //       behavior: "smooth",
+  //     });
 
-      setTimeout(() => {
-        scrollLock.current = false;
-      }, 2000);
-    };
+  //     setTimeout(() => {
+  //       scrollLock.current = false;
+  //     }, 2000);
+  //   };
 
-    window.addEventListener("wheel", handleWheel, { passive: true });
-    return () => window.removeEventListener("wheel", handleWheel);
-  }, []);
+  //   window.addEventListener("wheel", handleWheel, { passive: true });
+  //   return () => window.removeEventListener("wheel", handleWheel);
+  // }, []);
 
-  // Sync scene index on manual scroll (e.g. user dragging scrollbar)
-  useEffect(() => {
-    const handleScroll = () => {
-      const index = Math.round(window.scrollY / window.innerHeight);
-      const nextScene = sceneOrder[Math.max(0, Math.min(sceneOrder.length - 1, index))];
-      if (nextScene !== targetSceneRef.current) {
-        targetSceneRef.current = nextScene;
-        TriggerUiChange();
-      }
-    };
+  // // Sync scene index on manual scroll (e.g. user dragging scrollbar)
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const index = Math.round(window.scrollY / window.innerHeight);
+  //     const nextScene = sceneOrder[Math.max(0, Math.min(sceneOrder.length - 1, index))];
+  //     if (nextScene !== targetSceneRef.current) {
+  //       targetSceneRef.current = nextScene;
+  //       TriggerUiChange();
+  //     }
+  //   };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, []);
 
   return (
     <>
       {/* Scrollable page: 1 full-height div per scene */}
       <div style={{ height: "600vh", position: "absolute", top: 0, left: 0, width: "100%", zIndex: -5 }} />
 
-      <UI
+      {/* <UI
         targetSceneRef={targetSceneRef} // read-only
         triggerRef={triggerRef}
-      />
+      /> */}
 
       <Canvas
         style={{ position: "absolute", top: 0, left: 0, zIndex: 1 }}
@@ -138,10 +138,10 @@ export default function App() {
         shadows
         gl={{ preserveDrawingBuffer: true }}
       >
-        {/* <OrbitControls /> */}
+        <OrbitControls />
         {/* <OrbitControls autoRotate autoRotateSpeed={0.05} enableZoom={false} makeDefault minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} /> */}
         
-        <fog attach="fog" args={['black', 15, 22.5]} />
+        {/* <fog attach="fog" args={['black', 15, 22.5]} /> */}
         {/* <SoftShadows /> */}
 
         {/* <CameraMovement cameraGroupRef={cameraOffsetGroupRef} intensity={0.4} /> */}
@@ -189,9 +189,9 @@ export default function App() {
           // ref={particlesRef}
           width={50}
           height={50}
-          segments={100}
-          liftRadius={4}
-          liftStrength={1}
+          segments={300}
+          liftRadius={3}
+          liftStrength={0.5}
           position={[0, -2, 0]}
           rotation={[-Math.PI / 2, 0, 0]} // rotate to lay flat
         />

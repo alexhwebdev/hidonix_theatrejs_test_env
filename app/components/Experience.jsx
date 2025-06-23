@@ -55,7 +55,7 @@ export const Experience = () => {
         scale={[0.2, 0.2, 0.2]}
       >
         {/* <MedievalFantasyBook scale={0.1} envMapIntensity={0.3} /> */}
-        <Stadium scale={0.2} envMapIntensity={0.3} />
+        <Stadium scale={1.0} envMapIntensity={0.3} />
 
         <group 
           position={[-0.5, 0.5, 0.65]}
@@ -76,7 +76,7 @@ export const Experience = () => {
         scale={[0.2, 0.2, 0.2]}
         // scale={[1.0, 1.0, 1.0]}
       >
-        <StadiumTwo scale={0.1} envMapIntensity={0.3} />
+        {/* <StadiumTwo scale={0.1} envMapIntensity={0.3} /> */}
 
         {/* <Float
           speed={1}

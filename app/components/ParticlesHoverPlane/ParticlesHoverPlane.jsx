@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useRef, useState, useEffect } from "react";
+import React, { useMemo, useRef, useEffect } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
@@ -9,21 +9,22 @@ const ParticlesHoverPlane = ({
   height = 1,
   segments = 100,
   liftRadius = 1,
-  liftStrength = 1,
   position = [0, 0, 0],
   rotation = [0, 0, 0],
 }) => {
   const meshRef = useRef();
-  const { size, viewport, camera, gl } = useThree();
-
+  const { size, camera } = useThree();
   const count = segments * segments;
 
-  // Generate positions grid
   const positions = useMemo(() => {
     const arr = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
-      const x = (i % segments) / (segments - 1) * width - width / 2;
-      const y = Math.floor(i / segments) / (segments - 1) * height - height / 2;
+      const xIndex = i % segments;
+      const yIndex = Math.floor(i / segments);
+      const jitterX = (Math.random() - 0.5) * (width / segments);
+      const jitterY = (Math.random() - 0.5) * (height / segments);
+      const x = (xIndex / (segments - 1)) * width - width / 2 + jitterX;
+      const y = (yIndex / (segments - 1)) * height - height / 2 + jitterY;
       arr[i * 3] = x;
       arr[i * 3 + 1] = y;
       arr[i * 3 + 2] = 0;
@@ -31,58 +32,43 @@ const ParticlesHoverPlane = ({
     return arr;
   }, [count, segments, width, height]);
 
-  // Mouse position in plane coords (x,y)
-  const mousePos = useRef(new THREE.Vector2(10000, 10000)); // far away by default
+  const liftStrengths = useMemo(() => {
+    const arr = new Float32Array(count);
+    for (let i = 0; i < count; i++) {
+      arr[i] = Math.random();
+    }
+    return arr;
+  }, [count]);
 
-  // Update mouse position normalized to plane local space
+  const mousePos = useRef(new THREE.Vector2(10000, 10000));
+
   useEffect(() => {
     const handleMouseMove = (event) => {
-      // Convert mouse screen coords to NDC (-1 to 1)
       const x = (event.clientX / size.width) * 2 - 1;
       const y = -(event.clientY / size.height) * 2 + 1;
-
-      // Create a raycaster from camera through mouse
       const raycaster = new THREE.Raycaster();
       raycaster.setFromCamera(new THREE.Vector2(x, y), camera);
-
-      // Intersect with the plane at position, rotation:
-      // Plane is in XY plane at Z=0 after applying position and rotation
-      // We'll intersect with plane at mesh's world matrix
-
-      // Define a plane in world space matching the plane orientation
-      const plane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0); // XY plane at Z=0
-
-      // Apply plane transform from mesh's world matrix
+      const plane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
       if (meshRef.current) {
-        const worldMatrix = meshRef.current.matrixWorld;
-        // Transform plane to mesh world space
-        plane.applyMatrix4(worldMatrix);
+        plane.applyMatrix4(meshRef.current.matrixWorld);
       }
-
       const intersectPoint = new THREE.Vector3();
       raycaster.ray.intersectPlane(plane, intersectPoint);
-
-      if (intersectPoint) {
-        // Convert intersectPoint to local coords of mesh (plane)
-        if (meshRef.current) {
-          meshRef.current.worldToLocal(intersectPoint);
-          mousePos.current.set(intersectPoint.x, intersectPoint.y);
-        }
+      if (intersectPoint && meshRef.current) {
+        meshRef.current.worldToLocal(intersectPoint);
+        mousePos.current.set(intersectPoint.x, intersectPoint.y);
       }
     };
-
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [camera, size]);
 
-  // Uniforms including mousePos, liftRadius, liftStrength
   const uniforms = useMemo(() => ({
     uMousePos: { value: new THREE.Vector2(10000, 10000) },
     uLiftRadius: { value: liftRadius },
-    uLiftStrength: { value: liftStrength },
-  }), [liftRadius, liftStrength]);
+    uEdgeFadeRadius: { value: Math.min(width, height) * 0.4 },
+  }), [liftRadius, width, height]);
 
-  // Update mousePos uniform every frame
   useFrame(() => {
     uniforms.uMousePos.value.copy(mousePos.current);
   });
@@ -90,29 +76,47 @@ const ParticlesHoverPlane = ({
   const vertexShader = `
     uniform vec2 uMousePos;
     uniform float uLiftRadius;
-    uniform float uLiftStrength;
+    uniform float uEdgeFadeRadius;
+    attribute float liftStrength;
+    varying float vLift;
+    varying float vEdgeFade;
 
     void main() {
       float dist = distance(position.xy, uMousePos);
       float lift = 0.0;
-      if(dist < uLiftRadius){
-        // smooth falloff: lift strongest at center, zero at radius edge
-        lift = (1.0 - dist / uLiftRadius) * uLiftStrength;
+      if (dist < uLiftRadius) {
+        lift = (1.0 - dist / uLiftRadius) * liftStrength;
       }
+      vLift = lift;
+
+      float r = length(position.xy);
+      float fade = smoothstep(uEdgeFadeRadius, uEdgeFadeRadius * 1.3, r);
+      vEdgeFade = 1.0 - fade;
 
       vec3 pos = position;
       pos.z += lift;
 
       gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-      gl_PointSize = 4.0;
+      gl_PointSize = 2.0;
     }
   `;
 
   const fragmentShader = `
+    varying float vLift;
+    varying float vEdgeFade;
+
     void main() {
       float dist = length(gl_PointCoord - vec2(0.5));
       if (dist > 0.5) discard;
-      gl_FragColor = vec4(1.0);
+
+      float opacity = mix(0.1, 1.0, clamp(vLift, 0.0, 1.0));
+      opacity *= vEdgeFade;
+
+      if (opacity < 0.01) discard;
+
+      vec3 color = mix(vec3(1.0), vec3(1.0, 0.0, 0.0), clamp(vLift, 0.0, 1.0)); // white to red
+
+      gl_FragColor = vec4(color, opacity);
     }
   `;
 
@@ -125,6 +129,12 @@ const ParticlesHoverPlane = ({
           array={positions}
           itemSize={3}
         />
+        <bufferAttribute
+          attach="attributes-liftStrength"
+          count={count}
+          array={liftStrengths}
+          itemSize={1}
+        />
       </bufferGeometry>
       <shaderMaterial
         vertexShader={vertexShader}
@@ -132,7 +142,7 @@ const ParticlesHoverPlane = ({
         uniforms={uniforms}
         transparent={true}
         depthWrite={false}
-        blending={THREE.AdditiveBlending}
+        blending={THREE.NormalBlending}
       />
     </points>
   );

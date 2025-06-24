@@ -17,7 +17,7 @@ import {
   SoftShadows 
 } from '@react-three/drei'
 import CameraMovement from "./components/CameraMovement";
-
+import CustomGrid from "./components/CustomGrid";
 
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
@@ -64,80 +64,7 @@ const transitions = {
 function App() {
   const cameraOffsetGroupRef = useRef()
   const cameraTargetRef = useRef();
-  const [currentScreen, setCurrentScreen] = useState("Intro");
-  const [targetScreen, setTargetScreen] = useState("Scene1");
-  const scrollLock = useRef(false);
 
-
-  // Prevent scroll position from jumping on initial load
-  // useLayoutEffect(() => {
-  //   window.scrollTo(0, 0);
-  // }, []);
-
-  // Run Theatre.js transition when targetScreen changes
-  useEffect(() => {
-    project.ready.then(() => {
-      if (currentScreen === targetScreen) return;
-
-      const reverse = sceneOrder.indexOf(targetScreen) < sceneOrder.indexOf(currentScreen);
-      const transition = transitions[reverse ? currentScreen : targetScreen];
-      if (!transition) return;
-
-      mainSheet.sequence
-        .play({
-          range: transition,
-          direction: reverse ? "reverse" : "normal",
-          rate: reverse ? 1 : 1,
-          loop: true, // ⬅️ KEEP the sequence playing
-        })
-        .then(() => {
-          setCurrentScreen(targetScreen);
-        });
-    });
-  }, [targetScreen]);
-
-
-  // // Handle scroll position and snap
-  // useEffect(() => {
-  //   const handleWheel = (e) => {
-  //     if (scrollLock.current) return;
-
-  //     const direction = e.deltaY > 0 ? 1 : -1;
-  //     const currentIdx = sceneOrder.indexOf(targetScreen);
-  //     const newIdx = Math.max(0, Math.min(sceneOrder.length - 1, currentIdx + direction));
-  //     if (newIdx === currentIdx) return;
-
-  //     const nextScene = sceneOrder[newIdx];
-  //     setTargetScreen(nextScene);
-
-  //     scrollLock.current = true;
-  //     window.scrollTo({
-  //       top: newIdx * window.innerHeight,
-  //       behavior: "smooth",
-  //     });
-
-  //     setTimeout(() => {
-  //       scrollLock.current = false;
-  //     }, 1200); // Match transition time
-  //   };
-
-  //   window.addEventListener("wheel", handleWheel, { passive: true });
-  //   return () => window.removeEventListener("wheel", handleWheel);
-  // }, [targetScreen]);
-
-  // // Sync scene index on manual scroll (e.g. user dragging scrollbar)
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     const index = Math.round(window.scrollY / window.innerHeight);
-  //     const nextScene = sceneOrder[Math.max(0, Math.min(sceneOrder.length - 1, index))];
-  //     if (nextScene !== targetScreen) {
-  //       setTargetScreen(nextScene);
-  //     }
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, [targetScreen]);
 
   
   return (
@@ -148,12 +75,10 @@ function App() {
       <Canvas
         style={{ position: 'absolute', top: 0, left: 0, zIndex: 1 }}
         frameloop="always"
-        camera={{ position: [5, 5, 20], fov: 30, near: 1 }}
+        // camera={{ position: [5, 5, 20], fov: 30, near: 1 }}
         shadows
         gl={{ preserveDrawingBuffer: true }}
       >
-        <CameraMovement cameraGroupRef={cameraOffsetGroupRef} intensity={0.4} />
-
 
         {/* <SoftShadows /> */}
         <OrbitControls />
@@ -161,7 +86,20 @@ function App() {
 
         {/* <fog attach="fog" args={['black', 15, 22.5]} /> */}
 
-        <Grid 
+        <CustomGrid
+          position={[0, -1.85, 0]}
+          cellSize={3.0}
+          cellThickness={0.005}
+          dotRadius={0.02}
+          sectionColor={[1.0, 1.0, 1.0]}
+          // sectionColor={[0.0, 0.0, 0.0]}
+          // sectionColor={[0.5, 0.5, 0.5]}
+          dotColor={[0.6, 0.1, 0.1]}
+          fadeDistance={15}
+          planeSize={50}
+        />
+
+        {/* <Grid 
           renderOrder={-1} 
           position={[0, -1.85, 0]} 
           infiniteGrid 
@@ -172,15 +110,17 @@ function App() {
           // sectionColor={[0.5, 0.5, 10]} 
           sectionColor={[1, 1, 1]} // Dark red
           fadeDistance={30} 
-        />
+        /> */}
 
         <SheetProvider sheet={mainSheet}>
           <group ref={cameraOffsetGroupRef}>
             <PerspectiveCamera
-              position={[5, 5, 20]}
-              fov={30}
-              near={1}
               makeDefault
+              fov={30}
+              far={2000} 
+              near={1}
+              zoom={1}
+              position={[0, 10, 20]}
               theatreKey="Camera"
               lookAt={cameraTargetRef}
             />

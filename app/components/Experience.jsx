@@ -37,59 +37,28 @@ export const Experience = () => {
         blur={4} 
       />
 
-      {/* <e.directionalLight
-        theatreKey="SunLight"
-        position={[3, 3, 3]}
-        intensity={0.2}
-        castShadow
-        shadow-bias={-0.001}
-        shadow-mapSize-width={2048}
-        shadow-mapSize-height={2048}
-      /> */}
-
-      {/* <ambientLight intensity={10.9} /> */}
-
 
       <group 
         theatreKey={"Stadium"}
-        scale={[0.2, 0.2, 0.2]}
+        position={[0, 0, 0]}
+        scale={[1.0, 1.0, 1.0]}
       >
-        {/* <MedievalFantasyBook scale={0.1} envMapIntensity={0.3} /> */}
-        <Stadium scale={1.0} envMapIntensity={0.3} />
-
-        <group 
-          position={[-0.5, 0.5, 0.65]}
-          rotation={[1.7, 0, 2.6]}
-          scale={[0.2, 0.2, 0.2]}
-        >
-          <ParticlePathAnimation 
-            // position={[-1.39, 1.2, 0]} 
-          />
-        </group>
+        <Stadium scale={0.2} envMapIntensity={0.3} />
       </group>
 
-      {/* ⬇️ Only appears in Scene4 via Theatre.js scale animation */}
+
       <group 
         theatreKey="StadiumTwo" 
-        position={[10, 0, 10]}
-        // scale={[0, 0, 0]}
-        scale={[0.2, 0.2, 0.2]}
-        // scale={[1.0, 1.0, 1.0]}
+        position={[10, 0, 0]}
+        scale={[1.0, 1.0, 1.0]}
       >
-        {/* <StadiumTwo scale={0.1} envMapIntensity={0.3} /> */}
+        <StadiumTwo scale={0.2} envMapIntensity={0.3} />
 
-        {/* <Float
-          speed={1}
-          rotationIntensity={2}
-          floatIntensity={0.2}
-          floatingRange={[1, 1]}
-        > */}
-          <Drone 
-            position={[0.2, -1.5, 0]}
-            rotation={[5, 5, 5]}
-            scale={[0, 0, 0]}
-          />
-        {/* </Float> */}
+        <Drone 
+          position={[0.2, -1.5, 0]}
+          rotation={[5, 5, 5]}
+          scale={[0, 0, 0]}
+        />
       </group>
 
 

@@ -1,12 +1,17 @@
 "use client"
 
+
+import '@theatre/core';
 import { useEffect, useRef, useState, useLayoutEffect, Suspense } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { getProject } from "@theatre/core";
 import { PerspectiveCamera, SheetProvider, editable as e } from "@theatre/r3f";
 import extension from "@theatre/r3f/dist/extension";
 import studio from "@theatre/studio";
-import { Experience } from "./components/Experience";
+import { ExperienceFactories } from "./components/ExperienceFactories";
+import { ExperienceStadiums } from "./components/ExperienceStadiums";
+import { ExperienceRooms } from "./components/ExperienceRooms";
+import ExperiencePeopleModels from "./components/ExperiencePeopleModels";
 import projectState from "../assets/MedievalTown.theatre-project-state.json";
 import { 
   useGLTF, 
@@ -32,16 +37,17 @@ gltfLoader.setDRACOLoader(dracoLoader);
 
 
 
+
 export const isProd = process.env.NODE_ENV === "production";
 // console.log(" process.env.NODE_ENV:",  process.env.NODE_ENV);
 
-if (!isProd) {
+if (typeof window !== "undefined" && !isProd) {
   studio.initialize();
   studio.extend(extension);
 }
 
 const project = getProject(
-  "MedievalTown",
+  "Project",
   isProd
     ? {
         state: projectState,
@@ -86,7 +92,7 @@ function App() {
 
         {/* <fog attach="fog" args={['black', 15, 22.5]} /> */}
 
-        <CustomGrid
+        {/* <CustomGrid
           position={[0, -1.85, 0]}
           cellSize={3.0}
           cellThickness={0.005}
@@ -97,20 +103,20 @@ function App() {
           dotColor={[0.6, 0.1, 0.1]}
           fadeDistance={15}
           planeSize={50}
-        />
+        /> */}
 
-        {/* <Grid 
+        <Grid 
           renderOrder={-1} 
           position={[0, -1.85, 0]} 
           infiniteGrid 
-          cellSize={0.6} 
+          cellSize={1} 
           cellThickness={0.6} 
           sectionSize={2.3} 
           sectionThickness={1.5} 
           // sectionColor={[0.5, 0.5, 10]} 
           sectionColor={[1, 1, 1]} // Dark red
-          fadeDistance={30} 
-        /> */}
+          // fadeDistance={30} 
+        />
 
         <SheetProvider sheet={mainSheet}>
           <group ref={cameraOffsetGroupRef}>
@@ -120,7 +126,7 @@ function App() {
               far={2000} 
               near={1}
               zoom={1}
-              position={[0, 10, 20]}
+              position={[0, 0, 25]}
               theatreKey="Camera"
               lookAt={cameraTargetRef}
             />
@@ -135,7 +141,10 @@ function App() {
             <meshPhongMaterial color="yellow" />
           </e.mesh>
 
-          <Experience />
+          {/* <ExperienceStadiums /> */}
+          {/* <ExperiencePeopleModels /> */}
+          {/* <ExperienceFactories /> */}
+          <ExperienceRooms />
         </SheetProvider>
         
       </Canvas>
